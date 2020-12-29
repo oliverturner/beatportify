@@ -12,7 +12,7 @@ const loginURL = buildUrl({
 });
 
 async function login(req) {
-  const account = req.session && req.session.account;
+  const { user } = req.session;
 
   return {
     headers: {
@@ -22,7 +22,7 @@ async function login(req) {
     },
     statusCode: 200,
     body: JSON.stringify({
-      user: account.user,
+      user,
       loginURL,
       message: "Hello from Svelte + your Begin API!",
     }),

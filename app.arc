@@ -7,8 +7,9 @@ beatportify
 get /login
 get /auth
 post /logout
+get /api/top
 get /api/playlists
-get /api/playlists/:playlistID
+get /api/playlists/:playlistId
 get /api/tracks/:trackId
 
 @tables

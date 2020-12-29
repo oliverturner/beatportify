@@ -7,15 +7,17 @@ const {
 } = process.env;
 const clientTokenRaw = `${SPOTIFY_CLIENT_ID}:${SPOTIFY_CLIENT_SECRET}`;
 const clientToken = Buffer.from(clientTokenRaw).toString("base64");
+const url = "https://accounts.spotify.com/api/token";
+const headers = {
+  "Content-Type": "application/x-www-form-urlencoded",
+  Authorization: `Basic ${clientToken}`,
+};
 
-module.exports = async function spotify(code) {
+async function init(code) {
   try {
     const tokenResult = await post({
-      url: "https://accounts.spotify.com/api/token",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-        Authorization: `Basic ${clientToken}`,
-      },
+      url,
+      headers,
       data: {
         code,
         redirect_uri: SPOTIFY_REDIRECT,
@@ -39,8 +41,8 @@ module.exports = async function spotify(code) {
       refreshToken,
       user: {
         id,
-        display_name,
         href,
+        display_name,
         images: images[0],
       },
     };
@@ -51,4 +53,29 @@ module.exports = async function spotify(code) {
       error: err.message,
     };
   }
+}
+
+async function refresh(refresh_token) {
+  try {
+    const tokenResult = await post({
+      url,
+      headers,
+      data: {
+        refresh_token,
+        redirect_uri: SPOTIFY_REDIRECT,
+        grant_type: "refresh_token",
+      },
+    });
+
+    return tokenResult.body.access_token;
+  } catch (err) {
+    return {
+      error: err.message,
+    };
+  }
+}
+
+module.exports = {
+  init,
+  refresh,
 };

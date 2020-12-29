@@ -37,8 +37,9 @@
 <main>
   <h1>Hello {name}!</h1>
   <h2>{data.message}</h2>
-  {#if data.loginURL}
+  {#if !data.user}
     <p><a href={data.loginURL}>Log in to Spotify</a></p>
+  {:else}
     <form action="/logout" method="post"><button>log out</button></form>
   {/if}
 </main>

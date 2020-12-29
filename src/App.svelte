@@ -1,20 +1,16 @@
 <script>
-  import { onMount } from 'svelte'
-  export let name
-  export let message
-  onMount(async () => {
-    let data = await (await fetch('/api')).json()
-    message = data.msg
-    console.log('MESSAGE: ', message)
-  })
-</script>
+  import { onMount } from "svelte";
+  export let name;
+  export let data = {
+    message: "",
+  };
 
-<main>
-  <h1>Hello {name}!</h1>
-  <h2>{message}</h2>
-  <h3>Change me!</h3>
-  <p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
-</main>
+  onMount(async () => {
+    data = await (await fetch("/login")).json();
+
+    console.log({ data });
+  });
+</script>
 
 <style>
   main {
@@ -37,3 +33,12 @@
     }
   }
 </style>
+
+<main>
+  <h1>Hello {name}!</h1>
+  <h2>{data.message}</h2>
+  {#if data.loginURL}
+    <p><a href={data.loginURL}>Log in to Spotify</a></p>
+    <form action="/logout" method="post"><button>log out</button></form>
+  {/if}
+</main>

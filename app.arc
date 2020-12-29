@@ -1,10 +1,15 @@
 @app
-begin-app
+beatportify
 
 @static
 
 @http
-get /api
+get /login
+get /auth
+post /logout
+get /api/playlists
+get /api/playlists/:playlistID
+get /api/tracks/:trackId
 
 @tables
 data

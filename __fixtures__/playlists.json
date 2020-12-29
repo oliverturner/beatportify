@@ -1,0 +1,820 @@
+[
+  {
+    "collaborative": false,
+    "description": "<a href=\"spotify:artist:6caPJFLv1wesmM7gwK1ACy\">Boris Brejcha</a>'s favorite tracks. Updated regularly. Curated by Boris Brejcha. Discover more track IDs playlists <a href=\"spotify:genre:track_id\">here</a>.",
+    "external_urls": {
+      "spotify": "https://open.spotify.com/playlist/37i9dQZF1DWXjs5HmaJqaY"
+    },
+    "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DWXjs5HmaJqaY",
+    "id": "37i9dQZF1DWXjs5HmaJqaY",
+    "images": [
+      {
+        "height": null,
+        "url": "https://i.scdn.co/image/ab67706f00000003f9ff6e7d2fbff38e31b9cdf5",
+        "width": null
+      }
+    ],
+    "name": "Boris Brejcha's track IDs",
+    "owner": {
+      "display_name": "Spotify",
+      "external_urls": { "spotify": "https://open.spotify.com/user/spotify" },
+      "href": "https://api.spotify.com/v1/users/spotify",
+      "id": "spotify",
+      "type": "user",
+      "uri": "spotify:user:spotify"
+    },
+    "primary_color": null,
+    "public": false,
+    "snapshot_id": "MTYwODI4MzU0MCwwMDAwMDAwNjAwMDAwMTc2NzUyYjRjYzMwMDAwMDE3NTczZWQxZGYz",
+    "tracks": {
+      "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DWXjs5HmaJqaY/tracks",
+      "total": 65
+    },
+    "type": "playlist",
+    "uri": "spotify:playlist:37i9dQZF1DWXjs5HmaJqaY"
+  },
+  {
+    "collaborative": false,
+    "description": "Listen to  <a href=\"spotify:artist:19SmlbABtI4bXz864MLqOS\">Carl</a>'s favorite tracks. Updated regularly. More track IDs <a href=\"spotify:genre:track_id\">here</a>.",
+    "external_urls": {
+      "spotify": "https://open.spotify.com/playlist/37i9dQZF1DWSobRXOCtFPM"
+    },
+    "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DWSobRXOCtFPM",
+    "id": "37i9dQZF1DWSobRXOCtFPM",
+    "images": [
+      {
+        "height": null,
+        "url": "https://i.scdn.co/image/ab67706f000000032e31082300aca0900b1ae511",
+        "width": null
+      }
+    ],
+    "name": "Carl Cox' track IDs",
+    "owner": {
+      "display_name": "Spotify",
+      "external_urls": { "spotify": "https://open.spotify.com/user/spotify" },
+      "href": "https://api.spotify.com/v1/users/spotify",
+      "id": "spotify",
+      "type": "user",
+      "uri": "spotify:user:spotify"
+    },
+    "primary_color": null,
+    "public": false,
+    "snapshot_id": "MTYwODczNzIzMSwwMDAwMDAxMzAwMDAwMTc2OTAzNjEzNjkwMDAwMDE3M2E1YjkzZGVk",
+    "tracks": {
+      "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DWSobRXOCtFPM/tracks",
+      "total": 149
+    },
+    "type": "playlist",
+    "uri": "spotify:playlist:37i9dQZF1DWSobRXOCtFPM"
+  },
+  {
+    "collaborative": false,
+    "description": "<a href=\"spotify:artist:3TXQ1ddouwQAI78hV4hXDjj\">Maceo Plex</a>'s favorite tracks. Updated regularly. Curated by Maceo Plex. More track IDs <a href=\"spotify:genre:track_id\">here</a>.",
+    "external_urls": {
+      "spotify": "https://open.spotify.com/playlist/37i9dQZF1DWUomyMFpoR0R"
+    },
+    "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DWUomyMFpoR0R",
+    "id": "37i9dQZF1DWUomyMFpoR0R",
+    "images": [
+      {
+        "height": null,
+        "url": "https://i.scdn.co/image/ab67706f00000003aad6b9e1651d77ebfaffe42a",
+        "width": null
+      }
+    ],
+    "name": "Maceo Plex's track IDs",
+    "owner": {
+      "display_name": "Spotify",
+      "external_urls": { "spotify": "https://open.spotify.com/user/spotify" },
+      "href": "https://api.spotify.com/v1/users/spotify",
+      "id": "spotify",
+      "type": "user",
+      "uri": "spotify:user:spotify"
+    },
+    "primary_color": null,
+    "public": false,
+    "snapshot_id": "MTYwODIzMDYzMSwwMDAwMDAwNTAwMDAwMTc2NzIwM2Y5MjEwMDAwMDE3NWJjZDE1M2Uw",
+    "tracks": {
+      "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DWUomyMFpoR0R/tracks",
+      "total": 67
+    },
+    "type": "playlist",
+    "uri": "spotify:playlist:37i9dQZF1DWUomyMFpoR0R"
+  },
+  {
+    "collaborative": false,
+    "description": "<a href=\"spotify:artist:3AhwIUus3pIaA3CvYBEtpy\">Richie Hawtin</a>'s favorite tracks. Updated regularly. Curated by Richie Hawtin. Discover more track IDs playlists <a href=\"spotify:genre:track_id\">here</a>.",
+    "external_urls": {
+      "spotify": "https://open.spotify.com/playlist/37i9dQZF1DWTW1OpeglOzu"
+    },
+    "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DWTW1OpeglOzu",
+    "id": "37i9dQZF1DWTW1OpeglOzu",
+    "images": [
+      {
+        "height": null,
+        "url": "https://i.scdn.co/image/ab67706f0000000381be0575ff47078c47e336d7",
+        "width": null
+      }
+    ],
+    "name": "Richie Hawtin's track IDs",
+    "owner": {
+      "display_name": "Spotify",
+      "external_urls": { "spotify": "https://open.spotify.com/user/spotify" },
+      "href": "https://api.spotify.com/v1/users/spotify",
+      "id": "spotify",
+      "type": "user",
+      "uri": "spotify:user:spotify"
+    },
+    "primary_color": null,
+    "public": false,
+    "snapshot_id": "MTYwNzA3OTMwNSwwMDAwMDAwNzAwMDAwMTc2MmQ2NDIyNDkwMDAwMDE3NWRjMGQ1NzA4",
+    "tracks": {
+      "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DWTW1OpeglOzu/tracks",
+      "total": 50
+    },
+    "type": "playlist",
+    "uri": "spotify:playlist:37i9dQZF1DWTW1OpeglOzu"
+  },
+  {
+    "collaborative": false,
+    "description": "",
+    "external_urls": {
+      "spotify": "https://open.spotify.com/playlist/7o9mpNuyQAn19wjBB5CPUu"
+    },
+    "href": "https://api.spotify.com/v1/playlists/7o9mpNuyQAn19wjBB5CPUu",
+    "id": "7o9mpNuyQAn19wjBB5CPUu",
+    "images": [
+      {
+        "height": null,
+        "url": "https://i.scdn.co/image/ab67706c0000bebb651943f2cdfa20551e310aa9",
+        "width": null
+      }
+    ],
+    "name": "My Peloton Music by GilbertN",
+    "owner": {
+      "display_name": "oliver.turner",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/user/oliver.turner"
+      },
+      "href": "https://api.spotify.com/v1/users/oliver.turner",
+      "id": "oliver.turner",
+      "type": "user",
+      "uri": "spotify:user:oliver.turner"
+    },
+    "primary_color": null,
+    "public": true,
+    "snapshot_id": "NCw4NjQ4NGQ3YzNhOGRkMjE3MzRmZWI0ODEwMWQzMWQwMWYwMDk1Y2Zi",
+    "tracks": {
+      "href": "https://api.spotify.com/v1/playlists/7o9mpNuyQAn19wjBB5CPUu/tracks",
+      "total": 2
+    },
+    "type": "playlist",
+    "uri": "spotify:playlist:7o9mpNuyQAn19wjBB5CPUu"
+  },
+  {
+    "collaborative": false,
+    "description": "",
+    "external_urls": {
+      "spotify": "https://open.spotify.com/playlist/4YUz2uJ9se8qGJuOOw3doN"
+    },
+    "href": "https://api.spotify.com/v1/playlists/4YUz2uJ9se8qGJuOOw3doN",
+    "id": "4YUz2uJ9se8qGJuOOw3doN",
+    "images": [
+      {
+        "height": 640,
+        "url": "https://mosaic.scdn.co/640/ab67616d0000b2733877ca5911db29b8d7873868ab67616d0000b2734f6bf266e898435ed439c108ab67616d0000b2739479ede5c040f610c773390dab67616d0000b273f738e90d53fee10434244e4e",
+        "width": 640
+      },
+      {
+        "height": 300,
+        "url": "https://mosaic.scdn.co/300/ab67616d0000b2733877ca5911db29b8d7873868ab67616d0000b2734f6bf266e898435ed439c108ab67616d0000b2739479ede5c040f610c773390dab67616d0000b273f738e90d53fee10434244e4e",
+        "width": 300
+      },
+      {
+        "height": 60,
+        "url": "https://mosaic.scdn.co/60/ab67616d0000b2733877ca5911db29b8d7873868ab67616d0000b2734f6bf266e898435ed439c108ab67616d0000b2739479ede5c040f610c773390dab67616d0000b273f738e90d53fee10434244e4e",
+        "width": 60
+      }
+    ],
+    "name": "Werk 18",
+    "owner": {
+      "display_name": "oliver.turner",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/user/oliver.turner"
+      },
+      "href": "https://api.spotify.com/v1/users/oliver.turner",
+      "id": "oliver.turner",
+      "type": "user",
+      "uri": "spotify:user:oliver.turner"
+    },
+    "primary_color": null,
+    "public": false,
+    "snapshot_id": "MjUsMzZiMGU2NzNmOGNhZWQyNGYyMzA1MTZjMjQ0MmNhNDhlOTVlMjRhYQ==",
+    "tracks": {
+      "href": "https://api.spotify.com/v1/playlists/4YUz2uJ9se8qGJuOOw3doN/tracks",
+      "total": 23
+    },
+    "type": "playlist",
+    "uri": "spotify:playlist:4YUz2uJ9se8qGJuOOw3doN"
+  },
+  {
+    "collaborative": false,
+    "description": "",
+    "external_urls": {
+      "spotify": "https://open.spotify.com/playlist/0dyDLnep6uHNdbi7ps7YRK"
+    },
+    "href": "https://api.spotify.com/v1/playlists/0dyDLnep6uHNdbi7ps7YRK",
+    "id": "0dyDLnep6uHNdbi7ps7YRK",
+    "images": [
+      {
+        "height": 640,
+        "url": "https://mosaic.scdn.co/640/ab67616d0000b273664f70fc31607062ac947923ab67616d0000b2738263351afd0136c46ad71cc4ab67616d0000b2739479ede5c040f610c773390dab67616d0000b2739cf73da12f8e68b2354aad11",
+        "width": 640
+      },
+      {
+        "height": 300,
+        "url": "https://mosaic.scdn.co/300/ab67616d0000b273664f70fc31607062ac947923ab67616d0000b2738263351afd0136c46ad71cc4ab67616d0000b2739479ede5c040f610c773390dab67616d0000b2739cf73da12f8e68b2354aad11",
+        "width": 300
+      },
+      {
+        "height": 60,
+        "url": "https://mosaic.scdn.co/60/ab67616d0000b273664f70fc31607062ac947923ab67616d0000b2738263351afd0136c46ad71cc4ab67616d0000b2739479ede5c040f610c773390dab67616d0000b2739cf73da12f8e68b2354aad11",
+        "width": 60
+      }
+    ],
+    "name": "Purchase 14-11-20",
+    "owner": {
+      "display_name": "oliver.turner",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/user/oliver.turner"
+      },
+      "href": "https://api.spotify.com/v1/users/oliver.turner",
+      "id": "oliver.turner",
+      "type": "user",
+      "uri": "spotify:user:oliver.turner"
+    },
+    "primary_color": null,
+    "public": false,
+    "snapshot_id": "MTksZGFlZmY5MDk5MTgyMDdjYWE0ODEwYjVjZjEyM2JkOTRhNjhmNjE3NA==",
+    "tracks": {
+      "href": "https://api.spotify.com/v1/playlists/0dyDLnep6uHNdbi7ps7YRK/tracks",
+      "total": 18
+    },
+    "type": "playlist",
+    "uri": "spotify:playlist:0dyDLnep6uHNdbi7ps7YRK"
+  },
+  {
+    "collaborative": false,
+    "description": "",
+    "external_urls": {
+      "spotify": "https://open.spotify.com/playlist/3RnStjb7iiOKRMDnxndkfN"
+    },
+    "href": "https://api.spotify.com/v1/playlists/3RnStjb7iiOKRMDnxndkfN",
+    "id": "3RnStjb7iiOKRMDnxndkfN",
+    "images": [
+      {
+        "height": 640,
+        "url": "https://mosaic.scdn.co/640/ab67616d0000b273185e96bb5ea33ebf01810d15ab67616d0000b2733f73f5e2cb4e208cc4cd2f05ab67616d0000b2739581587e4ac9e0f9897daa2aab67616d0000b273ccdb230e54f5044f79739a65",
+        "width": 640
+      },
+      {
+        "height": 300,
+        "url": "https://mosaic.scdn.co/300/ab67616d0000b273185e96bb5ea33ebf01810d15ab67616d0000b2733f73f5e2cb4e208cc4cd2f05ab67616d0000b2739581587e4ac9e0f9897daa2aab67616d0000b273ccdb230e54f5044f79739a65",
+        "width": 300
+      },
+      {
+        "height": 60,
+        "url": "https://mosaic.scdn.co/60/ab67616d0000b273185e96bb5ea33ebf01810d15ab67616d0000b2733f73f5e2cb4e208cc4cd2f05ab67616d0000b2739581587e4ac9e0f9897daa2aab67616d0000b273ccdb230e54f5044f79739a65",
+        "width": 60
+      }
+    ],
+    "name": "Gentle House",
+    "owner": {
+      "display_name": "oliver.turner",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/user/oliver.turner"
+      },
+      "href": "https://api.spotify.com/v1/users/oliver.turner",
+      "id": "oliver.turner",
+      "type": "user",
+      "uri": "spotify:user:oliver.turner"
+    },
+    "primary_color": null,
+    "public": false,
+    "snapshot_id": "MTU0LDVlNzA4NTdhZThlMmQ3YjgzODNiY2YzNGExYjRhZDhhNzI2ZGYyZWY=",
+    "tracks": {
+      "href": "https://api.spotify.com/v1/playlists/3RnStjb7iiOKRMDnxndkfN/tracks",
+      "total": 139
+    },
+    "type": "playlist",
+    "uri": "spotify:playlist:3RnStjb7iiOKRMDnxndkfN"
+  },
+  {
+    "collaborative": false,
+    "description": "Your weekly mixtape of fresh music. Enjoy new music and deep cuts picked for you. Updates every Monday.",
+    "external_urls": {
+      "spotify": "https://open.spotify.com/playlist/37i9dQZEVXcMriO3MtW7xf"
+    },
+    "href": "https://api.spotify.com/v1/playlists/37i9dQZEVXcMriO3MtW7xf",
+    "id": "37i9dQZEVXcMriO3MtW7xf",
+    "images": [
+      {
+        "height": null,
+        "url": "https://newjams-images.scdn.co/v3/discover-weekly/QlZGGdbk9WlQ0OrJ1pCzC7idmPlyyGD0M7WV8v1mR-YWc_eKcBhZKfisjgf-ln8gwR9g-shpqVc0PV-9X9S-eL_ea4bFJRlhepUWG_C9CeM=/NDQ6NDU6ODFUMDEtMTAtMQ==/default",
+        "width": null
+      }
+    ],
+    "name": "Discover Weekly",
+    "owner": {
+      "display_name": "Spotify",
+      "external_urls": { "spotify": "https://open.spotify.com/user/spotify" },
+      "href": "https://api.spotify.com/v1/users/spotify",
+      "id": "spotify",
+      "type": "user",
+      "uri": "spotify:user:spotify"
+    },
+    "primary_color": null,
+    "public": false,
+    "snapshot_id": "MjY4MTg1NjAsMDAwMDAwMDBkMTE5OTU0NjJhYmM5Njg4MWY4MGEzMTg0YmJmODQwMA==",
+    "tracks": {
+      "href": "https://api.spotify.com/v1/playlists/37i9dQZEVXcMriO3MtW7xf/tracks",
+      "total": 30
+    },
+    "type": "playlist",
+    "uri": "spotify:playlist:37i9dQZEVXcMriO3MtW7xf"
+  },
+  {
+    "collaborative": false,
+    "description": "Catch all the latest music from artists you follow, plus new singles picked for you. Updates every Friday.",
+    "external_urls": {
+      "spotify": "https://open.spotify.com/playlist/37i9dQZEVXbpfc3fG6dt9B"
+    },
+    "href": "https://api.spotify.com/v1/playlists/37i9dQZEVXbpfc3fG6dt9B",
+    "id": "37i9dQZEVXbpfc3fG6dt9B",
+    "images": [
+      {
+        "height": null,
+        "url": "https://newjams-images.scdn.co/v3/release-radar/ab67616d0000b2738b05417aa4ea0f85903c81ac/en/large",
+        "width": null
+      }
+    ],
+    "name": "Release Radar",
+    "owner": {
+      "display_name": "Spotify",
+      "external_urls": { "spotify": "https://open.spotify.com/user/spotify" },
+      "href": "https://api.spotify.com/v1/users/spotify",
+      "id": "spotify",
+      "type": "user",
+      "uri": "spotify:user:spotify"
+    },
+    "primary_color": null,
+    "public": false,
+    "snapshot_id": "MjY4MTQyNDAsMDAwMDAwMDBhNjIwNGIyYjI0MWI5MzAxYzhlYzliMTZlMTE4MWVlMw==",
+    "tracks": {
+      "href": "https://api.spotify.com/v1/playlists/37i9dQZEVXbpfc3fG6dt9B/tracks",
+      "total": 30
+    },
+    "type": "playlist",
+    "uri": "spotify:playlist:37i9dQZEVXbpfc3fG6dt9B"
+  },
+  {
+    "collaborative": false,
+    "description": "",
+    "external_urls": {
+      "spotify": "https://open.spotify.com/playlist/2p96nsbIqsNZUY7utTewlP"
+    },
+    "href": "https://api.spotify.com/v1/playlists/2p96nsbIqsNZUY7utTewlP",
+    "id": "2p96nsbIqsNZUY7utTewlP",
+    "images": [
+      {
+        "height": 640,
+        "url": "https://i.scdn.co/image/ab67616d0000b273b3c87d8e15b9d62160f96113",
+        "width": 640
+      }
+    ],
+    "name": "JQBX :: Starred",
+    "owner": {
+      "display_name": "oliver.turner",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/user/oliver.turner"
+      },
+      "href": "https://api.spotify.com/v1/users/oliver.turner",
+      "id": "oliver.turner",
+      "type": "user",
+      "uri": "spotify:user:oliver.turner"
+    },
+    "primary_color": null,
+    "public": false,
+    "snapshot_id": "MixlYjA4ZGU3NTFhNzQxZDZmODBhYjVkYTBkM2YwYTMwMDc3OWMwMTQw",
+    "tracks": {
+      "href": "https://api.spotify.com/v1/playlists/2p96nsbIqsNZUY7utTewlP/tracks",
+      "total": 1
+    },
+    "type": "playlist",
+    "uri": "spotify:playlist:2p96nsbIqsNZUY7utTewlP"
+  },
+  {
+    "collaborative": false,
+    "description": "",
+    "external_urls": {
+      "spotify": "https://open.spotify.com/playlist/2ooFMHZ6N1lrIdIceRZr0O"
+    },
+    "href": "https://api.spotify.com/v1/playlists/2ooFMHZ6N1lrIdIceRZr0O",
+    "id": "2ooFMHZ6N1lrIdIceRZr0O",
+    "images": [
+      {
+        "height": 640,
+        "url": "https://i.scdn.co/image/ab67616d0000b273b24f517db39810579f08ec75",
+        "width": 640
+      }
+    ],
+    "name": "JQBX :: Queue",
+    "owner": {
+      "display_name": "oliver.turner",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/user/oliver.turner"
+      },
+      "href": "https://api.spotify.com/v1/users/oliver.turner",
+      "id": "oliver.turner",
+      "type": "user",
+      "uri": "spotify:user:oliver.turner"
+    },
+    "primary_color": null,
+    "public": false,
+    "snapshot_id": "MixkODBmMzM2ZWEyYjU2MmE1NTdiMDFlYTlmYjlmZjBmNjM4YzQyODk3",
+    "tracks": {
+      "href": "https://api.spotify.com/v1/playlists/2ooFMHZ6N1lrIdIceRZr0O/tracks",
+      "total": 1
+    },
+    "type": "playlist",
+    "uri": "spotify:playlist:2ooFMHZ6N1lrIdIceRZr0O"
+  },
+  {
+    "collaborative": false,
+    "description": "",
+    "external_urls": {
+      "spotify": "https://open.spotify.com/playlist/7oBPIv6U2n739zHKjS7Cwv"
+    },
+    "href": "https://api.spotify.com/v1/playlists/7oBPIv6U2n739zHKjS7Cwv",
+    "id": "7oBPIv6U2n739zHKjS7Cwv",
+    "images": [
+      {
+        "height": 640,
+        "url": "https://mosaic.scdn.co/640/ab67616d0000b27308b0d565056bff6a3c497bcfab67616d0000b273847d816382150fb766764857ab67616d0000b2738b05417aa4ea0f85903c81acab67616d0000b273f4b5956b416cecf51b7ecd07",
+        "width": 640
+      },
+      {
+        "height": 300,
+        "url": "https://mosaic.scdn.co/300/ab67616d0000b27308b0d565056bff6a3c497bcfab67616d0000b273847d816382150fb766764857ab67616d0000b2738b05417aa4ea0f85903c81acab67616d0000b273f4b5956b416cecf51b7ecd07",
+        "width": 300
+      },
+      {
+        "height": 60,
+        "url": "https://mosaic.scdn.co/60/ab67616d0000b27308b0d565056bff6a3c497bcfab67616d0000b273847d816382150fb766764857ab67616d0000b2738b05417aa4ea0f85903c81acab67616d0000b273f4b5956b416cecf51b7ecd07",
+        "width": 60
+      }
+    ],
+    "name": "Werk 17",
+    "owner": {
+      "display_name": "oliver.turner",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/user/oliver.turner"
+      },
+      "href": "https://api.spotify.com/v1/users/oliver.turner",
+      "id": "oliver.turner",
+      "type": "user",
+      "uri": "spotify:user:oliver.turner"
+    },
+    "primary_color": null,
+    "public": false,
+    "snapshot_id": "NTMsOGUxNjI1YmExMWJhOTNkMjg1ZmRjMjQzM2QxZGE3MTU5ZDRjZWNjMg==",
+    "tracks": {
+      "href": "https://api.spotify.com/v1/playlists/7oBPIv6U2n739zHKjS7Cwv/tracks",
+      "total": 51
+    },
+    "type": "playlist",
+    "uri": "spotify:playlist:7oBPIv6U2n739zHKjS7Cwv"
+  },
+  {
+    "collaborative": false,
+    "description": "",
+    "external_urls": {
+      "spotify": "https://open.spotify.com/playlist/4wU04i15hRXt2Ap5zJKWkt"
+    },
+    "href": "https://api.spotify.com/v1/playlists/4wU04i15hRXt2Ap5zJKWkt",
+    "id": "4wU04i15hRXt2Ap5zJKWkt",
+    "images": [
+      {
+        "height": 640,
+        "url": "https://mosaic.scdn.co/640/ab67616d0000b2734a134c0409a0ec80ac0200d7ab67616d0000b273825cb04ca8a56bfe7dd792d0ab67616d0000b2738bb2c97b9d8e7bcc4706e107ab67616d0000b27394d36a4204a98385b843809f",
+        "width": 640
+      },
+      {
+        "height": 300,
+        "url": "https://mosaic.scdn.co/300/ab67616d0000b2734a134c0409a0ec80ac0200d7ab67616d0000b273825cb04ca8a56bfe7dd792d0ab67616d0000b2738bb2c97b9d8e7bcc4706e107ab67616d0000b27394d36a4204a98385b843809f",
+        "width": 300
+      },
+      {
+        "height": 60,
+        "url": "https://mosaic.scdn.co/60/ab67616d0000b2734a134c0409a0ec80ac0200d7ab67616d0000b273825cb04ca8a56bfe7dd792d0ab67616d0000b2738bb2c97b9d8e7bcc4706e107ab67616d0000b27394d36a4204a98385b843809f",
+        "width": 60
+      }
+    ],
+    "name": "Werk 16",
+    "owner": {
+      "display_name": "oliver.turner",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/user/oliver.turner"
+      },
+      "href": "https://api.spotify.com/v1/users/oliver.turner",
+      "id": "oliver.turner",
+      "type": "user",
+      "uri": "spotify:user:oliver.turner"
+    },
+    "primary_color": null,
+    "public": false,
+    "snapshot_id": "NTEsOTkwOTc4NDMzMDQ4ZWExZTYxNDc4OGVmMDgyZDE1MDQ1OGIyMGM3NQ==",
+    "tracks": {
+      "href": "https://api.spotify.com/v1/playlists/4wU04i15hRXt2Ap5zJKWkt/tracks",
+      "total": 50
+    },
+    "type": "playlist",
+    "uri": "spotify:playlist:4wU04i15hRXt2Ap5zJKWkt"
+  },
+  {
+    "collaborative": false,
+    "description": "",
+    "external_urls": {
+      "spotify": "https://open.spotify.com/playlist/6erpSwGmiutupuqKX1VRxI"
+    },
+    "href": "https://api.spotify.com/v1/playlists/6erpSwGmiutupuqKX1VRxI",
+    "id": "6erpSwGmiutupuqKX1VRxI",
+    "images": [
+      {
+        "height": 640,
+        "url": "https://mosaic.scdn.co/640/ab67616d0000b273189a627d1fa4132940b97752ab67616d0000b2734cb8cc94a83b88119a44213fab67616d0000b27387e5084ece13c318914e8147ab67616d0000b273c0258bf5e7438976880ccdce",
+        "width": 640
+      },
+      {
+        "height": 300,
+        "url": "https://mosaic.scdn.co/300/ab67616d0000b273189a627d1fa4132940b97752ab67616d0000b2734cb8cc94a83b88119a44213fab67616d0000b27387e5084ece13c318914e8147ab67616d0000b273c0258bf5e7438976880ccdce",
+        "width": 300
+      },
+      {
+        "height": 60,
+        "url": "https://mosaic.scdn.co/60/ab67616d0000b273189a627d1fa4132940b97752ab67616d0000b2734cb8cc94a83b88119a44213fab67616d0000b27387e5084ece13c318914e8147ab67616d0000b273c0258bf5e7438976880ccdce",
+        "width": 60
+      }
+    ],
+    "name": "Werk 15",
+    "owner": {
+      "display_name": "oliver.turner",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/user/oliver.turner"
+      },
+      "href": "https://api.spotify.com/v1/users/oliver.turner",
+      "id": "oliver.turner",
+      "type": "user",
+      "uri": "spotify:user:oliver.turner"
+    },
+    "primary_color": null,
+    "public": false,
+    "snapshot_id": "NTUsNjJmM2YxOGNiOTEyOWNkYjcwMGVhNTQ0YTRkNzYwN2Y5MDczODFjZQ==",
+    "tracks": {
+      "href": "https://api.spotify.com/v1/playlists/6erpSwGmiutupuqKX1VRxI/tracks",
+      "total": 50
+    },
+    "type": "playlist",
+    "uri": "spotify:playlist:6erpSwGmiutupuqKX1VRxI"
+  },
+  {
+    "collaborative": false,
+    "description": "",
+    "external_urls": {
+      "spotify": "https://open.spotify.com/playlist/5sGNnQ7fT7bzRm0JwNyGwU"
+    },
+    "href": "https://api.spotify.com/v1/playlists/5sGNnQ7fT7bzRm0JwNyGwU",
+    "id": "5sGNnQ7fT7bzRm0JwNyGwU",
+    "images": [
+      {
+        "height": 640,
+        "url": "https://mosaic.scdn.co/640/ab67616d0000b2730568ce40f2ad80b426695ac1ab67616d0000b27313a6f944b65e1ee878ea1c04ab67616d0000b27318d5c1161e65be065d6a29baab67616d0000b2737fcb2dab988315ae369c3659",
+        "width": 640
+      },
+      {
+        "height": 300,
+        "url": "https://mosaic.scdn.co/300/ab67616d0000b2730568ce40f2ad80b426695ac1ab67616d0000b27313a6f944b65e1ee878ea1c04ab67616d0000b27318d5c1161e65be065d6a29baab67616d0000b2737fcb2dab988315ae369c3659",
+        "width": 300
+      },
+      {
+        "height": 60,
+        "url": "https://mosaic.scdn.co/60/ab67616d0000b2730568ce40f2ad80b426695ac1ab67616d0000b27313a6f944b65e1ee878ea1c04ab67616d0000b27318d5c1161e65be065d6a29baab67616d0000b2737fcb2dab988315ae369c3659",
+        "width": 60
+      }
+    ],
+    "name": "Werk 14",
+    "owner": {
+      "display_name": "oliver.turner",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/user/oliver.turner"
+      },
+      "href": "https://api.spotify.com/v1/users/oliver.turner",
+      "id": "oliver.turner",
+      "type": "user",
+      "uri": "spotify:user:oliver.turner"
+    },
+    "primary_color": null,
+    "public": false,
+    "snapshot_id": "MzAsODQ1YjY4YzFjZmI0MzZkYWI1MjBkNGIxNGY4ZmUxZmUxYmU3MDc1ZA==",
+    "tracks": {
+      "href": "https://api.spotify.com/v1/playlists/5sGNnQ7fT7bzRm0JwNyGwU/tracks",
+      "total": 50
+    },
+    "type": "playlist",
+    "uri": "spotify:playlist:5sGNnQ7fT7bzRm0JwNyGwU"
+  },
+  {
+    "collaborative": false,
+    "description": "",
+    "external_urls": {
+      "spotify": "https://open.spotify.com/playlist/2PuQ1kCdnPRgDY5JIkS1Yv"
+    },
+    "href": "https://api.spotify.com/v1/playlists/2PuQ1kCdnPRgDY5JIkS1Yv",
+    "id": "2PuQ1kCdnPRgDY5JIkS1Yv",
+    "images": [
+      {
+        "height": 640,
+        "url": "https://mosaic.scdn.co/640/ab67616d0000b2733427f8161b36a41d16170b7eab67616d0000b273dbfc94c4ccdce6f4f1cc89cdab67616d0000b273eb9380bf19b42c2cf693f774ab67616d0000b273eea60372652ad0142b670179",
+        "width": 640
+      },
+      {
+        "height": 300,
+        "url": "https://mosaic.scdn.co/300/ab67616d0000b2733427f8161b36a41d16170b7eab67616d0000b273dbfc94c4ccdce6f4f1cc89cdab67616d0000b273eb9380bf19b42c2cf693f774ab67616d0000b273eea60372652ad0142b670179",
+        "width": 300
+      },
+      {
+        "height": 60,
+        "url": "https://mosaic.scdn.co/60/ab67616d0000b2733427f8161b36a41d16170b7eab67616d0000b273dbfc94c4ccdce6f4f1cc89cdab67616d0000b273eb9380bf19b42c2cf693f774ab67616d0000b273eea60372652ad0142b670179",
+        "width": 60
+      }
+    ],
+    "name": "Werk 12",
+    "owner": {
+      "display_name": "oliver.turner",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/user/oliver.turner"
+      },
+      "href": "https://api.spotify.com/v1/users/oliver.turner",
+      "id": "oliver.turner",
+      "type": "user",
+      "uri": "spotify:user:oliver.turner"
+    },
+    "primary_color": null,
+    "public": false,
+    "snapshot_id": "NTEsM2FiZWIyNDk2OGE2ODRkNmNiM2RkZjgyY2Q2MGQ3YTQwMGM3ODE5Nw==",
+    "tracks": {
+      "href": "https://api.spotify.com/v1/playlists/2PuQ1kCdnPRgDY5JIkS1Yv/tracks",
+      "total": 50
+    },
+    "type": "playlist",
+    "uri": "spotify:playlist:2PuQ1kCdnPRgDY5JIkS1Yv"
+  },
+  {
+    "collaborative": false,
+    "description": "",
+    "external_urls": {
+      "spotify": "https://open.spotify.com/playlist/38uTy6jF83sCmNyM2wKEnE"
+    },
+    "href": "https://api.spotify.com/v1/playlists/38uTy6jF83sCmNyM2wKEnE",
+    "id": "38uTy6jF83sCmNyM2wKEnE",
+    "images": [
+      {
+        "height": 640,
+        "url": "https://mosaic.scdn.co/640/ab67616d0000b27377b879494297bc4e7d24a89eab67616d0000b273d3bc3e38ad7b813b4d9e4cb7ab67616d0000b273fa3b0f6ffb76cd5f07690e45ab67616d0000b273fee508354193040a8ce3b585",
+        "width": 640
+      },
+      {
+        "height": 300,
+        "url": "https://mosaic.scdn.co/300/ab67616d0000b27377b879494297bc4e7d24a89eab67616d0000b273d3bc3e38ad7b813b4d9e4cb7ab67616d0000b273fa3b0f6ffb76cd5f07690e45ab67616d0000b273fee508354193040a8ce3b585",
+        "width": 300
+      },
+      {
+        "height": 60,
+        "url": "https://mosaic.scdn.co/60/ab67616d0000b27377b879494297bc4e7d24a89eab67616d0000b273d3bc3e38ad7b813b4d9e4cb7ab67616d0000b273fa3b0f6ffb76cd5f07690e45ab67616d0000b273fee508354193040a8ce3b585",
+        "width": 60
+      }
+    ],
+    "name": "Werk 11",
+    "owner": {
+      "display_name": "oliver.turner",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/user/oliver.turner"
+      },
+      "href": "https://api.spotify.com/v1/users/oliver.turner",
+      "id": "oliver.turner",
+      "type": "user",
+      "uri": "spotify:user:oliver.turner"
+    },
+    "primary_color": null,
+    "public": false,
+    "snapshot_id": "NTEsZTVmZWUyMWM4NjhkZTkwYzRhMTk0NjZlNjY4MGE3ZTg1ZmRmZDc0Mg==",
+    "tracks": {
+      "href": "https://api.spotify.com/v1/playlists/38uTy6jF83sCmNyM2wKEnE/tracks",
+      "total": 50
+    },
+    "type": "playlist",
+    "uri": "spotify:playlist:38uTy6jF83sCmNyM2wKEnE"
+  },
+  {
+    "collaborative": false,
+    "description": "",
+    "external_urls": {
+      "spotify": "https://open.spotify.com/playlist/5b4cJP2IVElWYikwFDg5sB"
+    },
+    "href": "https://api.spotify.com/v1/playlists/5b4cJP2IVElWYikwFDg5sB",
+    "id": "5b4cJP2IVElWYikwFDg5sB",
+    "images": [
+      {
+        "height": 640,
+        "url": "https://mosaic.scdn.co/640/ab67616d0000b2731bc76f396b59a4151d7e0c4eab67616d0000b27360aa711c73827cd2cfaadc38ab67616d0000b27378c7b71b6ed154a0bc2dff5aab67616d0000b2737fad4821d7530d0782e91a46",
+        "width": 640
+      },
+      {
+        "height": 300,
+        "url": "https://mosaic.scdn.co/300/ab67616d0000b2731bc76f396b59a4151d7e0c4eab67616d0000b27360aa711c73827cd2cfaadc38ab67616d0000b27378c7b71b6ed154a0bc2dff5aab67616d0000b2737fad4821d7530d0782e91a46",
+        "width": 300
+      },
+      {
+        "height": 60,
+        "url": "https://mosaic.scdn.co/60/ab67616d0000b2731bc76f396b59a4151d7e0c4eab67616d0000b27360aa711c73827cd2cfaadc38ab67616d0000b27378c7b71b6ed154a0bc2dff5aab67616d0000b2737fad4821d7530d0782e91a46",
+        "width": 60
+      }
+    ],
+    "name": "Work 10",
+    "owner": {
+      "display_name": "oliver.turner",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/user/oliver.turner"
+      },
+      "href": "https://api.spotify.com/v1/users/oliver.turner",
+      "id": "oliver.turner",
+      "type": "user",
+      "uri": "spotify:user:oliver.turner"
+    },
+    "primary_color": null,
+    "public": false,
+    "snapshot_id": "NTUsYzBhZDNhNDJiZDU1ZDNiYzdlYWNkYjFiMTc1NTUyYWZiYWQzNGFkOQ==",
+    "tracks": {
+      "href": "https://api.spotify.com/v1/playlists/5b4cJP2IVElWYikwFDg5sB/tracks",
+      "total": 50
+    },
+    "type": "playlist",
+    "uri": "spotify:playlist:5b4cJP2IVElWYikwFDg5sB"
+  },
+  {
+    "collaborative": false,
+    "description": "",
+    "external_urls": {
+      "spotify": "https://open.spotify.com/playlist/6R0WbLUJJMyQf6WqQSQanu"
+    },
+    "href": "https://api.spotify.com/v1/playlists/6R0WbLUJJMyQf6WqQSQanu",
+    "id": "6R0WbLUJJMyQf6WqQSQanu",
+    "images": [
+      {
+        "height": 640,
+        "url": "https://mosaic.scdn.co/640/ab67616d0000b273146bf7a7780afe1af10cd946ab67616d0000b273511f18e8439b0544882db040ab67616d0000b2735217034d6db8f64761bb2c14ab67616d0000b273a551d8d5aa0681240855ad85",
+        "width": 640
+      },
+      {
+        "height": 300,
+        "url": "https://mosaic.scdn.co/300/ab67616d0000b273146bf7a7780afe1af10cd946ab67616d0000b273511f18e8439b0544882db040ab67616d0000b2735217034d6db8f64761bb2c14ab67616d0000b273a551d8d5aa0681240855ad85",
+        "width": 300
+      },
+      {
+        "height": 60,
+        "url": "https://mosaic.scdn.co/60/ab67616d0000b273146bf7a7780afe1af10cd946ab67616d0000b273511f18e8439b0544882db040ab67616d0000b2735217034d6db8f64761bb2c14ab67616d0000b273a551d8d5aa0681240855ad85",
+        "width": 60
+      }
+    ],
+    "name": "Work 9",
+    "owner": {
+      "display_name": "oliver.turner",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/user/oliver.turner"
+      },
+      "href": "https://api.spotify.com/v1/users/oliver.turner",
+      "id": "oliver.turner",
+      "type": "user",
+      "uri": "spotify:user:oliver.turner"
+    },
+    "primary_color": null,
+    "public": false,
+    "snapshot_id": "NTQsYWQwZWJlMjk4ZGZmMTU1MmEwN2Q2NDA5N2I3YzgyMzg3MThkMTM0MA==",
+    "tracks": {
+      "href": "https://api.spotify.com/v1/playlists/6R0WbLUJJMyQf6WqQSQanu/tracks",
+      "total": 50
+    },
+    "type": "playlist",
+    "uri": "spotify:playlist:6R0WbLUJJMyQf6WqQSQanu"
+  }
+]

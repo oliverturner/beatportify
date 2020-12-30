@@ -14,35 +14,7 @@ function buildUrl({ rootUrl, params }) {
   return builtURL;
 }
 
-/**
- * @param {Request} req
- */
-const makeResponse = (apiRequest) => async (req) => {
-  const { accessToken } = req.session;
-  if (!accessToken) return { location: "/" };
-
-  let body;
-  let statusCode = 200;
-  const headers = {
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${accessToken}`,
-  };
-
-  try {
-    const result = await apiRequest(req, headers);
-    body = JSON.stringify(result);
-  } catch (error) {
-    if (error.statusCode === 401) {
-      const refreshUrl = req.requestContext.http.path;
-      return {
-        location: `/auth?refreshUrl=${refreshUrl}`,
-      };
-    }
-
-    statusCode = error.statusCode;
-    body = error.message;
-  }
-
+function makePayload(statusCode, body) {
   return {
     headers: {
       "content-type": "application/json; charset=utf8",
@@ -50,8 +22,41 @@ const makeResponse = (apiRequest) => async (req) => {
         "no-cache, no-store, must-revalidate, max-age=0, s-maxage=0",
     },
     statusCode,
-    body,
+    body: JSON.stringify(body),
   };
+}
+
+/**
+ * @param {Request} req
+ */
+const makeResponse = (apiRequest) => async (req) => {
+  const { accessToken } = req.session;
+  if (!accessToken) return { location: "/" };
+
+  const headers = {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${accessToken}`,
+  };
+
+  try {
+    const result = await apiRequest(req, headers);
+    return makePayload(200, result);
+  } catch (error) {
+    // accessToken expired: se refreshToken to generate a new accessToken
+    if (error.statusCode === 401) {
+      const refreshUrl = req.requestContext.http.path;
+      return {
+        location: `/auth?refreshUrl=${refreshUrl}`,
+      };
+    }
+
+    // no device available for playback
+    if (error.statusCode === 404) {
+      return makePayload(error.statusCode, error.body);
+    }
+
+    return makePayload(error.statusCode, { message: error.message });
+  }
 };
 
 module.exports = {

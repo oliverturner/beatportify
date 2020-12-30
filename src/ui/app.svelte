@@ -15,24 +15,22 @@
   });
 </script>
 
-<style>
+<style lang="scss">
   .app {
     display: grid;
     grid-template-rows: auto 1fr;
 
     height: 100vh;
   }
-
-  main {
+  .app__main {
     padding: 1em;
-
-    background: pink;
+    border-top: 1px solid #333;
   }
 </style>
 
 <div class="app">
   <Nav user={data.user} />
-  <main>
+  <main class="app__main">
     {#if data.user}
       <Top />
     {:else}

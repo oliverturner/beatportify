@@ -35,16 +35,10 @@ async function init(code) {
       },
     });
 
-    const { display_name, href, id, images } = userResult.body;
     const account = {
       accessToken,
       refreshToken,
-      user: {
-        id,
-        href,
-        display_name,
-        images: images[0],
-      },
+      user: userResult.body,
     };
 
     return account;

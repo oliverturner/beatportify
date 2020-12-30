@@ -9,11 +9,14 @@ const { buildUrl, makeResponse } = require("../../shared/utils");
  */
 async function getPlaylist(req, headers) {
   const playlistId = req.params.playlistId;
+  const market = req.session.user.country;
+
   const url = buildUrl({
     rootUrl: `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
     params: {
-      fields:
-        "items(added_at,track(album.id,album.images,artists(id,name),id,name))",
+      market,
+      // fields:
+      //   "items(added_at,track(album.id,album.images,artists(id,name),id,name))",
     },
   });
 

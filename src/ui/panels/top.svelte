@@ -62,7 +62,8 @@
   <div class="column" on:click={onTrackClick}>
     {#each tracks as track}
       <a href={`/api/play/${track.id}`}>{getArtists(track.artists)}:
-        {track.name}</a>
+        {track.name}
+      </a>
     {/each}
   </div>
 </div>

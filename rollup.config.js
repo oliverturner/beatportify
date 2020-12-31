@@ -1,11 +1,14 @@
 /* eslint-disable global-require */
 import svelte from "rollup-plugin-svelte";
-import commonjs from "@rollup/plugin-commonjs";
 import resolve from "@rollup/plugin-node-resolve";
+import commonjs from "@rollup/plugin-commonjs";
 import livereload from "rollup-plugin-livereload";
 import { terser } from "rollup-plugin-terser";
 import css from "rollup-plugin-css-only";
-import sveltePreprocess from "svelte-preprocess";
+
+// CommonJS syntax required to address odd issue:
+// https://rollupjs.org/guide/en/#error-name-is-not-exported-by-module
+const { preprocess } = require("./svelte.config");
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -40,7 +43,7 @@ export default {
   },
   plugins: [
     svelte({
-      preprocess: sveltePreprocess(),
+      preprocess,
       compilerOptions: {
         // enable run-time checks when not in production
         dev: !production,

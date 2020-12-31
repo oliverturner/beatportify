@@ -4,7 +4,13 @@
   import Nav from "./panels/nav.svelte";
   import Top from "./panels/top.svelte";
 
-  export let data = {
+  type LoginData = {
+    message: string;
+    loginURL?: string;
+    user?: Record<string, string>;
+  };
+
+  export let data: LoginData = {
     message: "",
   };
 
@@ -15,7 +21,7 @@
   });
 </script>
 
-<style lang="scss">
+<style>
   .app {
     display: grid;
     grid-template-rows: auto 1fr;

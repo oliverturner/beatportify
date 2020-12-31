@@ -1,0 +1,5 @@
+{
+  "extends": "@tsconfig/svelte/tsconfig.json",
+  "include": ["./ui"],
+  "exclude": ["node_modules"]
+}

@@ -1,14 +1,10 @@
-<script>
+<script lang="ts">
   import { onMount } from "svelte";
 
   import Nav from "./panels/nav.svelte";
   import Top from "./panels/top.svelte";
 
-  type LoginData = {
-    message: string;
-    loginURL?: string;
-    user?: Record<string, string>;
-  };
+  import type { LoginData } from "../../typings/app";
 
   export let data: LoginData = {
     message: "",
@@ -21,7 +17,7 @@
   });
 </script>
 
-<style>
+<style lang="scss">
   .app {
     display: grid;
     grid-template-rows: auto 1fr;
@@ -29,6 +25,8 @@
     height: 100vh;
   }
   .app__main {
+    overflow: hidden;
+    width: 100%;
     padding: 1em;
     border-top: 1px solid #333;
   }
@@ -40,7 +38,6 @@
     {#if data.user}
       <Top />
     {:else}
-      <!-- else content here -->
       <h2>{data.message}</h2>
       <p><a href={data.loginURL}>Log in to Spotify</a></p>
     {/if}

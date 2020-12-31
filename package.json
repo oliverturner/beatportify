@@ -13,6 +13,9 @@
     "@begin/data": "latest",
     "@rollup/plugin-commonjs": "17.0.0",
     "@rollup/plugin-node-resolve": "11.0.1",
+    "@tsconfig/svelte": "1.0.10",
+    "@types/node": "12.19.11",
+    "@types/spotify-api": "0.0.6",
     "cross-env": "^7.0.3",
     "eslint": "^7.16.0",
     "eslint-plugin-svelte3": "",
@@ -33,8 +36,8 @@
     "typescript": "4.1.3"
   },
   "scripts": {
-    "build": "rollup -c",
-    "dev": "rollup -c -w",
+    "build": "tsc && rollup -c",
+    "dev": "tsc -w & rollup -c -w",
     "lint": "eslint src --fix",
     "start": "cross-env NODE_ENV=testing ARC_LOCAL=1 npx sandbox",
     "test": "cross-env NODE_ENV=testing PORT=6666 tape test/*-test.js ./test/**/*-test.js | tap-spec"

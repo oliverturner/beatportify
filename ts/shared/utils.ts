@@ -1,5 +1,7 @@
+import "@architect/functions";
+
 import type { ApiRequest, ApiRequestHeaders } from "../../typings";
-import type { ArcRequest, ArcHeaders } from "../../typings/arc";
+import type { ArcRequest } from "../../typings/arc";
 
 /**
  * @param {{

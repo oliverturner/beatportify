@@ -76,8 +76,8 @@
   <a href={`/api/play/${track.id}`} class="item__play" on:click|preventDefault={onTrackClick}>
     <p class="item__play__label"><span>{artists}:</span> <span>{track.name}</span></p>
   </a>
-  <a href={purchaseLink} class="item__purchase">
-    <svg class="icon">
+  <a href={purchaseLink} class="item__purchase" aria-label="Find on Beatport">
+    <svg class="icon" aria-hidden="true">
       <use href="#icon-beatport" />
     </svg>
   </a>

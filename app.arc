@@ -1,6 +1,9 @@
 @app
 beatportify
 
+@create
+autocreate true
+
 @static
 
 @http
@@ -13,6 +16,7 @@ get /api/playlists
 get /api/playlists/:playlistId
 get /api/tracks/:trackId
 get /api/play/:trackId
+get /api/artists/:artistId
 
 @tables
 data

@@ -1,5 +1,3 @@
-import "@architect/functions";
-
 import type { ApiRequest, ApiRequestHeaders } from "../../typings";
 import type { ArcRequest } from "../../typings/arc";
 

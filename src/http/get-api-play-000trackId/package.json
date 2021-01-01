@@ -1,0 +1,6 @@
+{
+  "name": "beatportify-get-api-play",
+  "dependencies": {
+    "@architect/functions": "latest"
+  }
+}

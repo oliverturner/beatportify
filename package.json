@@ -1,6 +1,6 @@
 {
   "name": "beatportify",
-  "description": "Begin basic Svelte app + API",
+  "description": "Make items in Spotify playlists searchable on Beatport",
   "version": "1.0.0",
   "volta": {
     "node": "12.20.0"
@@ -8,9 +8,11 @@
   "devDependencies": {
     "@architect/functions": "latest",
     "@architect/sandbox": "latest",
+    "@aws-sdk/types": "3.1.0",
     "@begin/data": "latest",
     "@rollup/plugin-commonjs": "17.0.0",
     "@rollup/plugin-node-resolve": "11.0.1",
+    "@tsconfig/node12": "1.0.7",
     "@tsconfig/svelte": "1.0.10",
     "@types/node": "12.19.11",
     "@types/spotify-api": "0.0.6",

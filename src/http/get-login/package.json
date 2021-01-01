@@ -1,0 +1,6 @@
+{
+  "name": "beatportify-get-login",
+  "dependencies": {
+    "@architect/functions": "latest"
+  }
+}

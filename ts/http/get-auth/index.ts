@@ -2,11 +2,9 @@ import arc from "@architect/functions";
 import { init, refresh } from "./session";
 
 import type { ArcRequest, SpotifySession } from "../../../typings/arc";
+import type { ApiRequest } from "../../../typings";
 
-/**
- * @param {Request} req
- */
-async function auth(req: ArcRequest) {
+const auth: ApiRequest = async (req: ArcRequest) => {
   if (req.query.code) {
     let account: SpotifySession | { error: string };
 
@@ -46,6 +44,6 @@ async function auth(req: ArcRequest) {
   return {
     location: "/",
   };
-}
+};
 
 export const handler = arc.http.async(auth);

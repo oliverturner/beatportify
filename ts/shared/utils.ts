@@ -1,13 +1,12 @@
+// import { URL } from "url";
 import type { ApiRequest, ApiRequestHeaders } from "../../typings";
 import type { ArcRequest } from "../../typings/arc";
 
-/**
- * @param {{
- *   rootUrl: string
- *   params: Record<string, string>
- * }}
- */
-export function buildUrl({ rootUrl, params }) {
+interface BuildUrlProps {
+  rootUrl: string;
+  params: Record<string, string>;
+}
+export function buildUrl({ rootUrl, params }: BuildUrlProps) {
   const builtURL = new URL(rootUrl);
   for (const [key, val] of Object.entries(params)) {
     builtURL.searchParams.set(key, val as string);

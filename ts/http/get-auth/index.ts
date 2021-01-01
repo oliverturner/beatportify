@@ -1,12 +1,14 @@
-const arc = require("@architect/functions");
-const { init, refresh } = require("./session");
+import arc from "@architect/functions";
+import { init, refresh } from "./session";
+
+import type { ArcRequest, SpotifySession } from "../../../typings/arc";
 
 /**
  * @param {Request} req
  */
-async function auth(req) {
+async function auth(req: ArcRequest) {
   if (req.query.code) {
-    let account;
+    let account: SpotifySession | { error: string };
 
     try {
       account = await init(req.query.code);
@@ -24,7 +26,7 @@ async function auth(req) {
   }
 
   if (req.query.refreshUrl) {
-    let accessToken;
+    let accessToken: string | { error: string };
 
     try {
       accessToken = await refresh(req.session.refreshToken);
@@ -46,4 +48,4 @@ async function auth(req) {
   };
 }
 
-exports.handler = arc.http.async(auth);
+export const handler = arc.http.async(auth);

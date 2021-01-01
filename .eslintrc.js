@@ -12,8 +12,6 @@ module.exports = {
   rules: {
     // enable additional rules
     "linebreak-style": ["error", "unix"],
-    // node specific
-    "global-require": "error",
     "handle-callback-err": "error",
     // override default options for rules from base configurations
     "no-cond-assign": ["error", "always"],

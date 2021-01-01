@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "outDir": "./src",
+    "target": "esnext",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "esModuleInterop": true
+  },
+  "include": ["./ts"],
+  "exclude": ["node_modules"]
+}

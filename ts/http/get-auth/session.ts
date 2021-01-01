@@ -1,10 +1,8 @@
-const { get, post } = require("tiny-json-http");
+import { get, post } from "tiny-json-http";
 
-const {
-  SPOTIFY_CLIENT_ID,
-  SPOTIFY_CLIENT_SECRET,
-  SPOTIFY_REDIRECT,
-} = process.env;
+import type { SpotifySession } from "../../../typings/arc";
+
+const { SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, SPOTIFY_REDIRECT } = process.env;
 const clientTokenRaw = `${SPOTIFY_CLIENT_ID}:${SPOTIFY_CLIENT_SECRET}`;
 const clientToken = Buffer.from(clientTokenRaw).toString("base64");
 const url = "https://accounts.spotify.com/api/token";
@@ -13,7 +11,7 @@ const headers = {
   Authorization: `Basic ${clientToken}`,
 };
 
-async function init(code) {
+export async function init(code: string): Promise<SpotifySession | { error: string }> {
   try {
     const tokenResult = await post({
       url,
@@ -35,16 +33,10 @@ async function init(code) {
       },
     });
 
-    const { display_name, href, id, images } = userResult.body;
     const account = {
       accessToken,
       refreshToken,
-      user: {
-        id,
-        href,
-        display_name,
-        images: images[0],
-      },
+      user: userResult.body,
     };
 
     return account;
@@ -55,7 +47,7 @@ async function init(code) {
   }
 }
 
-async function refresh(refresh_token) {
+export async function refresh(refresh_token: string): Promise<string | { error: string }> {
   try {
     const tokenResult = await post({
       url,
@@ -74,8 +66,3 @@ async function refresh(refresh_token) {
     };
   }
 }
-
-module.exports = {
-  init,
-  refresh,
-};

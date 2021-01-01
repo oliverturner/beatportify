@@ -1,0 +1,104 @@
+{
+  "album": {
+    "album_type": "album",
+    "artists": [
+      {
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/2jtEP3ZWQNoXeWQvjF86xU"
+        },
+        "href": "https://api.spotify.com/v1/artists/2jtEP3ZWQNoXeWQvjF86xU",
+        "id": "2jtEP3ZWQNoXeWQvjF86xU",
+        "name": "GMJ",
+        "type": "artist",
+        "uri": "spotify:artist:2jtEP3ZWQNoXeWQvjF86xU"
+      },
+      {
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/06G320XM6NWeEBGOb11ir3"
+        },
+        "href": "https://api.spotify.com/v1/artists/06G320XM6NWeEBGOb11ir3",
+        "id": "06G320XM6NWeEBGOb11ir3",
+        "name": "Proton Radio",
+        "type": "artist",
+        "uri": "spotify:artist:06G320XM6NWeEBGOb11ir3"
+      }
+    ],
+    "external_urls": {
+      "spotify": "https://open.spotify.com/album/0IhsjLFod1NiidzxJJrWmh"
+    },
+    "href": "https://api.spotify.com/v1/albums/0IhsjLFod1NiidzxJJrWmh",
+    "id": "0IhsjLFod1NiidzxJJrWmh",
+    "images": [
+      {
+        "height": 640,
+        "url": "https://i.scdn.co/image/ab67616d0000b2732b6e6a564f7245a9c696dc42",
+        "width": 640
+      },
+      {
+        "height": 300,
+        "url": "https://i.scdn.co/image/ab67616d00001e022b6e6a564f7245a9c696dc42",
+        "width": 300
+      },
+      {
+        "height": 64,
+        "url": "https://i.scdn.co/image/ab67616d000048512b6e6a564f7245a9c696dc42",
+        "width": 64
+      }
+    ],
+    "name": "Meanwhile 009 (DJ Mix)",
+    "release_date": "2020-10-16",
+    "release_date_precision": "day",
+    "total_tracks": 10,
+    "type": "album",
+    "uri": "spotify:album:0IhsjLFod1NiidzxJJrWmh"
+  },
+  "artists": [
+    {
+      "external_urls": {
+        "spotify": "https://open.spotify.com/artist/5LIOMRocJJsc899tVmsiJc"
+      },
+      "href": "https://api.spotify.com/v1/artists/5LIOMRocJJsc899tVmsiJc",
+      "id": "5LIOMRocJJsc899tVmsiJc",
+      "name": "Khetouin",
+      "type": "artist",
+      "uri": "spotify:artist:5LIOMRocJJsc899tVmsiJc"
+    },
+    {
+      "external_urls": {
+        "spotify": "https://open.spotify.com/artist/3KZtRaZSrjeiFNVPzNc0LU"
+      },
+      "href": "https://api.spotify.com/v1/artists/3KZtRaZSrjeiFNVPzNc0LU",
+      "id": "3KZtRaZSrjeiFNVPzNc0LU",
+      "name": "Orange & Indigo",
+      "type": "artist",
+      "uri": "spotify:artist:3KZtRaZSrjeiFNVPzNc0LU"
+    },
+    {
+      "external_urls": {
+        "spotify": "https://open.spotify.com/artist/0Vw8wTJPM8hzOHwqAjsFri"
+      },
+      "href": "https://api.spotify.com/v1/artists/0Vw8wTJPM8hzOHwqAjsFri",
+      "id": "0Vw8wTJPM8hzOHwqAjsFri",
+      "name": "Nico Szabo",
+      "type": "artist",
+      "uri": "spotify:artist:0Vw8wTJPM8hzOHwqAjsFri"
+    }
+  ],
+  "disc_number": 1,
+  "duration_ms": 454665,
+  "explicit": false,
+  "external_ids": { "isrc": "US83Z2035235" },
+  "external_urls": {
+    "spotify": "https://open.spotify.com/track/1VOMsVPZ3iAxmpdu2OF26Z"
+  },
+  "href": "https://api.spotify.com/v1/tracks/1VOMsVPZ3iAxmpdu2OF26Z",
+  "id": "1VOMsVPZ3iAxmpdu2OF26Z",
+  "is_local": false,
+  "is_playable": true,
+  "name": "Robot Meditation - Nico Szabo Remix - Mixed",
+  "popularity": 2,
+  "preview_url": "https://p.scdn.co/mp3-preview/c3459d593a703d26c17d0d8852e5d158d20a79ea?cid=e07299b6a07a4f71b198054fc759b029",
+  "track_number": 10,
+  "type": "track",
+  "uri": "spotify:track:1VOMsVPZ3iAxmpdu2OF26Z"
+}

@@ -1,8 +1,16 @@
-<script>
+<script lang="ts">
   import { onMount } from "svelte";
 
-  let artists = [];
-  let tracks = [];
+  import TrackItem from "../components/TrackItem.svelte";
+
+  let artists: SpotifyApi.ArtistObjectFull[] = [];
+  let tracks: SpotifyApi.TrackObjectFull[] = [];
+
+  async function onArtistClick(event) {
+    event.preventDefault();
+
+    const { href } = event.target;
+  }
 
   onMount(async () => {
     try {
@@ -11,27 +19,38 @@
       tracks = data.tracks.items;
 
       console.log({ artists });
+      console.log({ tracks });
     } catch (error) {
       console.log({ error });
     }
   });
 </script>
 
-<style>
+<style lang="scss">
   .columns {
     display: flex;
+  }
+
+  .column {
+    flex: 1;
+  }
+  .items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
   }
 </style>
 
 <div class="columns">
-  <div class="column">
+  <!-- <div class="column items" on:click={onArtistClick}>
     {#each artists as artist}
+      <a href={`/api/artist/${artist.id}`} class="track"> {artist.name} </a>
       <p>{artist.name}</p>
     {/each}
-  </div>
-  <div class="column">
+  </div> -->
+  <div class="column items">
     {#each tracks as track}
-      <p>{track.name}</p>
+      <TrackItem {track} />
     {/each}
   </div>
 </div>

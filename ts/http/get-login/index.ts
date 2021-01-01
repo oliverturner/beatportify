@@ -1,5 +1,14 @@
-const arc = require("@architect/functions");
-const { buildUrl } = require("../../shared/utils");
+import arc from "@architect/functions";
+
+import { buildUrl } from "../../shared/utils";
+
+const scopes = [
+  "playlist-read-private",
+  "user-top-read",
+  "user-read-email",
+  "user-read-private",
+  "user-modify-playback-state",
+];
 
 const loginURL = buildUrl({
   rootUrl: "https://accounts.spotify.com/authorize",
@@ -7,7 +16,7 @@ const loginURL = buildUrl({
     client_id: process.env.SPOTIFY_CLIENT_ID,
     redirect_uri: process.env.SPOTIFY_REDIRECT,
     response_type: "code",
-    scope: "playlist-read-private user-top-read",
+    scope: scopes.join(" "),
   },
 });
 
@@ -29,4 +38,4 @@ async function login(req) {
   };
 }
 
-exports.handler = arc.http.async(login);
+export const handler = arc.http.async(login);

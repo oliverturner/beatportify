@@ -1,5 +1,7 @@
 /node_modules/
 /public/build/
+/src/http/
+/src/shared/
 
 .arc-env
 .DS_Store

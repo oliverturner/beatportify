@@ -1,0 +1,6 @@
+{
+  "name": "beatportify-post-logout",
+  "dependencies": {
+    "@architect/functions": "latest"
+  }
+}

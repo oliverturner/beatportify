@@ -1,6 +1,7 @@
 import arc from "@architect/functions";
 
 import { buildUrl } from "../../shared/utils";
+import type { ApiRequest } from "../../../typings";
 
 const scopes = [
   "playlist-read-private",
@@ -13,21 +14,20 @@ const scopes = [
 const loginURL = buildUrl({
   rootUrl: "https://accounts.spotify.com/authorize",
   params: {
-    client_id: process.env.SPOTIFY_CLIENT_ID,
-    redirect_uri: process.env.SPOTIFY_REDIRECT,
+    client_id: process.env.SPOTIFY_CLIENT_ID || "",
+    redirect_uri: process.env.SPOTIFY_REDIRECT || "",
     response_type: "code",
     scope: scopes.join(" "),
   },
 });
 
-async function login(req) {
+const login: ApiRequest = async (req) => {
   const { user } = req.session;
 
   return {
     headers: {
       "content-type": "application/json; charset=utf8",
-      "cache-control":
-        "no-cache, no-store, must-revalidate, max-age=0, s-maxage=0",
+      "cache-control": "no-cache, no-store, must-revalidate, max-age=0, s-maxage=0",
     },
     statusCode: 200,
     body: JSON.stringify({
@@ -36,6 +36,6 @@ async function login(req) {
       message: "Hello from Svelte + your Begin API!",
     }),
   };
-}
+};
 
 export const handler = arc.http.async(login);

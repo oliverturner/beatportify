@@ -1,0 +1,6 @@
+{
+  "name": "beatportify-get-api-track",
+  "dependencies": {
+    "@architect/functions": "latest"
+  }
+}

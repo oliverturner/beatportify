@@ -1,6 +1,0 @@
-{
-  "name": "beatportify-get-api-playlists",
-  "dependencies": {
-    "@architect/functions": "latest"
-  }
-}

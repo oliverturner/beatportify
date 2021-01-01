@@ -1,30 +1,15 @@
 <script lang="ts">
   import { onMount } from "svelte";
 
+  import TrackItem from "../components/TrackItem.svelte";
+
   let artists: SpotifyApi.ArtistObjectFull[] = [];
   let tracks: SpotifyApi.TrackObjectFull[] = [];
-
-  async function onTrackClick(event) {
-    event.preventDefault();
-
-    const { href } = event.target;
-
-    try {
-      const res = fetch(href);
-      console.log({ res });
-    } catch (error) {
-      console.log({ error });
-    }
-  }
 
   async function onArtistClick(event) {
     event.preventDefault();
 
     const { href } = event.target;
-  }
-
-  function getArtists(artists: SpotifyApi.ArtistObjectSimplified[]) {
-    return artists.map((a) => a.name).join(", ");
   }
 
   onMount(async () => {
@@ -54,30 +39,6 @@
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 1rem;
   }
-
-  .item {
-    position: relative;
-    & img {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-  }
-
-  .item__label {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    padding: 0.5rem;
-    font-size: 11px;
-    background: #000a;
-    color: #ccc;
-
-    & span {
-      display: block;
-    }
-  }
 </style>
 
 <div class="columns">
@@ -87,15 +48,9 @@
       <p>{artist.name}</p>
     {/each}
   </div> -->
-  <div class="column items" on:click={onTrackClick}>
+  <div class="column items">
     {#each tracks as track}
-      <a href={`/api/play/${track.id}`} class="item">
-        <img src={track.album.images[1].url} alt={`Cover art for ${track.album.name}`} />
-        <div class="item__label">
-          <span>{getArtists(track.artists)}:</span>
-          <span>{track.name}</span>
-        </div>
-      </a>
+      <TrackItem {track} />
     {/each}
   </div>
 </div>

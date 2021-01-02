@@ -1,5 +1,4 @@
-import { arc } from "../../shared/arc";
-import { buildUrl } from "../../shared/utils";
+import { arc, utils } from "../../shared";
 
 import type { ApiRequest } from "../../../typings";
 
@@ -11,7 +10,7 @@ const scopes = [
   "user-modify-playback-state",
 ];
 
-const loginURL = buildUrl({
+const loginURL = utils.buildUrl({
   rootUrl: "https://accounts.spotify.com/authorize",
   params: {
     client_id: process.env.SPOTIFY_CLIENT_ID || "",

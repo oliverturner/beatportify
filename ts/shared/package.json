@@ -1,0 +1,6 @@
+{
+  "name": "beatportify-shared",
+  "dependencies": {
+    "@architect/functions": "latest"
+  }
+}

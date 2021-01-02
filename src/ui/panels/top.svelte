@@ -6,12 +6,6 @@
   let artists: SpotifyApi.ArtistObjectFull[] = [];
   let tracks: SpotifyApi.TrackObjectFull[] = [];
 
-  async function onArtistClick(event) {
-    event.preventDefault();
-
-    const { href } = event.target;
-  }
-
   onMount(async () => {
     try {
       const data = await (await fetch("/api/top")).json();
@@ -36,7 +30,7 @@
   }
   .items {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     gap: 1rem;
   }
 </style>

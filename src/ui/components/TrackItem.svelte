@@ -1,4 +1,6 @@
 <script lang="ts">
+  // import type SpotifyApi from "spotify-api"
+
   export let track: SpotifyApi.TrackObjectFull;
 
   function getArtists(artists: SpotifyApi.ArtistObjectSimplified[]) {
@@ -6,6 +8,8 @@
   }
 
   async function onTrackClick(event) {
+    // Needed despite |preventDefault modifier... svelte-micro issue?
+    event.preventDefault();
     const { href } = event.target;
 
     try {
@@ -41,7 +45,7 @@
     }
   }
 
-  .item__play__label {
+  .item__label {
     position: absolute;
     bottom: 0;
     width: 100%;
@@ -53,6 +57,10 @@
 
     & span {
       display: block;
+
+      & + span {
+        margin-top: 0.5rem;
+      }
     }
   }
 
@@ -69,14 +77,43 @@
     fill: #94d500;
     background: #262626;
   }
+
+  .artistlink,
+  .tracklink {
+    color: inherit;
+  }
+
+  .artistlink {
+    display: inline-block;
+    margin-right: 4px;
+
+    &::after {
+      content: ",";
+    }
+
+    &:last-child::after {
+      content: "";
+    }
+  }
+
+  .tracklink {
+    font-style: italic;
+  }
 </style>
 
 <div class="item">
-  <img src={track.album.images[1].url} alt={`Cover art for ${track.album.name}`} />
-  <a href={`/api/play/${track.id}`} class="item__play" on:click|preventDefault={onTrackClick}>
-    <p class="item__play__label"><span>{artists}:</span> <span>{track.name}</span></p>
+  <a class="item__play" href={`/api/play/${track.id}`} on:click|self|preventDefault={onTrackClick}>
+    <img src={track.album.images[1].url} alt={`Cover art for ${track.album.name}`} />
   </a>
-  <a href={purchaseLink} class="item__purchase" aria-label="Find on Beatport">
+  <p class="item__label">
+    <span class="artists">
+      {#each track.artists as artist}
+        <a class="artistlink" href="/artist?artistId={artist.id}">{artist.name}</a>
+      {/each}
+    </span>
+    <span><a class="tracklink" href="/track?trackId={track.id}">{track.name}</a></span>
+  </p>
+  <a class="item__purchase" href={purchaseLink} aria-label="Find on Beatport">
     <svg class="icon" aria-hidden="true">
       <use href="#icon-beatport" />
     </svg>

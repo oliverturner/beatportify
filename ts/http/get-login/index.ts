@@ -1,7 +1,5 @@
-// import arc from "@architect/functions";
-
-import { arc } from "../../shared/arc";
-import { buildUrl } from "../../shared/utils";
+import arc from "@architect/functions";
+import { buildUrl } from "@architect/shared/utils";
 
 import type { ApiRequest } from "../../../typings";
 

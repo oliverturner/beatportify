@@ -1,8 +1,9 @@
 import arc from "@architect/functions";
+
 import { init, refresh } from "./session";
 
-import type { ArcRequest, SpotifySession } from "../../../typings/arc";
-import type { ApiRequest } from "../../../typings";
+import type { ArcRequest, SpotifySession } from "@typings/arc";
+import type { ApiRequest } from "@typings/index";
 
 const auth: ApiRequest = async (req: ArcRequest) => {
   if (req.query.code) {

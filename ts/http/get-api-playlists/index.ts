@@ -1,9 +1,9 @@
 import arc from "@architect/functions";
 import { get } from "tiny-json-http";
 
-import type { ApiRequest } from "../../../typings";
+import { makeResponse } from "@architect/shared/utils";
 
-import { makeResponse } from "../../shared/utils";
+import type { ApiRequest } from "@typings/index";
 
 const getPlaylists: ApiRequest = async (_req, headers) => {
   const result = await get({

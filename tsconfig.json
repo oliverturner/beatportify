@@ -4,6 +4,11 @@
     "outDir": "./src",
     "moduleResolution": "node",
     "lib": ["DOM", "es2019", "es2020.promise", "es2020.bigint", "es2020.string"],
+    "baseUrl": ".",
+    "paths": {
+      "@typings/*": ["typings/*"],
+      "@architect/shared/*": ["ts/shared/*"]
+    }
   },
   "include": ["./typings", "./ts"],
   "exclude": ["node_modules"]

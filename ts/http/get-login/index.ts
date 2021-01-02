@@ -1,7 +1,7 @@
-import arc from "@architect/functions";
+import { arc } from "@architect/shared/arc";
 import { buildUrl } from "@architect/shared/utils";
 
-import type { ApiRequest } from "../../../typings";
+import type { ApiRequest } from "@typings/index";
 
 const scopes = [
   "playlist-read-private",

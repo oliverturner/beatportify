@@ -1,0 +1,6 @@
+{
+  "name": "begin-shared",
+  "dependencies": {
+    "@architect/functions": "3.13.8"
+  }
+}

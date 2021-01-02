@@ -1,9 +1,9 @@
 import arc from "@architect/functions";
 import { get } from "tiny-json-http";
 
-import { makeResponse } from "../../shared/utils";
+import { makeResponse } from "@architect/shared/utils";
 
-import type  { ApiRequest } from "../../../typings";
+import type { ApiRequest } from "@typings/index";
 
 const getTop: ApiRequest = async (_req, headers) => {
   const rootUrl = "https://api.spotify.com/v1/me/top/";

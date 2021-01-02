@@ -1,8 +1,8 @@
 import arc from "@architect/functions";
 import { put } from "tiny-json-http";
 
-import { makeResponse } from "../../shared/utils";
-import type { ApiRequest } from "../../../typings";
+import { makeResponse } from "@architect/shared/utils";
+import type { ApiRequest } from "@typings/index";
 
 const playTrack: ApiRequest = async (req, headers) => {
   const trackId = req.params.trackId;

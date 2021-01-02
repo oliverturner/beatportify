@@ -1,6 +1,5 @@
-// import { URL } from "url";
-import type { ApiRequest, ApiRequestHeaders } from "../../typings";
-import type { ArcRequest } from "../../typings/arc";
+import type { ApiRequest, ApiRequestHeaders } from "@typings/index";
+import type { ArcRequest } from "@typings/arc";
 
 interface BuildUrlProps {
   rootUrl: string;

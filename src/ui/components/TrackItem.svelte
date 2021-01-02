@@ -8,8 +8,6 @@
   }
 
   async function onTrackClick(event) {
-    // Needed despite |preventDefault modifier... svelte-micro issue?
-    event.preventDefault();
     const { href } = event.target;
 
     try {
@@ -102,7 +100,7 @@
 </style>
 
 <div class="item">
-  <a class="item__play" href={`/api/play/${track.id}`} on:click|self|preventDefault={onTrackClick}>
+  <a class="item__play" href={`/api/play/${track.id}`} on:click|self|stopPropagation={onTrackClick}>
     <img src={track.album.images[1].url} alt={`Cover art for ${track.album.name}`} />
   </a>
   <p class="item__label">

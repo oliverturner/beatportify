@@ -30,6 +30,7 @@
   }
   .items {
     display: grid;
+    place-content: center;
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     gap: 1rem;
   }

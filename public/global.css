@@ -2,6 +2,19 @@
   box-sizing: inherit;
 }
 
+:root {
+  --s1: 4px;
+  --s2: 8px;
+  --s3: 12px;
+  --s4: 16px;
+  --s6: 24px;
+  --s8: 32px;
+  --m12: 48px;
+  --m16: 64px;
+  --l18: 72px;
+  --l24: 96px;
+}
+
 html,
 body {
   position: relative;
@@ -12,8 +25,8 @@ body {
 body {
   box-sizing: border-box;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell,
+    "Helvetica Neue", sans-serif;
   color: #333;
 }
 
@@ -76,4 +89,14 @@ button:focus {
 .icon {
   width: 100%;
   height: 100%;
+}
+
+.items {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 1rem;
+
+  overflow-y: auto;
+  max-height: 100%;
+  padding: 0 1em;
 }

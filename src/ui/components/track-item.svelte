@@ -3,7 +3,7 @@
 
   export let track: SpotifyApi.TrackObjectFull;
 
-  function getArtists(artists: SpotifyApi.ArtistObjectSimplified[]) {
+  function getArtists(artists: SpotifyApi.ArtistObjectSimplified[] = []) {
     return artists.map((a) => a.name);
   }
 
@@ -11,7 +11,14 @@
     const { href } = event.target;
 
     try {
-      const res = await fetch(href);
+      const res = await (await fetch(href)).json();
+      if (res.error) {
+        // TODO notify user that a Spotify device must be available
+        console.log(res.error.message);
+        return;
+      }
+
+      // TODO notify user that track is loading
       console.log({ res });
     } catch (error) {
       console.log({ error });
@@ -26,10 +33,13 @@
 <style lang="scss">
   .item {
     position: relative;
+
     & img {
       display: block;
       width: 100%;
       height: 100%;
+      min-width: 150px;
+      min-height: 150px;
       object-fit: cover;
     }
   }
@@ -100,7 +110,10 @@
 </style>
 
 <div class="item">
-  <a class="item__play" href={`/api/play/${track.id}`} on:click|self|stopPropagation={onTrackClick}>
+  <a
+    class="item__play"
+    href={`/api/play/${track.id}`}
+    on:click|self|stopPropagation|preventDefault={onTrackClick}>
     <img src={track.album.images[1].url} alt={`Cover art for ${track.album.name}`} />
   </a>
   <p class="item__label">

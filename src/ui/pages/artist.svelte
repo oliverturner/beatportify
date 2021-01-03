@@ -1,6 +1,6 @@
 <script>
   import { onMount } from "svelte";
-  import { query, hash } from "svelte-micro";
+  import { query } from "svelte-micro";
 
   onMount(async () => {
     try {

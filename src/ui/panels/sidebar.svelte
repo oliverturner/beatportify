@@ -36,22 +36,30 @@
 <style lang="scss">
   .sidebar {
     display: grid;
+    grid-template-rows: 1fr auto;
+    align-items: flex-start;
     gap: 1rem;
 
-    overflow-y: auto;
+    overflow: hidden;
     padding: 1rem;
   }
 
   .sidebar__items {
     display: grid;
-    gap: 0.5rem;
+    gap: var(--s1);
+
+    overflow-y: auto;
+    max-height: 100%;
+  }
+
+  .sidebar__item {
+    padding: var(--s2) 0;
   }
 
   .sidebar__controls {
     display: flex;
     gap: 1rem;
 
-    margin-top: auto;
     padding: var(--s4) 0 0;
     border-top: 1px solid currentColor;
   }
@@ -106,7 +114,7 @@
   {#if items.length}
     <div class="sidebar__items">
       {#each items as playlist}
-        <a class="playlist__link" href="/playlist?playlistId={playlist.id}">{playlist.name}</a>
+        <a class="sidebar__item" href="/playlist?playlistId={playlist.id}">{playlist.name}</a>
       {/each}
     </div>
 

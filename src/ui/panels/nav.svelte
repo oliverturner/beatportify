@@ -13,7 +13,7 @@
     align-items: center;
     justify-content: space-between;
 
-    padding: 1rem;
+    padding: 0.5rem;
   }
 
   .row {

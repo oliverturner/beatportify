@@ -109,24 +109,26 @@
   }
 </style>
 
-<div class="item">
-  <a
-    class="item__play"
-    href={`/api/play/${track.id}`}
-    on:click|self|stopPropagation|preventDefault={onTrackClick}>
-    <img src={track.album.images[1].url} alt={`Cover art for ${track.album.name}`} />
-  </a>
-  <p class="item__label">
-    <span class="artists">
-      {#each track.artists as artist}
-        <a class="artistlink" href="/artist?artistId={artist.id}">{artist.name}</a>
-      {/each}
-    </span>
-    <span><a class="tracklink" href="/track?trackId={track.id}">{track.name}</a></span>
-  </p>
-  <a class="item__purchase" href={purchaseLink} aria-label="Find on Beatport">
-    <svg class="icon" aria-hidden="true">
-      <use href="#icon-beatport" />
-    </svg>
-  </a>
-</div>
+{#if track.id}
+  <div class="item">
+    <a
+      class="item__play"
+      href={`/api/play/${track.id}`}
+      on:click|self|stopPropagation|preventDefault={onTrackClick}>
+      <img src={track.album.images[1]?.url} alt={`Cover art for ${track.album.name}`} />
+    </a>
+    <p class="item__label">
+      <span class="artists">
+        {#each track.artists as artist}
+          <a class="artistlink" href="/artist?artistId={artist.id}">{artist.name}</a>
+        {/each}
+      </span>
+      <span><a class="tracklink" href="/track?trackId={track.id}">{track.name}</a></span>
+    </p>
+    <a class="item__purchase" href={purchaseLink} aria-label="Find on Beatport">
+      <svg class="icon" aria-hidden="true">
+        <use href="#icon-beatport" />
+      </svg>
+    </a>
+  </div>
+{/if}

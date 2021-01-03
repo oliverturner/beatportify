@@ -4,18 +4,17 @@
   const limit = 20;
 
   let total = limit;
-  let pageCurrent = 1;
   let pageTotal = 0;
   let pageLinks = [];
   let items: SpotifyApi.PlaylistObjectFull[] = [];
 
   const makeLink = (offset: number) => `/api/playlists?offset=${offset}&limit=${limit}`;
 
-  onMount(async () => {
+  const loadPage = async (pageCurrent: number = 0) => {
     try {
       const offset = pageCurrent * limit;
 
-      if (offset < total) return;
+      if (offset > total) return;
 
       const res = await fetch(`/api/playlists?offset=${offset}&limit=${limit}`);
       const playlists: SpotifyApi.PagingObject<SpotifyApi.PlaylistObjectFull> = await res.json();
@@ -29,7 +28,9 @@
     } catch (error) {
       console.log({ error });
     }
-  });
+  };
+
+  onMount(loadPage);
 </script>
 
 <style lang="scss">
@@ -47,19 +48,30 @@
   }
 
   .sidebar__controls {
-    display: grid;
-    gap: 0.5rem;
-    grid-template-columns: repeat(auto-fill, var(--s4));
+    display: flex;
+    gap: 1rem;
 
     margin-top: auto;
     padding: var(--s4) 0 0;
     border-top: 1px solid currentColor;
   }
 
-  .sidebar__control {
+  .controls__label {
+    margin: 0;
+  }
+
+  .controls__links {
+    flex: 1;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fill, var(--s4));
+    gap: 0.5rem;
+  }
+
+  .link {
     --wh: var(--s4);
     --wh05: var(--s2);
-    
+
     overflow: hidden;
     position: relative;
     width: var(--wh);
@@ -74,7 +86,7 @@
       width: var(--wh);
       height: var(--wh);
       border-radius: var(--wh);
-      background:  #333;
+      background: #333;
     }
 
     &::after {
@@ -99,7 +111,16 @@
     </div>
 
     <div class="sidebar__controls">
-      {#each pageLinks as href, index}<a class="sidebar__control" {href}>Page {index + 1}</a>{/each}
+      <p class="controls__label">pages:</p>
+      <div class="controls__links">
+        {#each pageLinks as href, index}
+          <a
+            class="link"
+            {href}
+            on:click|preventDefault|stopPropagation={() => loadPage(index)}>Page
+            {index + 1}</a>
+        {/each}
+      </div>
     </div>
   {:else}
     <p>...loading</p>

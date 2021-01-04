@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
 
-  import TrackItem from "../components/TrackItem.svelte";
+  import TrackItem from "../components/track-item.svelte";
 
   let artists: SpotifyApi.ArtistObjectFull[] = [];
   let tracks: SpotifyApi.TrackObjectFull[] = [];
@@ -27,12 +27,6 @@
 
   .column {
     flex: 1;
-  }
-  .items {
-    display: grid;
-    place-content: center;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 1rem;
   }
 </style>
 

@@ -6,10 +6,11 @@ import { makeResponse } from "@architect/shared/utils";
 import type { ApiRequest } from "@typings/index";
 
 const getPlaylists: ApiRequest = async (_req, headers) => {
-  const result = await get({
-    url: "https://api.spotify.com/v1/me/playlists",
-    headers,
-  });
+  const url = new URL("https://api.spotify.com/v1/me/playlists");
+  url.searchParams.set("offset", _req.query.offset);
+  url.searchParams.set("limit", _req.query.limit);
+
+  const result = await get({ url, headers });
 
   return result.body;
 };

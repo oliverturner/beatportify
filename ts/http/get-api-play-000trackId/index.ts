@@ -17,13 +17,11 @@ const playTrack: ApiRequest = async (req, headers) => {
       },
     });
 
-    return result.body;
+    return result;
   } catch (error) {
     // no device available for playback
     if (error.statusCode === 404) {
-      return {
-        error: error.body,
-      };
+      return error.body;
     }
 
     throw error;

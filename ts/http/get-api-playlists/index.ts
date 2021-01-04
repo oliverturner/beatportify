@@ -1,4 +1,4 @@
-import arc from "@architect/functions";
+import { http } from "@architect/shared/arc";
 import { get } from "tiny-json-http";
 
 import { makeResponse } from "@architect/shared/utils";
@@ -15,4 +15,4 @@ const getPlaylists: ApiRequest = async (_req, headers) => {
   return result.body;
 };
 
-export const handler = arc.http.async(makeResponse(getPlaylists));
+export const handler = http.async(makeResponse(getPlaylists));

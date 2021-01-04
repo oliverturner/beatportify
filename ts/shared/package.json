@@ -1,6 +1,7 @@
 {
   "name": "begin-shared",
   "dependencies": {
-    "@architect/functions": "3.13.8"
+    "@architect/functions": "3.13.8",
+    "tslib": "2.0.3"
   }
 }

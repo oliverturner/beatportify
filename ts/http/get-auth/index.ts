@@ -1,4 +1,4 @@
-import arc from "@architect/functions";
+import { http } from "@architect/shared/arc";
 
 import { init, refresh } from "./session";
 
@@ -47,4 +47,4 @@ const auth: ApiRequest = async (req: ArcRequest) => {
   };
 };
 
-export const handler = arc.http.async(auth);
+export const handler = http.async(auth);

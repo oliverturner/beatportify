@@ -1,4 +1,4 @@
-import arc from "@architect/functions";
+import { http } from "@architect/shared/arc";
 
 async function logout() {
   return {
@@ -7,4 +7,4 @@ async function logout() {
   };
 }
 
-export const handler = arc.http.async(logout);
+export const handler = http.async(logout);

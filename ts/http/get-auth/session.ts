@@ -1,6 +1,6 @@
 import { get, post } from "tiny-json-http";
 
-import type { SpotifySession } from "../../../typings/arc";
+import type { SpotifySession } from "@typings/arc";
 
 const { SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, SPOTIFY_REDIRECT } = process.env;
 const clientTokenRaw = `${SPOTIFY_CLIENT_ID}:${SPOTIFY_CLIENT_SECRET}`;

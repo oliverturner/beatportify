@@ -1,1 +1,1 @@
-export * as arc from "@architect/functions";
+export { http } from "@architect/functions";

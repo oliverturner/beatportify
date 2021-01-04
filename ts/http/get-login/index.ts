@@ -1,4 +1,4 @@
-import { arc } from "@architect/shared/arc";
+import { http } from "@architect/shared/arc";
 import { buildUrl } from "@architect/shared/utils";
 
 import type { ApiRequest } from "@typings/index";
@@ -38,4 +38,4 @@ const login: ApiRequest = async (req) => {
   };
 };
 
-export const handler = arc.http.async(login);
+export const handler = http.async(login);

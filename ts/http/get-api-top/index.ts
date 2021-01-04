@@ -1,4 +1,4 @@
-import arc from "@architect/functions";
+import { http } from "@architect/shared/arc";
 import { get } from "tiny-json-http";
 
 import { makeResponse } from "@architect/shared/utils";
@@ -17,4 +17,4 @@ const getTop: ApiRequest = async (_req, headers) => {
   };
 };
 
-export const handler = arc.http.async(makeResponse(getTop));
+export const handler = http.async(makeResponse(getTop));

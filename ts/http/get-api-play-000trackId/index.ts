@@ -1,4 +1,4 @@
-import arc from "@architect/functions";
+import { http } from "@architect/shared/arc";
 import { put } from "tiny-json-http";
 
 import { makeResponse } from "@architect/shared/utils";
@@ -28,4 +28,4 @@ const playTrack: ApiRequest = async (req, headers) => {
   }
 };
 
-export const handler = arc.http.async(makeResponse(playTrack));
+export const handler = http.async(makeResponse(playTrack));

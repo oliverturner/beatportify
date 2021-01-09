@@ -3,6 +3,8 @@
 
   import TrackItem from "../components/track-item.svelte";
 
+  export let location = {};
+
   let artists: SpotifyApi.ArtistObjectFull[] = [];
   let tracks: SpotifyApi.TrackObjectFull[] = [];
 
@@ -37,9 +39,12 @@
       <p>{artist.name}</p>
     {/each}
   </div> -->
-  <div class="column items">
-    {#each tracks as track}
-      <TrackItem {track} />
-    {/each}
+  <div class="column">
+    <h2>Top Tracks</h2>
+    <div class="items">
+      {#each tracks as track}
+        <TrackItem {track} />
+      {/each}
+    </div>
   </div>
 </div>

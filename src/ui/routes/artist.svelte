@@ -1,10 +1,11 @@
 <script>
   import { onMount } from "svelte";
-  import { query, hash } from "svelte-micro";
+  
+  export let id;
 
   onMount(async () => {
     try {
-      const data = await (await fetch("/api/artist/" + $query)).json();
+      const data = await (await fetch("/api/artist/" + id)).json();
 
       console.log({ data });
     } catch (error) {
@@ -13,4 +14,4 @@
   });
 </script>
 
-<p>Current query is {$query}</p>
+<p>Current query is {id}</p>

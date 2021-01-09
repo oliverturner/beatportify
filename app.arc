@@ -1,5 +1,5 @@
 @app
-beatportify
+portify
 
 @create
 autocreate true

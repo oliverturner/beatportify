@@ -1,4 +1,4 @@
-import { http } from "@architect/shared/arc";
+import { http } from "@architect/functions";
 
 import { init, refresh } from "./session";
 

@@ -120,10 +120,10 @@
     <p class="item__label">
       <span class="artists">
         {#each track.artists as artist}
-          <a class="artistlink" href="/artist?artistId={artist.id}">{artist.name}</a>
+          <a class="artistlink" href="/artist/{artist.id}">{artist.name}</a>
         {/each}
       </span>
-      <span><a class="tracklink" href="/track?trackId={track.id}">{track.name}</a></span>
+      <span><a class="tracklink" href="/track/{track.id}">{track.name}</a></span>
     </p>
     <a class="item__purchase" href={purchaseLink} aria-label="Find on Beatport">
       <svg class="icon" aria-hidden="true">

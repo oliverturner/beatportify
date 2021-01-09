@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
+  import { Link } from "svelte-routing";
 
   const limit = 20;
 
@@ -114,7 +115,7 @@
   {#if items.length}
     <div class="sidebar__items">
       {#each items as playlist}
-        <a class="sidebar__item" href="/playlist?playlistId={playlist.id}">{playlist.name}</a>
+        <Link class="sidebar__item" to="/playlist/{playlist.id}">{playlist.name}</Link>
       {/each}
     </div>
 

@@ -1,4 +1,4 @@
-import { http } from "@architect/shared/arc";
+import { http } from "@architect/functions";
 import { buildUrl } from "@architect/shared/utils";
 
 import type { ApiRequest } from "@typings/index";
@@ -26,15 +26,11 @@ const login: ApiRequest = async (req) => {
 
   return {
     headers: {
-      "content-type": "application/json; charset=utf8",
+      "content-type": "application/json; charset=utf-8",
       "cache-control": "no-cache, no-store, must-revalidate, max-age=0, s-maxage=0",
     },
     statusCode: 200,
-    body: JSON.stringify({
-      user,
-      loginURL,
-      message: "Hello from Svelte + your Begin API!",
-    }),
+    body: JSON.stringify({ user, loginURL }),
   };
 };
 

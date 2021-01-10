@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { link } from "svelte-routing";
+
   // import type SpotifyApi from "spotify-api"
 
   export let track: SpotifyApi.TrackObjectFull;
@@ -120,10 +122,10 @@
     <p class="item__label">
       <span class="artists">
         {#each track.artists as artist}
-          <a class="artistlink" href="/artist/{artist.id}">{artist.name}</a>
+          <a class="artistlink" href="/artist/{artist.id}" use:link>{artist.name}</a>
         {/each}
       </span>
-      <span><a class="tracklink" href="/track/{track.id}">{track.name}</a></span>
+      <span><a class="tracklink" href="/track/{track.id}" use:link>{track.name}</a></span>
     </p>
     <a class="item__purchase" href={purchaseLink} aria-label="Find on Beatport">
       <svg class="icon" aria-hidden="true">

@@ -5,7 +5,7 @@
 
   onMount(async () => {
     try {
-      const data = await (await fetch("/api/artist/" + id)).json();
+      const data = await (await fetch(`/api/tracks/${id}`)).json();
 
       console.log({ data });
     } catch (error) {

@@ -1,24 +1,20 @@
 <script>
-  import { onMount } from "svelte";
-  import { query } from "svelte-micro";
-
   import TrackItem from "../components/track-item.svelte";
 
+  export let id;
   let data = { items: [] };
 
-  async function loadTracks(query) {
-    console.log({ query });
+  async function loadTracks(playlistId) {
+    console.log({ playlistId });
 
     try {
-      const url = new URL(window.location);
-      const playlistId = url.searchParams.get("playlistId");
       data = await (await fetch(`/api/playlists/${playlistId}`)).json();
     } catch (error) {
       console.log({ error });
     }
   }
 
-  $: loadTracks($query);
+  $: loadTracks(id);
 </script>
 
 <div class="column items">

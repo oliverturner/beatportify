@@ -1,4 +1,4 @@
-import { http } from "@architect/shared/arc";
+import { http } from "@architect/functions";
 import { get } from "tiny-json-http";
 
 import { makeResponse } from "@architect/shared/utils";

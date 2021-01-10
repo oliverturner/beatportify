@@ -16,6 +16,7 @@
 
       console.log({ artists });
       console.log({ tracks });
+      console.log({ location });
     } catch (error) {
       console.log({ error });
     }

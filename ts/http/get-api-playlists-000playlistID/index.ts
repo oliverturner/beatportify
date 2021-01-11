@@ -5,6 +5,7 @@ import { buildUrl, makeResponse } from "@architect/shared/utils";
 
 import type { ApiRequest } from "@typings/index";
 import { ArcHeaders } from "@typings/arc";
+import { TrackItem } from "@typings/app";
 
 // Camelot keys indexed by mode -> pitch class
 // https://maustsontoast.com/2020/pitch-class-tonal-counterparts-and-camelot-key-equivalents
@@ -51,20 +52,21 @@ function getTrackAudio(trackIds: string[], headers: ArcHeaders) {
  * loudness: -7.095
  * speechiness: 0.0638
  */
-function addItemAudio(
-  audioFeatures: SpotifyApi.AudioFeaturesObject[],
-  items: SpotifyApi.PlaylistTrackObject[]
-) {
-  return items.map((item, index) => {
-    const { key: pitchClass, mode, tempo, analysis_url: analysisUrl } = audioFeatures[index];
-    const key = PITCH_CLASS[mode][pitchClass];
-    const tone = TONES[mode][pitchClass];
+function processAudio(audioFeatures: SpotifyApi.AudioFeaturesObject) {
+  const { key: pitchClass, mode, tempo, analysis_url: analysisUrl } = audioFeatures;
+  const key = PITCH_CLASS[mode][pitchClass];
+  const tone = TONES[mode][pitchClass];
 
-    return {
-      ...item,
-      audio: { key, tone, tempo, analysisUrl },
-    };
-  });
+  return { key, tone, tempo, analysisUrl };
+}
+
+function processItems(
+  items: SpotifyApi.PlaylistTrackObject[],
+  audioFeatures: SpotifyApi.AudioFeaturesObject[]
+): TrackItem[] {
+  return items
+    .map((item, index) => ({ ...item, audio: processAudio(audioFeatures[index]) }))
+    .filter((item) => item.track.is_playable);
 }
 
 const getPlaylist: ApiRequest = async (req, headers) => {
@@ -78,7 +80,7 @@ const getPlaylist: ApiRequest = async (req, headers) => {
   const trackIds = tracksPage.items.map((item) => item.track.id);
   const audioRes = await getTrackAudio(trackIds, headers);
 
-  trackRes.body.items = addItemAudio(audioRes.body.audio_features, tracksPage.items);
+  trackRes.body.items = processItems(tracksPage.items, audioRes.body.audio_features);
 
   return trackRes.body;
 };

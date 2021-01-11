@@ -111,6 +111,11 @@
   }
 </style>
 
+<!-- 
+// TODO: create use:containerQuery action: 
+// https://philipwalton.com/articles/responsive-components-a-solution-to-the-container-queries-problem/
+// https://css-tricks.com/the-raven-technique-one-step-closer-to-container-queries/
+-->
 {#if track.id}
   <div class="item">
     <a

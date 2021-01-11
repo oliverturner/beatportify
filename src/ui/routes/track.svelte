@@ -5,7 +5,8 @@
 
   onMount(async () => {
     try {
-      const data = await (await fetch("/api/artist/" + id)).json();
+      // TODO: load track date from store but request analysis from embedded URL
+      const data = await (await fetch(`/api/tracks/${id}`)).json();
 
       console.log({ data });
     } catch (error) {

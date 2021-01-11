@@ -2,13 +2,15 @@
   import TrackItem from "../components/track-item.svelte";
 
   export let id;
-  let data = { items: [] };
+  let playlist = { items: [] };
 
   async function loadTracks(playlistId) {
     console.log({ playlistId });
 
     try {
-      data = await (await fetch(`/api/playlists/${playlistId}`)).json();
+      playlist = await (await fetch(`/api/playlists/${playlistId}`)).json();
+
+      console.log({ playlist });
     } catch (error) {
       console.log({ error });
     }
@@ -18,7 +20,8 @@
 </script>
 
 <div class="column items">
-  {#each data.items as item}
+  {#each playlist.items as item}
+    <!-- // TODO: consume entire item object -->
     <TrackItem track={item.track} />
   {/each}
 </div>

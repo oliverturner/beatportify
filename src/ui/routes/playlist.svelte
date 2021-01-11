@@ -21,6 +21,7 @@
 
 <div class="column items">
   {#each playlist.items as item}
+    <!-- // TODO: consume entire item object -->
     <TrackItem track={item.track} />
   {/each}
 </div>

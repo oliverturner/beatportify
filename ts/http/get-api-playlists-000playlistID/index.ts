@@ -6,6 +6,10 @@ import { buildUrl, makeResponse } from "@architect/shared/utils";
 import type { ApiRequest } from "@typings/index";
 import { ArcHeaders } from "@typings/arc";
 
+// Camelot keys indexed by pitch index
+// https://en.wikipedia.org/wiki/Pitch_class
+const PITCH_CLASS = ["5A", "12A", "7A", "2A", "9A", "4A", "11A", "6A", "1A", "8A", "3A", "10A"];
+
 function getTracks(playlistId: string, market: string, headers: ArcHeaders) {
   const url = buildUrl({
     rootUrl: `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
@@ -23,31 +27,33 @@ function getTrackAudio(trackIds: string[], headers: ArcHeaders) {
 }
 
 /**
- * // TODO: only extract useful keys:
- * acousticness: 0.000802 
- * analysis_url: "https://api.spotify.com/v1/audio-analysis/7oHqjeTUFu0nUsawxYzmaP"
- * danceability: 0.779
- * duration_ms: 452231
- * energy: 0.894
- * id: "7oHqjeTUFu0nUsawxYzmaP"
- * instrumentalness: 0.923
  * key: 7
+ * mode: 1
+ * energy: 0.894
+ * danceability: 0.779
+ * tempo: 120.992
+ * analysis_url: "https://api.spotify.com/v1/audio-analysis/7oHqjeTUFu0nUsawxYzmaP"
+ *
+ * valence: 0.234
+ * time_signature: 4
+ * acousticness: 0.000802
+ * instrumentalness: 0.923
  * liveness: 0.0744
  * loudness: -7.095
- * mode: 1
  * speechiness: 0.0638
- * tempo: 120.992
- * time_signature: 4
- * track_href: "https://api.spotify.com/v1/tracks/7oHqjeTUFu0nUsawxYzmaP"
- * type: "audio_features"
- * uri: "spotify:track:7oHqjeTUFu0nUsawxYzmaP"
- * valence: 0.234
  */
 function addItemAudio(
   audioFeatures: SpotifyApi.AudioFeaturesObject[],
   items: SpotifyApi.PlaylistTrackObject[]
 ) {
-  return items.map((item, index) => ({ ...item, audio: audioFeatures[index] }));
+  return items.map((item, index) => {
+    const { key, tempo, analysis_url: analysisUrl } = audioFeatures[index];
+    const camelotKey = PITCH_CLASS[key];
+    return {
+      ...item,
+      audio: { key, camelotKey, tempo, analysisUrl },
+    };
+  });
 }
 
 const getPlaylist: ApiRequest = async (req, headers) => {

@@ -10,7 +10,9 @@
 
     try {
       const newTracks = await (await fetch(`/api/playlists/${playlistId}`)).json();
-      tracks.set(newTracks);
+      tracks.set(newTracks.items);
+
+      console.log({ newTracks });
     } catch (error) {
       console.log({ error });
     }
@@ -20,7 +22,7 @@
 </script>
 
 <div class="column items">
-  {#each tracks as item}
+  {#each $tracks as item}
     <!-- // TODO: consume entire item object -->
     <TrackItem track={item.track} />
   {/each}

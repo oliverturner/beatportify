@@ -3,12 +3,12 @@ import { get } from "tiny-json-http";
 
 import { makeResponse } from "@architect/shared/utils";
 
-import type { ApiRequest } from "@typings/index";
+import type { ApiPageRequest } from "@typings/index";
 
-const getPlaylists: ApiRequest = async (_req, headers) => {
+const getPlaylists: ApiPageRequest = async (req, headers) => {
   const url = new URL("https://api.spotify.com/v1/me/playlists");
-  url.searchParams.set("offset", _req.query.offset);
-  url.searchParams.set("limit", _req.query.limit);
+  url.searchParams.set("offset", req.query.offset);
+  url.searchParams.set("limit", req.query.limit);
 
   const result = await get({ url, headers });
 

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { fade, fly } from "svelte/transition";
   import { link } from "svelte-routing";
 
   // import type SpotifyApi from "spotify-api"
@@ -35,6 +36,7 @@
 <style lang="scss">
   .item {
     position: relative;
+    background: #ccc;
 
     & img {
       display: block;
@@ -116,26 +118,29 @@
 // https://philipwalton.com/articles/responsive-components-a-solution-to-the-container-queries-problem/
 // https://css-tricks.com/the-raven-technique-one-step-closer-to-container-queries/
 -->
-{#if track.id}
-  <div class="item">
-    <a
-      class="item__play"
-      href={`/api/play/${track.id}`}
-      on:click|self|stopPropagation|preventDefault={onTrackClick}>
-      <img src={track.album.images[1]?.url} alt={`Cover art for ${track.album.name}`} />
-    </a>
-    <p class="item__label">
-      <span class="artists">
-        {#each track.artists as artist}
-          <a class="artistlink" href="/artist/{artist.id}" use:link>{artist.name}</a>
-        {/each}
-      </span>
-      <span><a class="tracklink" href="/track/{track.id}" use:link>{track.name}</a></span>
-    </p>
-    <a class="item__purchase" href={purchaseLink} aria-label="Find on Beatport">
-      <svg class="icon" aria-hidden="true">
-        <use href="#icon-beatport" />
-      </svg>
-    </a>
-  </div>
-{/if}
+
+<div class="item" in:fade out:fly>
+  <a
+    class="item__play"
+    href={`/api/play/${track.id}`}
+    on:click|self|stopPropagation|preventDefault={onTrackClick}>
+    <img
+      src={track.album.images[1]?.url}
+      alt={`Cover art for ${track.album.name}`}
+      width="300"
+      height="300" />
+  </a>
+  <p class="item__label">
+    <span class="artists">
+      {#each track.artists as artist}
+        <a class="artistlink" href="/artist/{artist.id}" use:link>{artist.name}</a>
+      {/each}
+    </span>
+    <span><a class="tracklink" href="/track/{track.id}" use:link>{track.name}</a></span>
+  </p>
+  <a class="item__purchase" href={purchaseLink} aria-label="Find on Beatport">
+    <svg class="icon" aria-hidden="true">
+      <use href="#icon-beatport" />
+    </svg>
+  </a>
+</div>

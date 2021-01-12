@@ -6,3 +6,8 @@ export interface ApiRequestHeaders {
 }
 
 export type ApiRequest = (req: ArcRequest, headers: ArcHeaders) => Promise<Record<string, unknown>>;
+
+export type ApiPageRequest = (
+  req: ArcRequest,
+  headers: ArcHeaders
+) => Promise<Record<string, SpotifyApi.PagingObject<T>>>;

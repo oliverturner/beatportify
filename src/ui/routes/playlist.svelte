@@ -1,16 +1,21 @@
 <script lang="ts">
-  import { tracks } from "./stores";
+  import { tracks } from "../stores/tracks";
   import TrackItem from "../components/track-item.svelte";
 
   export let id: string;
-  tracks.set([]);
 
   async function loadTracks(playlistId) {
     console.log({ playlistId });
 
+    tracks.set([]);
+
     try {
-      const newTracks = await (await fetch(`/api/playlists/${playlistId}`)).json();
+      const newTracks: SpotifyApi.PagingObject<TrackItem> = await (
+        await fetch(`/api/playlists/${playlistId}`)
+      ).json();
       tracks.set(newTracks.items);
+
+      console.log({ $tracks });
 
       console.log({ newTracks });
     } catch (error) {
@@ -22,8 +27,8 @@
 </script>
 
 <div class="column items">
-  {#each $tracks as item}
+  {#each $tracks as item, index (item.track.id)}
     <!-- // TODO: consume entire item object -->
-    <TrackItem track={item.track} />
+    <TrackItem {item} {index} />
   {/each}
 </div>

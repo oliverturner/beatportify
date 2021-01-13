@@ -2,26 +2,30 @@
   import { onMount } from "svelte";
 
   import TrackItem from "../components/track-item.svelte";
+  import type { TrackItemRedux } from "@typings/app";
 
-  export let location = {};
-
-  let artists: SpotifyApi.ArtistObjectFull[] = [];
-  let tracks: SpotifyApi.TrackObjectFull[] = [];
+  let tracks: TrackItemRedux[] = [];
 
   onMount(async () => {
     try {
       const data = await (await fetch("/api/top")).json();
-      artists = data.artists.items;
-      tracks = data.tracks.items;
-
-      console.log({ artists });
-      console.log({ tracks });
-      console.log({ location });
+      tracks = data.tracks;
     } catch (error) {
       console.log({ error });
     }
   });
 </script>
+
+<div class="columns">
+  <div class="column">
+    <h2>Top Tracks</h2>
+    <div class="items">
+      {#each tracks as item, index (item.id)}
+        <TrackItem {item} {index} />
+      {/each}
+    </div>
+  </div>
+</div>
 
 <style lang="scss">
   .columns {
@@ -32,20 +36,3 @@
     flex: 1;
   }
 </style>
-
-<div class="columns">
-  <!-- <div class="column items" on:click={onArtistClick}>
-    {#each artists as artist}
-      <a href={`/api/artist/${artist.id}`} class="track"> {artist.name} </a>
-      <p>{artist.name}</p>
-    {/each}
-  </div> -->
-  <div class="column">
-    <h2>Top Tracks</h2>
-    <div class="items">
-      {#each tracks as track}
-        <TrackItem {track} />
-      {/each}
-    </div>
-  </div>
-</div>

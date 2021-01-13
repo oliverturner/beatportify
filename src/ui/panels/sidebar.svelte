@@ -112,7 +112,7 @@
 </style>
 
 <nav class="sidebar">
-  {#if items.length}
+  {#if items?.length}
     <div class="sidebar__items">
       {#each items as playlist}
         <a class="sidebar__item" href="/playlist/{playlist.id}" use:link>{playlist.name}</a>

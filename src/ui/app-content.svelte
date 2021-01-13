@@ -11,17 +11,6 @@
   export let user;
 </script>
 
-<style>
-  .app__main {
-    grid-template-columns: 250px 1fr;
-  }
-
-  .app__main__content {
-    overflow: hidden;
-    padding: 1em 0;
-  }
-</style>
-
 <Nav {user}>
   <Link to="/">Top Tracks</Link>
 </Nav>
@@ -40,3 +29,14 @@
     <Route component={Top} />
   </div>
 </main>
+
+<style>
+  .app__main {
+    grid-template-columns: 250px 1fr;
+  }
+
+  .app__main__content {
+    overflow: hidden;
+    padding: 1em 0;
+  }
+</style>

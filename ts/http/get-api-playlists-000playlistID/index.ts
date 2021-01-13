@@ -2,7 +2,7 @@ import { http } from "@architect/functions";
 import { get } from "tiny-json-http";
 
 import { buildUrl, makeResponse } from "@architect/shared/utils";
-import { processAudio } from "@architect/shared/audio";
+import { getTrackAudio, processAudio } from "@architect/shared/audio";
 
 import type { ApiRequest } from "@typings/index";
 import { ArcHeaders } from "@typings/arc";
@@ -11,15 +11,6 @@ function getTracks(playlistId: string, market: string, headers: ArcHeaders) {
   const url = buildUrl({
     rootUrl: `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
     params: { market },
-  });
-
-  return get({ url, headers });
-}
-
-function getTrackAudio(trackIds: string[], headers: ArcHeaders) {
-  const url = buildUrl({
-    rootUrl: `https://api.spotify.com/v1/audio-features`,
-    params: { ids: trackIds.join(",") },
   });
 
   return get({ url, headers });

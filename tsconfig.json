@@ -1,7 +1,6 @@
 {
   "extends": "@tsconfig/node12/tsconfig.json",
   "compilerOptions": {
-    "noEmit": true,
     "importHelpers": true,
     "moduleResolution": "node",
     "lib": ["DOM", "es2019", "es2020.promise", "es2020.bigint", "es2020.string"],
@@ -12,6 +11,6 @@
       "@architect/shared/*": ["ts/shared/*"]
     }
   },
-  "include": ["./typings", "./ts", "./src/stores", "src/ui/routes/stores.ts"],
+  "include": ["./typings", "./ts"],
   "exclude": ["node_modules"]
 }

@@ -1,22 +1,29 @@
-import type { AlbumRedux, TrackItemRedux } from "@typings/app";
+import type * as Portify from "@typings/app";
+import type * as SpotifyApi from "@typings/spotify";
 
-export function purgeTrack(item: SpotifyApi.TrackObjectFull): TrackItemRedux {
-  const {
-    available_markets,
-    disc_number,
-    explicit,
-    external_ids,
-    external_urls,
-    is_local,
-    popularity,
-    ...track
-  } = item;
+export function processAlbum(itemAlbum: SpotifyApi.SimplifiedAlbum): Portify.Album {
+  const { album_type, artists, id, images, name, uri } = itemAlbum;
 
-  return track;
+  return {
+    id,
+    album_type,
+    artists,
+    images,
+    name,
+    uri,
+  };
 }
 
-export function purgeAlbum(itemAlbum: SpotifyApi.AlbumObjectSimplified): AlbumRedux {
-  const { available_markets, type, ...album } = itemAlbum;
+export function processTrack(item: SpotifyApi.Track): Portify.Track {
+  const { album, artists, duration_ms, id, is_playable, name, uri } = item;
 
-  return album;
+  return {
+    album: processAlbum(album),
+    artists,
+    duration_ms,
+    id,
+    is_playable,
+    name,
+    uri,
+  };
 }

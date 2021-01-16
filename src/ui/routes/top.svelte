@@ -2,14 +2,16 @@
   import { onMount } from "svelte";
 
   import TrackItem from "../components/track-item.svelte";
-  import type { TrackItemRedux } from "@typings/app";
+  import type { Track } from "@typings/app";
 
-  let tracks: TrackItemRedux[] = [];
+  let tracks: Track[] = [];
 
   onMount(async () => {
     try {
       const data = await (await fetch("/api/top")).json();
       tracks = data.tracks;
+
+      console.log({ data, tracks });
     } catch (error) {
       console.log({ error });
     }

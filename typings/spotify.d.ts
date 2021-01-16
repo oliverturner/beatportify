@@ -101,7 +101,7 @@ export interface CurrentlyPlaying {
   context: Context;
   currently_playing_type: string;
   is_playing: boolean;
-  item: "Track | Episode";
+  item: Track | Episode;
   progress_ms: number;
   timestamp: number;
 }
@@ -158,15 +158,7 @@ export interface ExternalId {
   isrc: string;
   upc: string;
 }
-export interface PagingObject {
-  href: string;
-  items: [];
-  limit: number;
-  next: string;
-  offset: number;
-  previous: string;
-  total: number;
-}
+
 export interface PlayHistory {
   context: Context;
   played_at: Timestamp;
@@ -190,7 +182,7 @@ export interface PlaylistTrack {
   added_at: Timestamp;
   added_by: PublicUser;
   is_local: boolean;
-  track: "Track | Episode";
+  track: Track | Episode;
 }
 export interface PrivateUser {
   country: string;
@@ -263,7 +255,7 @@ export interface Show {
   uri: string;
 }
 export interface SimplifiedAlbum {
-  album_group: string;
+  album_group?: string;
   album_type: string;
   artists: SimplifiedArtist[];
   available_markets: string[];
@@ -272,7 +264,7 @@ export interface SimplifiedAlbum {
   id: string;
   images: Image[];
   name: string;
-  restrictions: AlbumRestriction;
+  restrictions?: AlbumRestriction;
   type: string;
   uri: string;
 }
@@ -371,3 +363,21 @@ export interface TuneableTrack {
   time_signature: number;
   valence: number;
 }
+
+// Responses
+// -----------------------------------------------------------------------------
+export interface PagingObject<T> {
+  href: string;
+  items: T[];
+  limit: number;
+  next: string;
+  offset: number;
+  previous: string;
+  total: number;
+}
+
+export type ApiResponseTracks = PagingObject<Track>;
+
+export type ApiResponsePlaylists = PagingObject<Playlist>;
+
+export type ApiResponsePlaylist = PagingObject<PlaylistTrack>;

@@ -40,7 +40,10 @@ export function processAudio(audioFeatures: SpotifyApi.AudioFeaturesObject) {
   return { key, tone, tempo, analysisUrl };
 }
 
-export function getTrackAudio(trackIds: string[], headers: ArcHeaders) {
+export function getTrackAudio(
+  trackIds: string[],
+  headers: ArcHeaders
+): Promise<{ body: { audio_features: SpotifyApi.AudioFeaturesObject[] } }> {
   const url = buildUrl({
     rootUrl: `https://api.spotify.com/v1/audio-features`,
     params: { ids: trackIds.join(",") },

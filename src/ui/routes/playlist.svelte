@@ -2,20 +2,21 @@
   import { tracks } from "../stores/tracks";
   import TrackItem from "../components/track-item.svelte";
 
+  import type * as Portify from "@typings/app";
+  import type * as SpotifyApi from "@typings/spotify";
+
   export let id: string;
 
   async function loadTracks(playlistId) {
-    console.log({ playlistId });
-
     tracks.set([]);
 
     try {
-      const newTracks: SpotifyApi.PagingObject<TrackItem> = await (
+      const newTracks: SpotifyApi.PagingObject<Portify.Track> = await (
         await fetch(`/api/playlists/${playlistId}`)
       ).json();
       tracks.set(newTracks.items);
 
-      console.log({ $tracks });
+      console.log({ playlistId, $tracks });
 
       console.log({ newTracks });
     } catch (error) {
@@ -28,7 +29,6 @@
 
 <div class="column items">
   {#each $tracks as item, index (item.track.id)}
-    <!-- // TODO: consume entire item object -->
     <TrackItem {item} {index} />
   {/each}
 </div>

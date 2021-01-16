@@ -3,8 +3,9 @@ import { put } from "tiny-json-http";
 
 import { makeResponse } from "@architect/shared/utils";
 import type { ApiPageRequest } from "@typings/index";
+import { Artist } from "@typings/app";
 
-const playTrack: ApiPageRequest = async (req, headers) => {
+const playTrack: ApiPageRequest<Artist> = async (req, headers) => {
   const trackId = req.params.trackId;
 
   try {

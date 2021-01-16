@@ -1,4 +1,5 @@
 import { ArcRequest, ArcHeaders } from "./arc";
+import { PagingObject } from "./spotify";
 
 export interface ApiRequestHeaders {
   "Content-Type": "application/json";
@@ -7,7 +8,7 @@ export interface ApiRequestHeaders {
 
 export type ApiRequest = (req: ArcRequest, headers: ArcHeaders) => Promise<Record<string, unknown>>;
 
-export type ApiPageRequest = (
+export type ApiPageRequest<T> = (
   req: ArcRequest,
   headers: ArcHeaders
-) => Promise<Record<string, SpotifyApi.PagingObject<T>>>;
+) => Promise<PagingObject<T> | { debug: res }>;

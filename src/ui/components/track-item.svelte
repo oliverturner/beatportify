@@ -2,17 +2,17 @@
   import { fade, fly } from "svelte/transition";
   import { link } from "svelte-routing";
 
-  // import type SpotifyApi from "spotify-api";
-  import type { TrackItemRedux } from "@typings/app";
+  import type * as SpotifyApi from "@typings/spotify";
+  import type { Track } from "@typings/app";
 
-  export let item: TrackItemRedux;
+  export let item: Track;
   export let index: number = 0;
 
   let artists: string;
   let searchTerm: string;
   let purchaseLink: string;
 
-  function getArtists(artists: SpotifyApi.ArtistObjectSimplified[] = []) {
+  function getArtists(artists: SpotifyApi.Artist[] = []) {
     return artists.map((a) => a.name);
   }
 

@@ -23,7 +23,7 @@
     {#if data.user}
       <AppContent user={data.user} />
     {:else}
-      <h2>Portify</h2>
+      <h2 class="title">Portify</h2>
       <main class="app__main app__main--login">
         <p><a href={data.loginURL}>Log in to Spotify</a></p>
       </main>

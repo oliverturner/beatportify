@@ -1,13 +1,17 @@
 <script lang="ts">
   import { onMount } from "svelte";
 
-  import TrackItem from "../components/track-item.svelte";
+  import TrackList from "../components/track-list.svelte";
+
   import type { Track } from "@typings/app";
 
+  export let location: Location;
   let tracks: Track[] = [];
 
   onMount(async () => {
     try {
+      console.log({ location });
+
       const data = await (await fetch("/api/top")).json();
       tracks = data.tracks;
 
@@ -18,23 +22,4 @@
   });
 </script>
 
-<div class="columns">
-  <div class="column">
-    <h2>Top Tracks</h2>
-    <div class="items">
-      {#each tracks as item, index (item.id)}
-        <TrackItem {item} {index} />
-      {/each}
-    </div>
-  </div>
-</div>
-
-<style lang="scss">
-  .columns {
-    display: flex;
-  }
-
-  .column {
-    flex: 1;
-  }
-</style>
+<TrackList title="Top Tracks" {tracks} />

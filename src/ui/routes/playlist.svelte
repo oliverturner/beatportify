@@ -8,7 +8,7 @@
 
   export let id: string;
 
-  const limit = 25;
+  const limit = 24;
 
   let title = "";
   let makeLink = (_offset: number) => "";

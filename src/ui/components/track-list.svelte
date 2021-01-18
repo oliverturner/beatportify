@@ -28,5 +28,6 @@
   }
   .tracklist__title {
     margin: 0;
+    font-size: medium;
   }
 </style>

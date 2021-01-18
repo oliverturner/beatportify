@@ -9,7 +9,7 @@ import type { ApiRequest } from "@typings/index";
 import type * as Portify from "@typings/app";
 import type { PagingObject, Track } from "@typings/spotify";
 
-const LIMIT = 50;
+const LIMIT = 48;
 const TIME_RANGE = "long_term";
 
 const getTop: ApiRequest = async (req, headers) => {

@@ -1,11 +1,18 @@
 <script lang="ts">
+  import { fade, fly } from "svelte/transition";
   import { link } from "svelte-routing";
 
-  // import type SpotifyApi from "spotify-api"
+  import type * as SpotifyApi from "@typings/spotify";
+  import type { Track } from "@typings/app";
 
-  export let track: SpotifyApi.TrackObjectFull;
+  export let item: Track;
+  export let index: number = 0;
 
-  function getArtists(artists: SpotifyApi.ArtistObjectSimplified[] = []) {
+  let artists: string;
+  let searchTerm: string;
+  let purchaseLink: string;
+
+  function getArtists(artists: SpotifyApi.Artist[] = []) {
     return artists.map((a) => a.name);
   }
 
@@ -27,14 +34,52 @@
     }
   }
 
-  let artists = getArtists(track.artists).join(", ");
-  let searchTerm = `${artists} - ${track.name}`.split(" ").join("+");
-  let purchaseLink = `https://www.beatport.com/search?q=${searchTerm}`;
+  if (item) {
+    artists = getArtists(item.artists).join(", ");
+    searchTerm = `${artists} - ${item.name}`.split(" ").join("+");
+    purchaseLink = `https://www.beatport.com/search?q=${searchTerm}`;
+  }
 </script>
+
+<!-- 
+// TODO: create use:containerQuery action: 
+// https://philipwalton.com/articles/responsive-components-a-solution-to-the-container-queries-problem/
+// https://css-tricks.com/the-raven-technique-one-step-closer-to-container-queries/
+-->
+
+{#if item}
+  <div class="item" in:fade={{ delay: index * 100 }} out:fly>
+    <a
+      class="item__play"
+      href={`/api/play/${item.id}`}
+      on:click|self|stopPropagation|preventDefault={onTrackClick}>
+      <img
+        src={item.album.images[1]?.url}
+        alt={`Cover art for ${item.album.name}`}
+        width="300"
+        height="300"
+      />
+    </a>
+    <p class="item__label">
+      <span class="artists">
+        {#each item.artists as artist}
+          <a class="artistlink" href="/artist/{artist.id}" use:link>{artist.name}</a>
+        {/each}
+      </span>
+      <span><a class="tracklink" href="/track/{item.id}" use:link>{item.name}</a></span>
+    </p>
+    <a class="item__purchase" href={purchaseLink} aria-label="Find on Beatport">
+      <svg class="icon" aria-hidden="true">
+        <use href="#icon-beatport" />
+      </svg>
+    </a>
+  </div>
+{/if}
 
 <style lang="scss">
   .item {
     position: relative;
+    background: #ccc;
 
     & img {
       display: block;
@@ -110,32 +155,3 @@
     font-style: italic;
   }
 </style>
-
-<!-- 
-// TODO: create use:containerQuery action: 
-// https://philipwalton.com/articles/responsive-components-a-solution-to-the-container-queries-problem/
-// https://css-tricks.com/the-raven-technique-one-step-closer-to-container-queries/
--->
-{#if track.id}
-  <div class="item">
-    <a
-      class="item__play"
-      href={`/api/play/${track.id}`}
-      on:click|self|stopPropagation|preventDefault={onTrackClick}>
-      <img src={track.album.images[1]?.url} alt={`Cover art for ${track.album.name}`} />
-    </a>
-    <p class="item__label">
-      <span class="artists">
-        {#each track.artists as artist}
-          <a class="artistlink" href="/artist/{artist.id}" use:link>{artist.name}</a>
-        {/each}
-      </span>
-      <span><a class="tracklink" href="/track/{track.id}" use:link>{track.name}</a></span>
-    </p>
-    <a class="item__purchase" href={purchaseLink} aria-label="Find on Beatport">
-      <svg class="icon" aria-hidden="true">
-        <use href="#icon-beatport" />
-      </svg>
-    </a>
-  </div>
-{/if}

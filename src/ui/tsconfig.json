@@ -1,5 +1,11 @@
 {
   "extends": "@tsconfig/svelte/tsconfig.json",
-  "include": ["./ui"],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@typings/*": ["../../typings/*"]
+    }
+  },
+  "include": ["."],
   "exclude": ["node_modules"]
 }

@@ -17,6 +17,8 @@ const playTrack: ApiRequest = async (req, headers) => {
       },
     });
 
+    console.log({ playTrack: result });
+
     return result;
   } catch (error) {
     // no device available for playback

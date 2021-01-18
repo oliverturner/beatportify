@@ -1,5 +1,6 @@
-import type { ApiRequest, ApiRequestHeaders } from "@typings/index";
+import type { ApiPageRequest, ApiRequest, ApiRequestHeaders } from "@typings/index";
 import type { ArcRequest } from "@typings/arc";
+import type { PagingObject } from "@typings/spotify";
 
 interface BuildUrlProps {
   rootUrl: string;
@@ -14,7 +15,7 @@ export function buildUrl({ rootUrl, params }: BuildUrlProps) {
   return builtURL;
 }
 
-function makePayload(statusCode: number, body: Record<string, unknown>) {
+function makePayload(statusCode: number, body: unknown) {
   return {
     headers: {
       "content-type": "application/json; charset=utf-8",
@@ -24,7 +25,9 @@ function makePayload(statusCode: number, body: Record<string, unknown>) {
   };
 }
 
-export const makeResponse = (apiRequest: ApiRequest) => async (req: ArcRequest) => {
+export const makeResponse = (apiRequest: ApiRequest | ApiPageRequest<unknown>) => async (
+  req: ArcRequest
+) => {
   const { accessToken } = req.session;
   if (!accessToken) return { location: "/" };
 

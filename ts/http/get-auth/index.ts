@@ -5,7 +5,7 @@ import { init, refresh } from "./session";
 import type { ArcRequest, SpotifySession } from "@typings/arc";
 import type { ApiRequest } from "@typings/index";
 
-const auth: ApiRequest = async (req: ArcRequest) => {
+const auth: ApiRequest = async (req) => {
   if (req.query.code) {
     let account: SpotifySession | { error: string };
 

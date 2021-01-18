@@ -12,12 +12,12 @@ import type * as Spotify from "@typings/spotify";
 
 function getTracks(
   playlistId: string,
-  market: string,
+  params: Record<string, string>,
   headers: ArcHeaders
 ): Promise<{ body: Spotify.ApiResponsePlaylist }> {
   const url = buildUrl({
     rootUrl: `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
-    params: { market },
+    params,
   });
 
   return get({ url, headers });
@@ -25,9 +25,13 @@ function getTracks(
 
 const getPlaylist: ApiPageRequest<Portify.Track> = async (req, headers) => {
   const playlistId = req.params.playlistId;
-  const market = req.session.user.country;
+  const params = {
+    offset: req.query.offset,
+    limit: req.query.limit,
+    market: req.session.user.country,
+  };
 
-  const res = (await getTracks(playlistId, market, headers)).body;
+  const res = (await getTracks(playlistId, params, headers)).body;
 
   if (req.query.debug === "true") return { debug: res };
 
@@ -47,7 +51,7 @@ const getPlaylist: ApiPageRequest<Portify.Track> = async (req, headers) => {
     item.audio = processAudio(audio);
   }
 
-  return { ...res, items: Object.values(tracksDict) }
+  return { ...res, items: Object.values(tracksDict) };
 };
 
 export const handler = http.async(makeResponse(getPlaylist));

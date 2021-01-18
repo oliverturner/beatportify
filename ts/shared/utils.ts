@@ -1,5 +1,6 @@
 import type { ApiPageRequest, ApiRequest, ApiRequestHeaders } from "@typings/index";
 import type { ArcRequest } from "@typings/arc";
+import type { PagingObject } from "@typings/spotify";
 
 interface BuildUrlProps {
   rootUrl: string;

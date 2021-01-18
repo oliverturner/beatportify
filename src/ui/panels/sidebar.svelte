@@ -1,71 +1,46 @@
 <script lang="ts">
-  import { onMount } from "svelte";
+  import { onMount, tick } from "svelte";
   import { fade, fly } from "svelte/transition";
   import { link } from "svelte-routing";
 
+  import { getDefaultPage } from "../utils";
   import { playlists } from "../stores/tracks";
   import Pagelinks from "../components/pagelinks.svelte";
 
-  import type * as Spotify from "@typings/spotify";
-
   const limit = 15;
+  const makeLink = (offset: number) => `/api/playlists?offset=${offset * limit}&limit=${limit}`;
 
-  let total = limit;
-  let pageTotal = 0;
-  let pageLinks = [];
-  let pageCurrent = 0;
-  let items: Spotify.Playlist[] = [];
+  let page = getDefaultPage({ limit });
 
-  const makeLink = (offset: number) => `/api/playlists?offset=${offset}&limit=${limit}`;
+  async function loadPage(offset: number) {
+    playlists.set([]);
+    page = await (await fetch(makeLink(offset))).json();
+    playlists.set(page.items);
+  }
 
-  const loadPage = (pageIndex: number = 0) => async () => {
-    try {
-      pageCurrent = pageIndex;
-      const offset = pageCurrent * limit;
-
-      if (offset > total) return;
-
-      playlists.set([]);
-
-      const page: Spotify.ApiResponsePlaylists = await (await fetch(makeLink(offset))).json();
-      playlists.set(page.items);
-
-      items = page.items;
-      total = page.total;
-      pageTotal = Math.ceil(total / limit);
-      pageLinks = Array.from({ length: pageTotal }, (_, index) => index).map(makeLink);
-    } catch (error) {
-      console.log({ error });
-    }
-  };
-
-  onMount(loadPage(pageCurrent));
+  onMount(() => loadPage(0));
 </script>
 
 <nav class="sidebar">
-  {#if items?.length}
-    <div class="sidebar__items">
-      {#each items as playlist, index (playlist.id)}
-        <a
-          class="sidebar__item"
-          href="/playlist/{playlist.id}"
-          use:link
-          in:fade={{ delay: 1000 + index * 50 }}
-          out:fly={{ delay: index * 25 }}>
-          <span>{playlist.name}</span>
-        </a>
-      {/each}
-    </div>
+  <div class="sidebar__items">
+    {#each $playlists as playlist, index (playlist.id)}
+      <a
+        class="sidebar__item"
+        href="/playlist/{playlist.id}"
+        use:link
+        in:fade={{ delay: 1000 + index * 50 }}
+        out:fly={{ delay: index * 25 }}>
+        <span>{playlist.name}</span>
+      </a>
+    {/each}
+  </div>
 
-    <div class="sidebar__controls">
-      <p class="controls__label">pages:</p>
-      <div class="controls__links">
-        <Pagelinks {pageCurrent} {pageLinks} {loadPage} />
-      </div>
+  <div class="sidebar__controls">
+    <p class="controls__label">pages:</p>
+    <div class="controls__links">
+      <Pagelinks {page} {makeLink} {loadPage} />
     </div>
-  {:else}
-    <p>...loading</p>
-  {/if}
+  </div>
 </nav>
 
 <style lang="scss">
@@ -76,6 +51,11 @@
 
     overflow: hidden;
     font-size: small;
+  }
+
+  .loading {
+    justify-self: center;
+    align-self: center;
   }
 
   .sidebar__items {

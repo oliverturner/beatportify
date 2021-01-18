@@ -3,11 +3,11 @@
 
   export let user;
 
-  const routes = [{ label: "Home", path: "/" }];
+  const routes = [];
 </script>
 
 <nav class="nav">
-  <h2 class="title">Portify</h2>
+  <a href="/" use:links><h2 class="title">Portify</h2></a>
   <div class="row nav__controls">
     {#each routes as route}<a href={route.path} use:links>{route.label}</a>{/each}
   </div>
@@ -23,7 +23,7 @@
   .nav {
     display: flex;
     align-items: center;
-  
+
     padding: 0.5rem;
   }
 

@@ -12,7 +12,9 @@
       <TrackItem {item} {index} />
     {/each}
   </div>
-  <div class="tracklist__controls">pagelinks</div>
+  <div class="tracklist__controls">
+    <slot name="controls" />
+  </div>
 </section>
 
 <style lang="scss">
@@ -24,7 +26,6 @@
     max-height: 100%;
     overflow: hidden;
   }
-
   .tracklist__title {
     margin: 0;
   }

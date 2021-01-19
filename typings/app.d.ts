@@ -27,3 +27,9 @@ export type Track = Pick<
   album: Album;
   audio?: TrackAudio;
 };
+
+export type TrackAudioFetch = (
+  trackIds: string[]
+) => Promise<{ body: { audio_features: AudioFeatures[] } }>;
+
+export type AudioRequestFactory = (headers: ArcHeaders) => TrackAudioFetch;

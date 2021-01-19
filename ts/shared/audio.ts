@@ -2,6 +2,8 @@ import { get } from "tiny-json-http";
 import { buildUrl } from "./utils";
 
 import type { ArcHeaders } from "@typings/arc";
+import type { AudioFeatures } from "@typings/spotify";
+import type { AudioRequestFactory } from "@typings/app";
 
 // Camelot keys indexed by mode -> pitch class
 // https://maustsontoast.com/2020/pitch-class-tonal-counterparts-and-camelot-key-equivalents
@@ -32,7 +34,7 @@ const TONES = [
  * loudness: -7.095
  * speechiness: 0.0638
  */
-export function processAudio(audioFeatures: SpotifyApi.AudioFeaturesObject) {
+export function processAudio(audioFeatures: AudioFeatures) {
   const { key: pitchClass, mode, tempo, analysis_url: analysisUrl } = audioFeatures;
   const key = PITCH_CLASS[mode][pitchClass];
   const tone = TONES[mode][pitchClass];
@@ -40,10 +42,11 @@ export function processAudio(audioFeatures: SpotifyApi.AudioFeaturesObject) {
   return { key, tone, tempo, analysisUrl };
 }
 
+// TODO: deprecate and replace with makeAudioRequest
 export function getTrackAudio(
   trackIds: string[],
   headers: ArcHeaders
-): Promise<{ body: { audio_features: SpotifyApi.AudioFeaturesObject[] } }> {
+): Promise<{ body: { audio_features: AudioFeatures[] } }> {
   const url = buildUrl({
     rootUrl: `https://api.spotify.com/v1/audio-features`,
     params: { ids: trackIds.join(",") },
@@ -51,3 +54,17 @@ export function getTrackAudio(
 
   return get({ url, headers });
 }
+
+/**
+ * Return a method for fetching an array of AudioFeature instances
+ * 
+ * @param headers 
+ */
+export const makeAudioRequest: AudioRequestFactory = (headers) => (trackIds) => {
+  const url = buildUrl({
+    rootUrl: `https://api.spotify.com/v1/audio-features`,
+    params: { ids: trackIds.join(",") },
+  });
+
+  return get({ url, headers });
+};

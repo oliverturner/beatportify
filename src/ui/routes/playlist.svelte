@@ -7,6 +7,9 @@
   import { getDefaultPage } from "../utils";
 
   export let id: string;
+  export let location: Location;
+
+  console.log({ id, location });
 
   const limit = 24;
 
@@ -16,6 +19,8 @@
   let page = getDefaultPage({ limit });
 
   async function loadTracks(playlistId: string) {
+    if (!$playlistDict[playlistId]) return;
+
     title = `Playlist: ${$playlistDict[playlistId].name}`;
     makeLink = (offset: number) =>
       `/api/playlists/${playlistId}?offset=${offset * limit}&limit=${limit}`;
@@ -50,7 +55,6 @@
     padding: var(--s4);
     padding-bottom: 0;
     border-top: 1px solid currentColor;
-    font-size: small;
 
     & p {
       margin: 0;

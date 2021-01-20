@@ -13,9 +13,10 @@ export type Album = Pick<
 export type Artist = Pick<Spotify.Artist, "name" | "id">;
 
 export interface TrackAudio {
-  key: string;
+  key: number;
+  pitch: string;
   tone: string;
-  tempo: number;
+  bpm: number;
   analysisUrl: string;
 }
 

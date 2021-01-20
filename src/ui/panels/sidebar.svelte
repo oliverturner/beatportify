@@ -61,7 +61,6 @@
     align-items: flex-start;
 
     overflow: hidden;
-    font-size: small;
   }
 
   .loading {
@@ -70,8 +69,6 @@
   }
 
   .sidebar__items {
-    --item-bg: #ccc;
-
     display: grid;
     gap: var(--s1);
 
@@ -83,8 +80,8 @@
 
   .sidebar__item {
     padding: var(--s2);
-    border-radius: 3px;
     background: var(--item-bg);
+    color: var(--item-text);
   }
 
   .sidebar__controls {

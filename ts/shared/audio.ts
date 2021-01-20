@@ -7,7 +7,7 @@ import type { AudioRequestFactory } from "@typings/app";
 
 // Camelot keys indexed by mode -> pitch class
 // https://maustsontoast.com/2020/pitch-class-tonal-counterparts-and-camelot-key-equivalents
-const PITCH_CLASS = [
+const PITCHES = [
   // minor
   ["5A", "12A", "7A", "2A", "9A", "4A", "11A", "6A", "1A", "8A", "3A", "10A"],
   // major
@@ -35,11 +35,12 @@ const TONES = [
  * speechiness: 0.0638
  */
 export function processAudio(audioFeatures: AudioFeatures) {
-  const { key: pitchClass, mode, tempo, analysis_url: analysisUrl } = audioFeatures;
-  const key = PITCH_CLASS[mode][pitchClass];
-  const tone = TONES[mode][pitchClass];
+  const { key, mode, tempo, analysis_url: analysisUrl } = audioFeatures;
+  const pitch = PITCHES[mode][key];
+  const tone = TONES[mode][key];
+  const bpm = Math.round(tempo);
 
-  return { key, tone, tempo, analysisUrl };
+  return { key, pitch, tone, bpm, analysisUrl };
 }
 
 // TODO: deprecate and replace with makeAudioRequest
@@ -57,8 +58,8 @@ export function getTrackAudio(
 
 /**
  * Return a method for fetching an array of AudioFeature instances
- * 
- * @param headers 
+ *
+ * @param headers
  */
 export const makeAudioRequest: AudioRequestFactory = (headers) => (trackIds) => {
   const url = buildUrl({

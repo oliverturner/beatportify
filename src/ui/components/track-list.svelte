@@ -7,7 +7,7 @@
 
 <section class="tracklist">
   <h2 class="title tracklist__title">{title}</h2>
-  <div class="items tracklist__items">
+  <div class="tracklist__items">
     {#each tracks as item, index (item.id)}
       <TrackItem {item} {index} />
     {/each}
@@ -29,5 +29,14 @@
   .tracklist__title {
     margin: 0;
     font-size: medium;
+  }
+
+  .tracklist__items {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+
+    overflow-y: auto;
+    max-height: 100%;
   }
 </style>

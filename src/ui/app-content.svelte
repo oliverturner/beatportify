@@ -21,9 +21,10 @@
     <Route path="/track/:id" let:params>
       <Track id={params.id} />
     </Route>
-    <Route path="/playlist/:id" let:params>
+    <!-- <Route path="/playlist/:id" let:params>
       <Playlist id={params.id} />
-    </Route>
+    </Route> -->
+    <Route path="/playlist/:id" component={Playlist} />
     <Route component={Top} />
   </div>
 </main>

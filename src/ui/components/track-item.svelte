@@ -10,25 +10,22 @@
 
   let artists: string;
   let searchTerm: string;
-  let purchaseLink: string;
+  let purchaseLinks: Record<string, string>;
 
   function getArtists(artists: SpotifyApi.Artist[] = []) {
     return artists.map((a) => a.name);
   }
 
   async function onTrackClick(event) {
-    const { href } = event.target;
-
     try {
-      const res = await (await fetch(href)).json();
+      const res = await (await fetch(event.target.href)).json();
       if (res.error) {
         // TODO notify user that a Spotify device must be available
-        console.log(res.error.message);
-        return;
+        throw new Error(res.error.message);
       }
 
       // TODO notify user that track is loading
-      console.log({ res });
+      // console.log({ res });
     } catch (error) {
       console.log({ error });
     }
@@ -36,8 +33,11 @@
 
   if (item) {
     artists = getArtists(item.artists).join(", ");
-    searchTerm = `${artists} - ${item.name}`.split(" ").join("+");
-    purchaseLink = `https://www.beatport.com/search?q=${searchTerm}`;
+    searchTerm = `${artists} - ${item.name}`;
+    purchaseLinks = {
+      beatport: `https://www.beatport.com/search?q=${searchTerm.split(" ").join("+")}`,
+      bandcamp: `https://bandcamp.com/search?q=${encodeURIComponent(searchTerm)}`,
+    };
   }
 </script>
 
@@ -48,11 +48,11 @@
 -->
 
 {#if item}
-  <div class="item" in:fade={{ delay: index * 100 }} out:fly>
+  <article class="item" in:fade={{ delay: index * 100 }} out:fly>
     <a
       class="item__play"
       href={`/api/play/${item.id}`}
-      on:click|self|stopPropagation|preventDefault={onTrackClick}>
+      on:click|stopPropagation|preventDefault={onTrackClick}>
       <img
         src={item.album.images[1]?.url}
         alt={`Cover art for ${item.album.name}`}
@@ -60,87 +60,112 @@
         height="300"
       />
     </a>
-    <p class="item__label">
-      <span class="artists">
+    <div class="item__label">
+      <h3 class="title">
+        <a href="/track/{item.id}" use:link>{item.name}</a>
+      </h3>
+      <p class="artists">
         {#each item.artists as artist}
           <a class="artistlink" href="/artist/{artist.id}" use:link>{artist.name}</a>
         {/each}
-      </span>
-      <span><a class="tracklink" href="/track/{item.id}" use:link>{item.name}</a></span>
-    </p>
-    <a class="item__purchase" href={purchaseLink} aria-label="Find on Beatport">
-      <svg class="icon" aria-hidden="true">
-        <use href="#icon-beatport" />
-      </svg>
-    </a>
-  </div>
+      </p>
+    </div>
+    <div class="item__audio" style={`background-color: var(--key${item.audio.key})`}>
+      <p>Key: {item.audio.pitch}</p>
+      <p>BPM: {item.audio.bpm}</p>
+      <!-- <p><a href={item.audio.analysisUrl}>Analysis</a></p> -->
+    </div>
+    <aside class="item__purchases">
+      <a
+        class="purchaselink purchaselink--beatport"
+        href={purchaseLinks.beatport}
+        aria-label="Find on Beatport">
+        <svg class="icon" aria-hidden="true">
+          <use href="#icon-beatport" />
+        </svg>
+      </a>
+
+      <a class="purchaselink" href={purchaseLinks.bandcamp} aria-label="Find on Bandcamp">
+        <svg class="icon" aria-hidden="true">
+          <use href="#icon-bandcamp" />
+        </svg>
+      </a>
+    </aside>
+  </article>
 {/if}
 
 <style lang="scss">
   .item {
+    display: grid;
+    grid-template-columns: 150px 1fr auto;
+    grid-template-rows: 1fr auto;
+    grid-template-areas:
+      "a b d"
+      "a c d";
+    gap: 0.5rem 1rem;
+
     position: relative;
-    background: #ccc;
+    background: var(--item-bg);
+    color: var(--item-text);
 
     & img {
       display: block;
-      width: 100%;
+      max-width: 100%;
       height: 100%;
       min-width: 150px;
       min-height: 150px;
       object-fit: cover;
+      pointer-events: none;
     }
   }
-
   .item__play {
-    &::before {
-      content: "";
-      position: absolute;
-      inset: 0 0 0 0;
-      background: transparent;
-    }
+    grid-area: a;
+
+    overflow: hidden;
+    background: #333;
+  }
+
+  .item__label,
+  .item__audio {
+    padding: 0.5rem 0;
   }
 
   .item__label {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    margin: 0;
-    padding: 0.5rem;
-    font-size: 11px;
-    background: #000a;
-    color: #ccc;
-
-    & span {
-      display: block;
-
-      & + span {
-        margin-top: 0.5rem;
-      }
-    }
+    grid-area: b;
   }
 
-  .item__purchase {
+  .title {
+    margin: 0;
+  }
+
+  .artists {
+    margin-top: 0.5rem;
+  }
+
+  .item__audio {
+    grid-area: c;
+  }
+
+  .item__purchases {
+    grid-area: d;
+
+    display: grid;
+    place-content: end;
+    gap: 0.5rem;
+
+    padding: 0.5rem;
+  }
+  .purchaselink {
     --wh: 32px;
 
-    position: absolute;
-    inset: 5px 5px auto auto;
     width: var(--wh);
     height: var(--wh);
-
-    padding: 5px;
-    border-radius: 3px;
-    fill: #94d500;
-    background: #262626;
-  }
-
-  .artistlink,
-  .tracklink {
-    color: inherit;
   }
 
   .artistlink {
     display: inline-block;
     margin-right: 4px;
+    color: inherit;
 
     &::after {
       content: ",";
@@ -149,9 +174,5 @@
     &:last-child::after {
       content: "";
     }
-  }
-
-  .tracklink {
-    font-style: italic;
   }
 </style>

@@ -13,6 +13,24 @@
   --m16: 64px;
   --l18: 72px;
   --l24: 96px;
+
+  --key0: hsl(0, 25%, 50%);
+  --key1: hsl(30, 25%, 50%);
+  --key2: hsl(60.6, 25%, 50%);
+  --key3: hsl(90, 25%, 50%);
+  --key4: hsl(120, 25%, 50%);
+  --key5: hsl(150, 25%, 50%);
+  --key6: hsl(180, 25%, 50%);
+  --key7: hsl(210, 25%, 50%);
+  --key8: hsl(240, 25%, 50%);
+  --key9: hsl(270, 25%, 50%);
+  --key10: hsl(300, 25%, 50%);
+  --key11: hsl(330, 25%, 50%);
+
+  --border: #333;
+  --item-bg: #111;
+  --item-text: #aaa;
+  --item-title: var(--key7);
 }
 
 html,
@@ -27,14 +45,23 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell,
     "Helvetica Neue", sans-serif;
+  font-size: small;
 
   background: #222;
-  color: #bbb;
+  color: #999;
 }
 
 a {
   color: inherit;
   text-decoration: none;
+}
+
+p {
+  margin: 0;
+}
+
+p + p {
+  margin-top: 0.5rem;
 }
 
 /* a:hover {
@@ -86,11 +113,38 @@ h3.title {
   height: 100%;
 }
 
-.items {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 1rem;
+.feathericon {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
 
-  overflow-y: auto;
-  max-height: 100%;
+.app {
+  display: grid;
+  grid-template-rows: auto 1fr;
+
+  height: 100vh;
+}
+
+.app__main {
+  display: grid;
+
+  overflow: hidden;
+  width: 100%;
+  border-top: 1px solid var(--border);
+}
+
+.content__header {
+  padding: var(--s4);
+}
+
+.content__footer {
+  display: flex;
+  justify-content: end;
+  gap: 0.5rem;
+
+  padding: var(--s4);
+  border-top: 1px solid var(--border);
 }

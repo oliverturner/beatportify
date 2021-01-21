@@ -1,45 +1,46 @@
 <script lang="ts">
   import { links } from "svelte-routing";
 
+  import { ui } from "../stores/ui";
+
   export let user;
 
   const routes = [];
+
+  $: title = $ui.title;
+  $: console.log({ user });
 </script>
 
 <nav class="nav">
-  <a href="/" use:links><h2 class="title">Portify</h2></a>
-  <div class="row nav__controls">
-    {#each routes as route}<a href={route.path} use:links>{route.label}</a>{/each}
-  </div>
+  <a href="/" use:links><h2 class="title title--app">Portify</h2></a>
 
-  {#if user}
-    <div class="nav__user">
+  <h3 class="title title--content">{title}</h3>
+
+  <div class="user">
+    {#if user}
       <form action="/logout" method="post"><button class="btn">log out</button></form>
-    </div>
-  {/if}
+    {/if}
+  </div>
 </nav>
 
 <style>
   .nav {
-    display: flex;
+    display: grid;
+    grid-template-columns: 250px 1fr auto;
     align-items: center;
 
-    padding: 0.5rem;
+    padding: 0.5rem 0;
   }
 
   .title {
     margin: 0;
   }
 
-  .row {
-    display: flex;
+  .title--app {
+    padding: 0 0.5rem;
   }
 
-  .nav__controls {
-    gap: 1rem;
-  }
-
-  .nav__user {
+  .user {
     margin-left: auto;
     color: #333;
   }

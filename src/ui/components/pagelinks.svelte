@@ -6,6 +6,7 @@
   export let page: PagingObject<unknown>;
 
   $: pageNum = Math.ceil(page.total / page.limit);
+  $: pageCurrent = Math.floor(page.offset / page.limit);
   $: pageLinks = Array.from({ length: pageNum }, (_, index) => index).map(makeLink);
 </script>
 
@@ -13,7 +14,7 @@
   {#each pageLinks as href, index}
     <a
       class="pagelink"
-      class:active={index === page.offset}
+      class:active={index === pageCurrent}
       {href}
       on:click|preventDefault|stopPropagation={() => loadPage(index)}>
       <span>{index + 1}</span>
@@ -27,6 +28,7 @@
 
     display: grid;
     grid-template-columns: repeat(auto-fill, var(--wh));
+    grid-auto-flow: column;
     gap: 0.5rem;
 
     color: #333;
@@ -36,7 +38,7 @@
     --bg: #ccc;
     --color: inherit;
 
-    transition: background 0.25s, color 0.25s;
+    transition: color 0.25s;
 
     display: flex;
     align-items: center;
@@ -54,6 +56,8 @@
     }
 
     &::before {
+      transition: background 0.25s;
+
       content: "";
       position: absolute;
       display: block;

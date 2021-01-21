@@ -1,4 +1,5 @@
 import type * as Spotify from "@typings/spotify";
+import { ArcHeaders } from "./arc";
 export interface LoginData {
   message: string;
   loginURL?: string;
@@ -13,9 +14,10 @@ export type Album = Pick<
 export type Artist = Pick<Spotify.Artist, "name" | "id">;
 
 export interface TrackAudio {
-  key: string;
+  key: number;
+  pitch: string;
   tone: string;
-  tempo: number;
+  bpm: number;
   analysisUrl: string;
 }
 
@@ -24,6 +26,12 @@ export type Track = Pick<
   "artists" | "duration_ms" | "id" | "is_playable" | "name" | "uri"
 > & {
   artists: Artist[];
-  album: Album;
+  album?: Album;
   audio?: TrackAudio;
 };
+
+export type TrackAudioFetch = (
+  trackIds: string[]
+) => Promise<{ body: { audio_features: AudioFeatures[] } }>;
+
+export type AudioRequestFactory = (headers: ArcHeaders) => TrackAudioFetch;

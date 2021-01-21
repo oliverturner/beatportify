@@ -14,27 +14,15 @@
 <Nav {user} />
 <main class="app__main">
   <Sidebar />
-  <div class="app__main__content">
-    <Route path="/artist/:id" let:params>
-      <Artist id={params.id} />
-    </Route>
-    <Route path="/track/:id" let:params>
-      <Track id={params.id} />
-    </Route>
-    <Route path="/playlist/:id" let:params>
-      <Playlist id={params.id} />
-    </Route>
-    <Route component={Top} />
-  </div>
+
+  <Route path="/artist/:id" component={Artist} />
+  <Route path="/track/:id" component={Track} />
+  <Route path="/playlist/:id" component={Playlist} />
+  <Route component={Top} />
 </main>
 
 <style>
   .app__main {
     grid-template-columns: 250px 1fr;
-  }
-
-  .app__main__content {
-    overflow: hidden;
-    padding: 1rem;
   }
 </style>

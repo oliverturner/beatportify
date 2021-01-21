@@ -6,16 +6,22 @@
   import { getDefaultPage } from "../utils";
   import { playlists } from "../stores/tracks";
   import Pagelinks from "../components/pagelinks.svelte";
+  import type { ApiResponsePlaylists } from "@typings/spotify";
 
   const limit = 15;
   const makeLink = (offset: number) => `/api/playlists?offset=${offset * limit}&limit=${limit}`;
 
+  let pageRes: Response;
   let page = getDefaultPage({ limit });
 
   async function loadPage(offset: number) {
-    playlists.set([]);
-    page = await (await fetch(makeLink(offset))).json();
-    playlists.set(page.items);
+    try {
+      pageRes = await fetch(makeLink(offset));
+      page = await pageRes.json();
+      playlists.set(page.items);
+    } catch (error) {
+      console.log({ error });
+    }
   }
 
   onMount(() => loadPage(0));
@@ -23,16 +29,20 @@
 
 <nav class="sidebar">
   <div class="sidebar__items">
-    {#each $playlists as playlist, index (playlist.id)}
-      <a
-        class="sidebar__item"
-        href="/playlist/{playlist.id}"
-        use:link
-        in:fade={{ delay: 1000 + index * 50 }}
-        out:fly={{ delay: index * 25 }}>
-        <span>{playlist.name}</span>
-      </a>
-    {/each}
+    {#await pageRes}
+      <div class="loading">loading</div>
+    {:then}
+      {#each $playlists as playlist, index (playlist.id)}
+        <a
+          class="sidebar__item"
+          href="/playlist/{playlist.id}"
+          use:link
+          in:fade={{ delay: 1000 + index * 50 }}
+          out:fly={{ delay: index * 25 }}>
+          <span>{playlist.name}</span>
+        </a>
+      {/each}
+    {/await}
   </div>
 
   <div class="sidebar__controls">
@@ -50,7 +60,6 @@
     align-items: flex-start;
 
     overflow: hidden;
-    font-size: small;
   }
 
   .loading {
@@ -59,21 +68,19 @@
   }
 
   .sidebar__items {
-    --item-bg: #ccc;
-
     display: grid;
     gap: var(--s1);
 
     overflow-y: auto;
     max-height: 100%;
-    padding: 1rem;
+    padding: 0.5rem;
     color: #333;
   }
 
   .sidebar__item {
     padding: var(--s2);
-    border-radius: 3px;
     background: var(--item-bg);
+    color: var(--item-text);
   }
 
   .sidebar__controls {
@@ -84,7 +91,7 @@
     gap: 0.5rem;
 
     padding: var(--s4);
-    border-top: 1px solid currentColor;
+    border-top: 1px solid var(--border);
   }
 
   .controls__label {

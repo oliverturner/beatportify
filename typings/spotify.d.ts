@@ -376,6 +376,10 @@ export interface PagingObject<T> {
   total: number;
 }
 
+export type TopTimeRange = "long_term" | "medium_term" | "short_term";
+
+export type getDefaultPage<T> = ({ limit = 0 }) => PagingObject<T>;
+
 export type ApiResponseTracks = PagingObject<Track>;
 
 export type ApiResponsePlaylists = PagingObject<Playlist>;

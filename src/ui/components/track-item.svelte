@@ -48,7 +48,12 @@
 -->
 
 {#if item}
-  <article class="item" in:fade={{ delay: index * 100 }} out:fly>
+  <article
+    class="item"
+    style={`--key: var(--key${item.audio.key});`}
+    in:fade={{ delay: index * 100 }}
+    out:fly
+  >
     <a
       class="item__play"
       href={`/api/play/${item.id}`}
@@ -70,9 +75,9 @@
         {/each}
       </p>
     </div>
-    <div class="item__audio" style={`background-color: var(--key${item.audio.key})`}>
-      <p>Key: {item.audio.pitch}</p>
-      <p>BPM: {item.audio.bpm}</p>
+    <div class="item__audio">
+      <p class="item__audio__pitch">Key: {item.audio.pitch}</p>
+      <p class="item__audio__bpm">BPM: {item.audio.bpm}</p>
       <!-- <p><a href={item.audio.analysisUrl}>Analysis</a></p> -->
     </div>
     <aside class="item__purchases">
@@ -99,10 +104,10 @@
     --icon-wh: 32px;
 
     display: grid;
-    grid-template-columns: 150px 1fr calc(1rem + var(--icon-wh));
+    grid-template-columns: 150px 1fr auto;
     grid-template-rows: 1fr auto;
     grid-template-areas:
-      "a b d"
+      "a b b"
       "a c d";
     gap: 0.5rem 1rem;
 
@@ -120,6 +125,7 @@
       pointer-events: none;
     }
   }
+
   .item__play {
     grid-area: a;
 
@@ -139,6 +145,7 @@
   .title {
     margin: 0;
     font-size: 0.8rem;
+    color: var(--item-title);
   }
 
   .artists {
@@ -147,17 +154,33 @@
 
   .item__audio {
     grid-area: c;
+
+    display: grid;
+    grid-auto-flow: column;
+    align-content: end;
+    gap: 0.5rem;
+
+    & p {
+      margin: 0;
+    }
+  }
+
+  .item__audio__pitch {
+    padding-left: 5px;
+    border-left: 1rem solid var(--key);
   }
 
   .item__purchases {
     grid-area: d;
 
     display: grid;
+    grid-auto-flow: column;
     place-content: end;
     gap: 0.5rem;
 
     padding: 0.5rem;
   }
+
   .purchaselink {
     width: var(--icon-wh);
     height: var(--icon-wh);

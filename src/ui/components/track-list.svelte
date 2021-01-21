@@ -30,8 +30,9 @@
     align-items: start;
     gap: 1rem;
 
-    height: 100%;
     overflow: hidden;
+    height: 100%;
+    padding-top: 0.5rem;
 
     &.tracklist--header {
       grid-template-rows: auto 1fr;
@@ -48,7 +49,7 @@
 
   .tracklist__items {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
     gap: 1rem;
 
     overflow: hidden auto;

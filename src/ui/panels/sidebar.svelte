@@ -15,7 +15,6 @@
   let page = getDefaultPage({ limit });
 
   async function loadPage(offset: number) {
-    playlists.set([]);
     try {
       pageRes = await fetch(makeLink(offset));
       page = await pageRes.json();
@@ -74,7 +73,7 @@
 
     overflow-y: auto;
     max-height: 100%;
-    padding: 1rem;
+    padding: 0.5rem;
     color: #333;
   }
 
@@ -92,7 +91,7 @@
     gap: 0.5rem;
 
     padding: var(--s4);
-    border-top: 1px solid currentColor;
+    border-top: 1px solid var(--border);
   }
 
   .controls__label {

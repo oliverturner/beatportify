@@ -14,21 +14,23 @@
   --l18: 72px;
   --l24: 96px;
 
-  --key0: hsl(0, 50, 50);
-  --key1: hsl(30, 50, 50);
-  --key2: hsl(60.6, 50, 50);
-  --key3: hsl(90, 50, 50);
-  --key4: hsl(120, 50, 50);
-  --key5: hsl(150, 50, 50);
-  --key6: hsl(180, 50, 50);
-  --key7: hsl(210, 50, 50);
-  --key8: hsl(240, 50, 50);
-  --key9: hsl(270, 50, 50);
-  --key10: hsl(300, 50, 50);
-  --key11: hsl(330, 50, 50);
+  --key0: hsl(0, 25%, 50%);
+  --key1: hsl(30, 25%, 50%);
+  --key2: hsl(60.6, 25%, 50%);
+  --key3: hsl(90, 25%, 50%);
+  --key4: hsl(120, 25%, 50%);
+  --key5: hsl(150, 25%, 50%);
+  --key6: hsl(180, 25%, 50%);
+  --key7: hsl(210, 25%, 50%);
+  --key8: hsl(240, 25%, 50%);
+  --key9: hsl(270, 25%, 50%);
+  --key10: hsl(300, 25%, 50%);
+  --key11: hsl(330, 25%, 50%);
 
+  --border: #333;
   --item-bg: #111;
-  --item-text: #bbb;
+  --item-text: #aaa;
+  --item-title: var(--key7);
 }
 
 html,
@@ -46,7 +48,7 @@ body {
   font-size: small;
 
   background: #222;
-  color: #aaa;
+  color: #999;
 }
 
 a {
@@ -88,7 +90,7 @@ textarea {
 
 .title {
   text-transform: uppercase;
-  font-weight: 200;
+  font-weight: 400;
   letter-spacing: var(--spacing);
 }
 
@@ -117,4 +119,32 @@ h3.title {
   stroke-width: 2;
   stroke-linecap: round;
   stroke-linejoin: round;
+}
+
+.app {
+  display: grid;
+  grid-template-rows: auto 1fr;
+
+  height: 100vh;
+}
+
+.app__main {
+  display: grid;
+
+  overflow: hidden;
+  width: 100%;
+  border-top: 1px solid var(--border);
+}
+
+.content__header {
+  padding: var(--s4);
+}
+
+.content__footer {
+  display: flex;
+  justify-content: end;
+  gap: 0.5rem;
+
+  padding: var(--s4);
+  border-top: 1px solid var(--border);
 }

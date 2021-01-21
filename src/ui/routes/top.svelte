@@ -23,4 +23,26 @@
   });
 </script>
 
-<TrackList {tracks} />
+<TrackList {tracks}>
+  <!-- 
+  <div class="content__header" slot="header">
+    <div class="controls">
+      <p>time</p>
+      <p>limit</p>
+    </div>
+  </div>
+   -->
+</TrackList>
+
+<style lang="scss">
+  // .controls {
+  //   display: flex;
+  //   justify-content: flex-end;
+  //   gap: 1rem;
+  //   bottom: pink;
+
+  //   & > p {
+  //     margin: 0;
+  //   }
+  // }
+</style>

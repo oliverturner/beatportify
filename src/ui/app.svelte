@@ -32,19 +32,7 @@
 </Router>
 
 <style lang="scss">
-  .app {
-    display: grid;
-    grid-template-rows: auto 1fr;
-
-    height: 100vh;
-  }
-  :global(.app__main) {
-    display: grid;
-
-    overflow: hidden;
-    width: 100%;
-    border-top: 1px solid #333;
-  }
+  
 
   .app__main.app__main--login {
     place-content: center;

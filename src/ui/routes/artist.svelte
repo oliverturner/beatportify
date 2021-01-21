@@ -11,6 +11,9 @@
   async function loadArtist(artistId: string) {
     const response = await (await fetch(`/api/artists/${artistId}`)).json();
     ui.update((props) => ({ ...props, title: `Artist: ${response.artist.name}` }));
+
+    // TODO: display artist image
+
     tracks = response.topTracks;
   }
 

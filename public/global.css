@@ -88,7 +88,7 @@ textarea {
 
 .title {
   text-transform: uppercase;
-  font-weight: 400;
+  font-weight: 200;
   letter-spacing: var(--spacing);
 }
 
@@ -109,4 +109,12 @@ h3.title {
 .icon {
   width: 100%;
   height: 100%;
+}
+
+.feathericon {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }

@@ -1,33 +1,49 @@
 import arc from "@architect/functions";
-import { put } from "tiny-json-http";
+import { get } from "tiny-json-http";
 
 import { makeResponse } from "@architect/shared/utils";
-import type { ApiPageRequest } from "@typings/index";
-import { Artist } from "@typings/app";
+import { getTracksAudio } from "@architect/shared/audio";
 
-const playTrack: ApiPageRequest<Artist> = async (req, headers) => {
-  const trackId = req.params.trackId;
+import type { ApiRequest } from "@typings/index";
+// import type { Artist } from "@typings/app";
+import type { ArcHeaders } from "@typings/arc";
 
-  try {
-    const result = await put({
-      url: `https://api.spotify.com/v1/me/player/play`,
-      headers,
-      data: {
-        uris: [`spotify:track:${trackId}`],
-      },
-    });
+function getArtist(artistId: string, headers: ArcHeaders) {
+  return get({
+    url: `https://api.spotify.com/v1/artists/${artistId}`,
+    headers,
+  });
+}
 
-    return result.body;
-  } catch (error) {
-    // no device available for playback
-    if (error.statusCode === 404) {
-      return {
-        error: error.body,
-      };
-    }
+function getTopTracks(artistId: string, market: string, headers: ArcHeaders) {
+  return get({
+    url: `https://api.spotify.com/v1/artists/${artistId}/top-tracks`,
+    data: { market },
+    headers,
+  });
+}
 
-    throw error;
-  }
+const getArtistData: ApiRequest = async (req, headers) => {
+  const artistId = req.params.artistId;
+  const market = req.session.user.country;
+
+  const [artistRes, tracksRes] = await Promise.allSettled([
+    getArtist(artistId, headers),
+    getTopTracks(artistId, market, headers),
+  ]);
+
+  const artist =
+    artistRes.status === "fulfilled" ? artistRes.value.body : { error: artistRes.reason };
+
+  const topTracks =
+    tracksRes.status === "fulfilled"
+      ? await getTracksAudio(tracksRes.value.body.tracks, headers)
+      : { error: tracksRes.reason };
+
+  return {
+    artist,
+    topTracks,
+  };
 };
 
-export const handler = arc.http.async(makeResponse(playTrack));
+export const handler = arc.http.async(makeResponse(getArtistData));

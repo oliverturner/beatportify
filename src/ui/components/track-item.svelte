@@ -96,8 +96,10 @@
 
 <style lang="scss">
   .item {
+    --icon-wh: 32px;
+
     display: grid;
-    grid-template-columns: 150px 1fr auto;
+    grid-template-columns: 150px 1fr calc(1rem + var(--icon-wh));
     grid-template-rows: 1fr auto;
     grid-template-areas:
       "a b d"
@@ -136,6 +138,7 @@
 
   .title {
     margin: 0;
+    font-size: 0.8rem;
   }
 
   .artists {
@@ -156,10 +159,8 @@
     padding: 0.5rem;
   }
   .purchaselink {
-    --wh: 32px;
-
-    width: var(--wh);
-    height: var(--wh);
+    width: var(--icon-wh);
+    height: var(--icon-wh);
   }
 
   .artistlink {

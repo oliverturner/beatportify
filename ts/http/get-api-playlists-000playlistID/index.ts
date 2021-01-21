@@ -2,11 +2,10 @@ import { http } from "@architect/functions";
 import { get } from "tiny-json-http";
 
 import { buildUrl, makeResponse } from "@architect/shared/utils";
-import { processTrack } from "@architect/shared/data";
-import { getTrackAudio, processAudio } from "@architect/shared/audio";
+import { getTracksAudio } from "@architect/shared/audio";
 
 import type { ArcHeaders } from "@typings/arc";
-import type { ApiPageRequest } from "@typings/index";
+import type { ApiPageRequest, ApiRequest } from "@typings/index";
 import type * as Portify from "@typings/app";
 import type * as Spotify from "@typings/spotify";
 
@@ -26,32 +25,21 @@ function getTracks(
 const getPlaylist: ApiPageRequest<Portify.Track> = async (req, headers) => {
   const playlistId = req.params.playlistId;
   const params = {
-    offset: req.query.offset,
-    limit: req.query.limit,
+    offset: req.query.offset || "0",
+    limit: req.query.limit || "10",
     market: req.session.user.country,
   };
 
-  const res = (await getTracks(playlistId, params, headers)).body;
+  const page = (await getTracks(playlistId, params, headers)).body;
+  const tracks = page.items
+    .filter(({ is_local }) => !is_local)
+    .map(({ track }) => track as Spotify.Track);
 
-  if (req.query.debug === "true") return { debug: res };
+  console.log({ tracks });
 
-  const tracksDict: Record<string, Portify.Track> = {};
-  for (const item of res.items) {
-    if (item.track.is_playable === false) continue;
+  const items = await getTracksAudio(tracks, headers);
 
-    const track = processTrack(item.track as Spotify.Track);
-    tracksDict[track.id] = track;
-  }
-
-  const trackIds = Object.keys(tracksDict);
-  const audioFeatures = (await getTrackAudio(trackIds, headers)).body.audio_features;
-
-  for (const audio of audioFeatures) {
-    const item = tracksDict[audio.id];
-    item.audio = processAudio(audio);
-  }
-
-  return { ...res, items: Object.values(tracksDict) };
+  return { ...page, items };
 };
 
 export const handler = http.async(makeResponse(getPlaylist));

@@ -5,7 +5,7 @@
 
   onMount(async () => {
     try {
-      // TODO: load track date from store but request analysis from embedded URL
+      // TODO: load track data from store but request analysis from embedded URL
       const data = await (await fetch(`/api/tracks/${id}`)).json();
 
       console.log({ data });

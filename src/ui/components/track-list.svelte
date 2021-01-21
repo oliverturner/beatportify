@@ -1,42 +1,57 @@
 <script lang="ts">
   import TrackItem from "./track-item.svelte";
 
-  export let title = "";
-  export let tracks = [];
+  import type { Track } from "@typings/app";
+
+  export let tracks: Track[] = [];
 </script>
 
-<section class="tracklist">
-  <h2 class="title tracklist__title">{title}</h2>
+<section
+  class="tracklist"
+  class:tracklist--header={$$slots.header}
+  class:tracklist--footer={$$slots.footer}
+  class:tracklist--header-footer={$$slots.header && $$slots.footer}
+>
+  <slot name="header" />
+
   <div class="tracklist__items">
     {#each tracks as item, index (item.id)}
       <TrackItem {item} {index} />
     {/each}
   </div>
-  <div class="tracklist__controls">
-    <slot name="controls" />
-  </div>
+
+  <slot name="footer" />
 </section>
 
 <style lang="scss">
   .tracklist {
     display: grid;
-    grid-template-rows: auto 1fr auto;
+
+    align-items: start;
     gap: 1rem;
 
-    max-height: 100%;
+    height: 100%;
     overflow: hidden;
-  }
-  .tracklist__title {
-    margin: 0;
-    font-size: medium;
+
+    &.tracklist--header {
+      grid-template-rows: auto 1fr;
+    }
+
+    &.tracklist--footer {
+      grid-template-rows: 1fr auto;
+    }
+
+    &.tracklist--header-footer {
+      grid-template-rows: auto 1fr auto;
+    }
   }
 
   .tracklist__items {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
     gap: 1rem;
 
-    overflow-y: auto;
+    overflow: hidden auto;
     max-height: 100%;
   }
 </style>

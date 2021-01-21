@@ -1,19 +1,17 @@
 <script lang="ts">
   import { tick } from "svelte";
 
+  import { ui } from "../stores/ui";
   import { tracks, playlistDict } from "../stores/tracks";
   import TrackList from "../components/track-list.svelte";
   import Pagelinks from "../components/pagelinks.svelte";
   import { getDefaultPage } from "../utils";
 
   export let id: string;
-  export let location: Location;
-
-  console.log({ id, location });
+  export const location: Location = null;
 
   const limit = 24;
 
-  let title = "";
   let makeLink = (_offset: number) => "";
   let loadPage = (_offset: number) => {};
   let page = getDefaultPage({ limit });
@@ -21,7 +19,8 @@
   async function loadTracks(playlistId: string) {
     if (!$playlistDict[playlistId]) return;
 
-    title = `Playlist: ${$playlistDict[playlistId].name}`;
+    ui.update((props) => ({ ...props, title: `Playlist: ${$playlistDict[playlistId].name}` }));
+
     makeLink = (offset: number) =>
       `/api/playlists/${playlistId}?offset=${offset * limit}&limit=${limit}`;
 
@@ -39,8 +38,8 @@
   $: loadTracks(id);
 </script>
 
-<TrackList {title} tracks={$tracks}>
-  <div class="controls" slot="controls">
+<TrackList tracks={$tracks}>
+  <div class="controls" slot="footer">
     <p>pages:</p>
     <Pagelinks {page} {makeLink} {loadPage} />
   </div>
@@ -48,8 +47,8 @@
 
 <style lang="scss">
   .controls {
-    display: grid;
-    grid-template-columns: auto 1fr;
+    display: flex;
+    justify-content: end;
     gap: 0.5rem;
 
     padding: var(--s4);
@@ -57,7 +56,7 @@
     border-top: 1px solid currentColor;
 
     & p {
-      margin: 0;
+      margin: 0 4px 0 auto;
       line-height: var(--s6);
     }
   }

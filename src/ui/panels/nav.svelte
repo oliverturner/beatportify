@@ -1,13 +1,17 @@
 <script lang="ts">
   import { links } from "svelte-routing";
 
+  import { ui } from "../stores/ui";
+
   export let user;
 
   const routes = [];
+
+  $: title = `Portify: ${$ui.title}`;
 </script>
 
 <nav class="nav">
-  <a href="/" use:links><h2 class="title">Portify</h2></a>
+  <a href="/" use:links><h2 class="title">{title}</h2></a>
   <div class="row nav__controls">
     {#each routes as route}<a href={route.path} use:links>{route.label}</a>{/each}
   </div>

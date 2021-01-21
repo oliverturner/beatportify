@@ -28,6 +28,7 @@
 
     display: grid;
     grid-template-columns: repeat(auto-fill, var(--wh));
+    grid-auto-flow: column;
     gap: 0.5rem;
 
     color: #333;

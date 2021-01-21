@@ -1,17 +1,20 @@
 <script lang="ts">
-  import { onMount } from "svelte";
-  
-  export let id;
+  import { ui } from "../stores/ui";
+  import TrackList from "../components/track-list.svelte";
 
-  onMount(async () => {
-    try {
-      const data = await (await fetch("/api/artists/" + id)).json();
+  import type { Track } from "@typings/app";
 
-      console.log({ data });
-    } catch (error) {
-      console.log({ error });
-    }
-  });
+  export let id: string;
+
+  let tracks: Track[] = [];
+
+  async function loadArtist(artistId: string) {
+    const response = await (await fetch(`/api/artists/${artistId}`)).json();
+    ui.update((props) => ({ ...props, title: `Artist: ${response.artist.name}` }));
+    tracks = response.topTracks;
+  }
+
+  $: loadArtist(id);
 </script>
 
-<p>Current query is {id}</p>
+<TrackList {tracks} />

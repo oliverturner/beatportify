@@ -1,8 +1,11 @@
 import { get } from "tiny-json-http";
+
+import { processTrack } from "./data";
 import { buildUrl } from "./utils";
 
 import type { ArcHeaders } from "@typings/arc";
-import type { AudioFeatures } from "@typings/spotify";
+import type * as Portify from "@typings/app";
+import type * as Spotify from "@typings/spotify";
 import type { AudioRequestFactory } from "@typings/app";
 
 // Camelot keys indexed by mode -> pitch class
@@ -34,7 +37,7 @@ const TONES = [
  * loudness: -7.095
  * speechiness: 0.0638
  */
-export function processAudio(audioFeatures: AudioFeatures) {
+export function processAudio(audioFeatures: Spotify.AudioFeatures) {
   const { key, mode, tempo, analysis_url: analysisUrl } = audioFeatures;
   const pitch = PITCHES[mode][key];
   const tone = TONES[mode][key];
@@ -43,23 +46,8 @@ export function processAudio(audioFeatures: AudioFeatures) {
   return { key, pitch, tone, bpm, analysisUrl };
 }
 
-// TODO: deprecate and replace with makeAudioRequest
-export function getTrackAudio(
-  trackIds: string[],
-  headers: ArcHeaders
-): Promise<{ body: { audio_features: AudioFeatures[] } }> {
-  const url = buildUrl({
-    rootUrl: `https://api.spotify.com/v1/audio-features`,
-    params: { ids: trackIds.join(",") },
-  });
-
-  return get({ url, headers });
-}
-
 /**
  * Return a method for fetching an array of AudioFeature instances
- *
- * @param headers
  */
 export const makeAudioRequest: AudioRequestFactory = (headers) => (trackIds) => {
   const url = buildUrl({
@@ -69,3 +57,25 @@ export const makeAudioRequest: AudioRequestFactory = (headers) => (trackIds) => 
 
   return get({ url, headers });
 };
+
+export async function getTracksAudio(tracks: Spotify.Track[], headers: ArcHeaders) {
+  const getAudioFeatures = makeAudioRequest(headers);
+  const tracksMap: Record<string, Portify.Track> = {};
+  for (const track of tracks) {
+    if (track.is_playable === false) continue;
+    tracksMap[track.id] = processTrack(track);
+  }
+
+  const trackIds = Object.keys(tracksMap);
+  const audioFeatures = (await getAudioFeatures(trackIds)).body.audio_features;
+
+  for (const audio of audioFeatures) {
+    // Local tracks have no audio analysis
+    if (!audio) continue;
+
+    const item = tracksMap[audio.id];
+    item.audio = processAudio(audio);
+  }
+
+  return Object.values(tracksMap);
+}

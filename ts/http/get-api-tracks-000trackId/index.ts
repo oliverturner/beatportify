@@ -10,10 +10,7 @@ const getTrack: ApiRequest = async (req, headers) => {
   const market = req.session.user.country;
 
   // TODO: get track analysis from https://api.spotify.com/v1/audio-analysis/{id}
-  const url = buildUrl({
-    rootUrl: `https://api.spotify.com/v1/tracks/${trackId}`,
-    params: { market },
-  });
+  const url = buildUrl({ endpoint: `/tracks/${trackId}`, params: { market } });
 
   const result = await get({ url, headers });
 

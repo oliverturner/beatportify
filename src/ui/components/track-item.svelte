@@ -16,6 +16,10 @@
     return artists.map((a) => a.name);
   }
 
+  function getSrcSet(images) {
+    return images.map(({ url, width }) => `${url} ${width}w`).join(", ");
+  }
+
   async function onTrackClick(event) {
     try {
       const res = await (await fetch(event.target.href)).json();
@@ -59,7 +63,8 @@
       href={`/api/play/${item.id}`}
       on:click|stopPropagation|preventDefault={onTrackClick}>
       <img
-        src={item.album.images[1]?.url}
+        srcset={getSrcSet(item.album.images)}
+        src={`default ${item.album.images[1]?.url}`}
         alt={`Cover art for ${item.album.name}`}
         width="300"
         height="300"

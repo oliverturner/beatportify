@@ -30,7 +30,7 @@
   --border: #333;
   --item-bg: #111;
   --item-text: #aaa;
-  --item-title: var(--key7);
+  --item-title: hsl(210, 25%, 65%);
 }
 
 html,

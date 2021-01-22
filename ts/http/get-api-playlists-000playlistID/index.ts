@@ -14,10 +14,7 @@ function getTracks(
   params: Record<string, string>,
   headers: ArcHeaders
 ): Promise<{ body: Spotify.ApiResponsePlaylist }> {
-  const url = buildUrl({
-    rootUrl: `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
-    params,
-  });
+  const url = buildUrl({ endpoint: `/playlists/${playlistId}/tracks`, params });
 
   return get({ url, headers });
 }
@@ -34,9 +31,6 @@ const getPlaylist: ApiPageRequest<Portify.Track> = async (req, headers) => {
   const tracks = page.items
     .filter(({ is_local }) => !is_local)
     .map(({ track }) => track as Spotify.Track);
-
-  console.log({ tracks });
-
   const items = await getTracksAudio(tracks, headers);
 
   return { ...page, items };

@@ -1,7 +1,7 @@
 import arc from "@architect/functions";
 import { get } from "tiny-json-http";
 
-import { makeResponse } from "@architect/shared/utils";
+import { API_URL, buildUrl, makeResponse } from "@architect/shared/utils";
 import { getTracksAudio } from "@architect/shared/audio";
 
 import type { ApiRequest } from "@typings/index";
@@ -30,17 +30,18 @@ type RelatedArtistRes = Res<{ artists: Artist[] }>;
 
 function getArtist(artistId: string, headers: ArcHeaders): Promise<ArtistRes> {
   return get({
-    url: `https://api.spotify.com/v1/artists/${artistId}`,
+    url: `${API_URL}/artists/${artistId}`,
     headers,
   });
 }
 
 function getTopTracks(artistId: string, headers: ArcHeaders): Promise<TopTracksRes> {
-  return get({
-    url: `https://api.spotify.com/v1/artists/${artistId}/top-tracks`,
-    data: { market: "from_token" },
-    headers,
+  const url = buildUrl({
+    endpoint: `/artists/${artistId}/top-tracks`,
+    params: { market: "from_token" },
   });
+
+  return get({ url, headers });
 }
 
 function getAlbums(
@@ -48,16 +49,17 @@ function getAlbums(
   headers: ArcHeaders,
   params: Partial<PagingKeysAlbum> = {}
 ): Promise<AlbumRes> {
-  return get({
-    url: `https://api.spotify.com/v1/artists/${artistId}/albums`,
+  const url = buildUrl({
+    endpoint: `/artists/${artistId}/albums`,
     params: { ...params, market: "from_token" },
-    headers,
   });
+
+  return get({ url, headers });
 }
 
 function getRelatedArtists(artistId: string, headers: ArcHeaders): Promise<RelatedArtistRes> {
   return get({
-    url: `https://api.spotify.com/v1/artists/${artistId}/related-artists`,
+    url: `${API_URL}/artists/${artistId}/related-artists`,
     headers,
   });
 }
@@ -87,7 +89,8 @@ const getArtistData: ApiRequest = async (req, headers) => {
     }
 
     if (key === "topTracks") {
-      data[key] = await getTracksAudio((res.value as TopTracksRes).body.tracks, headers);
+      const { tracks: topTracks } = (res.value as TopTracksRes).body;
+      data[key] = await getTracksAudio(topTracks, headers);
       continue;
     }
 

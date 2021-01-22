@@ -1,20 +1,28 @@
 <script lang="ts">
   import { ui } from "../stores/ui";
-  import { tracks, playlistDict } from "../stores/tracks";
+  import { tracks, playlistMap } from "../stores/tracks";
   import { getDefaultPage } from "../utils";
   import TrackList from "../components/track-list.svelte";
   import Pagelinks from "../components/pagelinks.svelte";
 
+  import type { Track } from "@typings/app";
   import type { Playlist } from "@typings/spotify";
 
   export let id: string;
   export const location: Location = null;
 
-  const limit = 24;
+  const TRACK_LIMIT = 24;
 
-  let makeLink = (_offset: number) => "";
-  let loadPage = (_offset: number) => {};
-  let page = getDefaultPage({ limit });
+  let page = getDefaultPage<Track>({ limit: TRACK_LIMIT });
+
+  function makeLink(offset: number) {
+    return `/api/playlists/${id}?offset=${offset * TRACK_LIMIT}&limit=${TRACK_LIMIT}`;
+  }
+
+  async function loadPage(offset: number) {
+    page = await (await fetch(makeLink(offset))).json();
+    tracks.set(page.items);
+  }
 
   async function loadTracks(playlist: Playlist) {
     if (!playlist) return;
@@ -22,17 +30,10 @@
     tracks.set([]);
     ui.update((props) => ({ ...props, title: `Playlist: ${playlist.name}` }));
 
-    makeLink = (offset: number) => `/api/playlists/${id}?offset=${offset * limit}&limit=${limit}`;
-
-    loadPage = async (offset) => {
-      page = await (await fetch(makeLink(offset))).json();
-      tracks.set(page.items);
-    };
-
     loadPage(0);
   }
 
-  $: loadTracks($playlistDict[id]);
+  $: loadTracks($playlistMap[id]);
 </script>
 
 <TrackList tracks={$tracks}>

@@ -1,13 +1,15 @@
 import type { ApiPageRequest, ApiRequest, ApiRequestHeaders } from "@typings/index";
 import type { ArcRequest } from "@typings/arc";
-import type { PagingObject } from "@typings/spotify";
+
+export const API_URL = "https://api.spotify.com/v1";
 
 interface BuildUrlProps {
-  rootUrl: string;
-  params: Record<string, string>;
+  rootUrl?: string;
+  endpoint: string;
+  params: Record<string, unknown>;
 }
-export function buildUrl({ rootUrl, params }: BuildUrlProps) {
-  const builtURL = new URL(rootUrl);
+export function buildUrl({ rootUrl = API_URL, endpoint, params }: BuildUrlProps) {
+  const builtURL = new URL(`${rootUrl}${endpoint}`);
   for (const [key, val] of Object.entries(params)) {
     builtURL.searchParams.set(key, val as string);
   }

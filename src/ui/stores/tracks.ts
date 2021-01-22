@@ -1,15 +1,17 @@
-import { writable, derived } from "svelte/store";
+import { writable, derived, Writable, Readable } from "svelte/store";
 
-export const tracks = writable([]);
+import type { Track } from "@typings/app";
+import type { Playlist } from "@typings/spotify";
 
-export const playlists = writable([]);
+export const tracks: Writable<Track[]> = writable([]);
 
-export const playlistDict = derived(playlists, ($playlists) => {
-  const dict = {};
+export const playlists: Writable<Playlist[]> = writable([]);
 
+export const playlistMap: Readable<Record<string, Playlist>> = derived(playlists, ($playlists) => {
+  const data = {};
   for (const playlist of $playlists) {
-    dict[playlist.id] = playlist;
+    data[playlist.id] = playlist;
   }
 
-  return dict;
+  return data;
 });

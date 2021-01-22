@@ -12,7 +12,8 @@ const scopes = [
 ];
 
 const loginURL = buildUrl({
-  rootUrl: "https://accounts.spotify.com/authorize",
+  rootUrl: "https://accounts.spotify.com",
+  endpoint: "/authorize",
   params: {
     client_id: process.env.SPOTIFY_CLIENT_ID || "",
     redirect_uri: process.env.SPOTIFY_REDIRECT || "",

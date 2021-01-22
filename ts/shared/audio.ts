@@ -50,10 +50,7 @@ export function processAudio(audioFeatures: Spotify.AudioFeatures) {
  * Return a method for fetching an array of AudioFeature instances
  */
 export const makeAudioRequest: AudioRequestFactory = (headers) => (trackIds) => {
-  const url = buildUrl({
-    rootUrl: `https://api.spotify.com/v1/audio-features`,
-    params: { ids: trackIds.join(",") },
-  });
+  const url = buildUrl({ endpoint: `/audio-features`, params: { ids: trackIds.join(",") } });
 
   return get({ url, headers });
 };

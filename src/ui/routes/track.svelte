@@ -1,13 +1,13 @@
 <script lang="ts">
-  import { onMount } from "svelte";
-
   export let id: string;
 
-  import { ui } from "../stores/ui";
+  import { pageTitle, contentTitle } from "../stores/ui";
 
   async function loadTrack(trackId: string) {
+    // TODO: display *album* data
     // const response = await (await fetch(`/api/artists/${artistId}`)).json();
-    ui.update((props) => ({ ...props, title: `Track: ${id}` }));
+    pageTitle.set(`Track`);
+    contentTitle.set(id);
     // tracks = response.topTracks;
   }
 

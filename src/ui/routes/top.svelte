@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
 
-  import { ui } from "../stores/ui";
+  import { contentTitle, pageTitle } from "../stores/ui";
   import TrackList from "../components/track-list.svelte";
 
   import type { Track } from "@typings/app";
@@ -9,7 +9,7 @@
   export const location: Location = null;
   let tracks: Track[] = [];
 
-  ui.update((props) => ({ ...props, title: "Top tracks" }));
+  pageTitle.set("Top tracks");
 
   onMount(async () => {
     try {

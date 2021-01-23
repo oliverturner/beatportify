@@ -9,6 +9,7 @@ function getPlugins(isProd) {
   const plugins = [
     postcssPresetEnv({
       features: {
+        "nesting-rules": true,
         "custom-media-queries": { importFrom: { customMedia } },
       },
     }),

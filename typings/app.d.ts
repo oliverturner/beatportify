@@ -1,9 +1,9 @@
 import type * as Spotify from "@typings/spotify";
 import { ArcHeaders } from "./arc";
+
 export interface LoginData {
-  message: string;
   loginURL?: string;
-  user?: SpotifyApi.UserObjectPrivate;
+  user?: Spotify.PrivateUser;
 }
 
 export type Album = Pick<

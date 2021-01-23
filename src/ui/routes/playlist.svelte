@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ui } from "../stores/ui";
+  import { pageTitle, contentTitle, menuOpen } from "../stores/ui";
   import { tracks, playlistMap } from "../stores/tracks";
   import { getDefaultPage } from "../utils";
   import TrackList from "../components/track-list.svelte";
@@ -12,6 +12,7 @@
   export const location: Location = null;
 
   const TRACK_LIMIT = 24;
+  pageTitle.set("Playlist");
 
   let page = getDefaultPage<Track>({ limit: TRACK_LIMIT });
 
@@ -23,14 +24,14 @@
     page = await (await fetch(makeLink(offset))).json();
     tracks.set(page.items);
   }
-
+  
   async function loadTracks(playlist: Playlist) {
     if (!playlist) return;
-
+    
     tracks.set([]);
-    ui.update((props) => ({ ...props, title: `Playlist: ${playlist.name}` }));
-
-    loadPage(0);
+    contentTitle.set(playlist.name);
+    await loadPage(0);
+    menuOpen.set(false);
   }
 
   $: loadTracks($playlistMap[id]);

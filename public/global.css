@@ -28,6 +28,8 @@
   --key11: hsl(330, 25%, 50%);
 
   --border: #333;
+  --app-bg: #222;
+  --app-colour: #999;
   --item-bg: #111;
   --item-text: #aaa;
   --item-title: hsl(210, 25%, 65%);
@@ -41,24 +43,15 @@
   --toastProgressBackground: rgba(0, 0, 0, 0);
 }
 
-html {
-  height: -webkit-fill-available;
-}
-
 body {
   box-sizing: border-box;
-
-  /* iOS viewport bug fix */
-  min-height: 100vh;
-  min-height: -webkit-fill-available; 
-
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell,
     "Helvetica Neue", sans-serif;
   font-size: small;
 
-  background: #222;
-  color: #999;
+  background: var(--app-bg);
+  color: var(--app-colour);
 }
 
 a {
@@ -129,21 +122,6 @@ h3.title {
   stroke-width: 2;
   stroke-linecap: round;
   stroke-linejoin: round;
-}
-
-.app {
-  display: grid;
-  grid-template-rows: auto 1fr;
-
-  height: 100vh;
-}
-
-.app__main {
-  display: grid;
-
-  overflow: hidden;
-  width: 100%;
-  border-top: 1px solid var(--border);
 }
 
 .content__header {

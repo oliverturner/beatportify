@@ -7,10 +7,12 @@ import commonjs from "@rollup/plugin-commonjs";
 import css from "rollup-plugin-css-only";
 import resolve from "@rollup/plugin-node-resolve";
 import typescript from "@rollup/plugin-typescript";
+// import sveltePreprocess from 'svelte-preprocess';
 
 // CommonJS syntax required to address odd issue:
 // https://rollupjs.org/guide/en/#error-name-is-not-exported-by-module
-const { preprocess } = require("./svelte.config");
+// const { preprocess } = require("./svelte.config");
+import { preprocess } from "./svelte.config";
 
 const production = !process.env.ROLLUP_WATCH;
 

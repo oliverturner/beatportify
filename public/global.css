@@ -31,17 +31,27 @@
   --item-bg: #111;
   --item-text: #aaa;
   --item-title: hsl(210, 25%, 65%);
+
+  --toastContainerTop: auto;
+  --toastContainerRight: auto;
+  --toastContainerBottom: 0;
+  --toastContainerLeft: calc(50vw - 8rem);
+  --toastHeight: auto;
+  --toastBackground: #000;
+  --toastProgressBackground: rgba(0, 0, 0, 0);
 }
 
-html,
-body {
-  position: relative;
-  width: 100%;
-  height: 100%;
+html {
+  height: -webkit-fill-available;
 }
 
 body {
   box-sizing: border-box;
+
+  /* iOS viewport bug fix */
+  min-height: 100vh;
+  min-height: -webkit-fill-available; 
+
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell,
     "Helvetica Neue", sans-serif;
@@ -147,4 +157,8 @@ h3.title {
 
   padding: var(--s4);
   border-top: 1px solid var(--border);
+}
+
+._toastMsg {
+  padding: 1rem !important;
 }

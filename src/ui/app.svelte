@@ -90,5 +90,9 @@
   .app__main__sidebar {
     position: relative;
     z-index: 1;
+
+    @media (--mq-medium) {
+      overflow: hidden;
+    }
   }
 </style>

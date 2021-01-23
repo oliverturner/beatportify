@@ -10,7 +10,7 @@
 
   import type { Playlist } from "@typings/spotify";
 
-  const limit = 15;
+  const limit = 50;
   const makeLink = (offset: number) => `/api/playlists?offset=${offset * limit}&limit=${limit}`;
 
   let pageRes: Promise<void>;
@@ -21,6 +21,8 @@
       return fetch(makeLink(offset)).then(async (res) => {
         page = await res.json();
         playlists.set(page.items);
+
+        console.log("page.items", page.items);
       });
     } catch (error) {
       console.log({ error });
@@ -31,7 +33,7 @@
     pageRes = loadPage(0);
   });
 
-  $: console.log({ $menuOpen });
+  $: console.log({ $playlists });
 </script>
 
 <nav class="sidebar" class:active={$menuOpen}>
@@ -39,16 +41,18 @@
     {#await pageRes}
       <div class="loading">loading</div>
     {:then}
-      {#each $playlists as playlist, index (playlist.id)}
-        <a
-          class="sidebar__item"
-          href="/playlist/{playlist.id}"
-          use:link
-          in:fade={{ delay: 1000 + index * 50 }}
-          out:fly={{ delay: index * 25 }}>
-          <span>{playlist.name}</span>
-        </a>
-      {/each}
+      {#if $playlists?.length}
+        {#each $playlists as playlist, index (playlist.id)}
+          <a
+            class="sidebar__item"
+            href="/playlist/{playlist.id}"
+            use:link
+            in:fade={{ delay: 1000 + index * 50 }}
+            out:fly={{ delay: index * 25 }}>
+            <span>{playlist.name}</span>
+          </a>
+        {/each}
+      {/if}
     {/await}
   </div>
 
@@ -70,7 +74,6 @@
 
     transition: transform 0.5s;
 
-    overflow: hidden;
     position: absolute;
     left: 0;
     top: 0;
@@ -91,8 +94,7 @@
   }
 
   .loading {
-    justify-self: center;
-    align-self: center;
+    place-self: center;
   }
 
   .sidebar__items {

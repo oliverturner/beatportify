@@ -1,8 +1,6 @@
-const sveltePreprocess = require("svelte-preprocess");
+import sveltePreprocess from "svelte-preprocess";
 
-module.exports = {
-  preprocess: sveltePreprocess({
-    scss: { renderSync: true },
-    postcss: true
-  }),
-};
+export const preprocess = sveltePreprocess({
+  scss: { renderSync: true },
+  postcss: true,
+});

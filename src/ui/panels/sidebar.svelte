@@ -6,25 +6,29 @@
   import { getDefaultPage } from "../utils";
   import { playlists } from "../stores/tracks";
   import Pagelinks from "../components/pagelinks.svelte";
-  import type { ApiResponsePlaylists } from "@typings/spotify";
+
+  import type { Playlist } from "@typings/spotify";
 
   const limit = 15;
   const makeLink = (offset: number) => `/api/playlists?offset=${offset * limit}&limit=${limit}`;
 
-  let pageRes: Response;
-  let page = getDefaultPage({ limit });
+  let pageRes: Promise<void>;
+  let page = getDefaultPage<Playlist>({ limit });
 
   async function loadPage(offset: number) {
     try {
-      pageRes = await fetch(makeLink(offset));
-      page = await pageRes.json();
-      playlists.set(page.items);
+      return fetch(makeLink(offset)).then(async (res) => {
+        page = await res.json();
+        playlists.set(page.items);
+      });
     } catch (error) {
       console.log({ error });
     }
   }
 
-  onMount(() => loadPage(0));
+  onMount(() => {
+    pageRes = loadPage(0);
+  });
 </script>
 
 <nav class="sidebar">

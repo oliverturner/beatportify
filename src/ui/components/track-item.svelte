@@ -93,13 +93,13 @@
         href={purchaseLinks.beatport}
         aria-label="Find on Beatport">
         <svg class="icon" aria-hidden="true">
-          <use href="#icon-beatport" />
+          <use xlink:href="#icon-beatport" />
         </svg>
       </a>
 
       <a class="purchaselink" href={purchaseLinks.bandcamp} aria-label="Find on Bandcamp">
         <svg class="icon" aria-hidden="true">
-          <use href="#icon-bandcamp" />
+          <use xlink:href="#icon-bandcamp" />
         </svg>
       </a>
     </aside>

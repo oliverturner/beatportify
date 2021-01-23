@@ -42,7 +42,7 @@ export const makeResponse = (apiRequest: ApiRequest | ApiPageRequest<unknown>) =
     const result = await apiRequest(req, headers);
     return makePayload(200, result);
   } catch (error) {
-    // accessToken expired: se refreshToken to generate a new accessToken
+    // accessToken expired: use refreshToken to generate a new one
     if (error.statusCode === 401) {
       const refreshUrl = req.requestContext.http.path;
       return {

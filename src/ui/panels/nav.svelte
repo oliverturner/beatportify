@@ -16,7 +16,6 @@
 
 <nav class="nav">
   <div class="logo">
-    <button on:click={toggleMenu}>menu</button>
     <a href="/" use:links><h2 class="title title--app">Portify</h2></a>
   </div>
 
@@ -27,27 +26,24 @@
 
   <div class="user">
     {#if user}
+      <button class="togglebtn" on:click={toggleMenu}>menu</button>
       <form action="/logout" method="post"><button class="btn">log out</button></form>
     {/if}
   </div>
 </nav>
 
-<style>
+<style lang="scss">
   .nav {
     display: grid;
     grid-template-columns: auto 1fr auto;
-    align-items: center;
+    align-items: baseline;
 
     padding: 0.5rem 0;
+    line-height: 1;
 
     @media (--mq-medium) {
       grid-template-columns: 250px 1fr auto;
     }
-  }
-
-  .logo {
-    display: flex;
-    align-items: center;
   }
 
   .title {
@@ -67,7 +63,18 @@
   }
 
   .user {
+    display: flex;
     margin-left: auto;
     color: #333;
+
+    & > * + * {
+      margin-left: 0.25rem;
+    }
+  }
+
+  .togglebtn {
+    @media (--mq-medium) {
+      display: none;
+    }
   }
 </style>

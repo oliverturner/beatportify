@@ -23,7 +23,6 @@
   onMount(async () => {
     try {
       data = await (await fetch("/login")).json();
-      console.log({ "app.onMount": data });
     } catch (err) {
       console.log({ "app.onMount:err:": err });
     }
@@ -58,12 +57,12 @@
 <style lang="scss">
   .app {
     display: grid;
-    grid-template-rows: auto 1fr;
+    /* minmax forces calculation of "indefinite" dimensions on iOS */
+    grid-template-rows: auto minmax(0, 1fr);
 
     overflow: hidden;
-
-    /* iOS viewport bug fix */
     height: 100vh;
+    /* iOS viewport bug fix */
     max-height: -webkit-fill-available;
   }
 

@@ -16,6 +16,8 @@
 
     // TODO: display artist image & other data
 
+    console.log({ artist: Object.keys(response) });
+
     tracks = response.topTracks;
   }
 

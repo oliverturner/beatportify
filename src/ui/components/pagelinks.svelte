@@ -35,8 +35,8 @@
   }
 
   .pagelink {
-    --bg: #ccc;
-    --color: inherit;
+    --bg: #444;
+    --color: #ccc;
 
     transition: color 0.25s;
 
@@ -49,10 +49,10 @@
     height: var(--wh);
     color: var(--color);
 
-    &:hover,
+    &:enter,
     &.active {
-      --bg: #444;
-      --color: #ccc;
+      --bg: #aaa;
+      --color: inherit;
     }
 
     &::before {

@@ -73,17 +73,17 @@
     max-height: 100%;
     border-top: 1px solid var(--border);
     overflow: hidden;
-  }
 
-  .app__main--login {
-    place-content: center;
-  }
+    &.app__main--login {
+      place-content: center;
+    }
 
-  .app__main--active {
-    grid-template-columns: 0 1fr;
+    &.app__main--active {
+      grid-template-columns: 0 1fr;
 
-    @media (--mq-medium) {
-      grid-template-columns: 250px 1fr;
+      @media (--mq-medium) {
+        grid-template-columns: 250px 1fr;
+      }
     }
   }
 

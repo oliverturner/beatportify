@@ -1,6 +1,7 @@
 <script lang="ts">
   import { fade, fly } from "svelte/transition";
   import { link } from "svelte-routing";
+  import { toast } from "@zerodevx/svelte-toast";
 
   import type * as SpotifyApi from "@typings/spotify";
   import type { Track } from "@typings/app";
@@ -29,9 +30,10 @@
       }
 
       // TODO notify user that track is loading
-      // console.log({ res });
+      toast.push(`Playing "${item.name}" via Spotify Connect`);
     } catch (error) {
       console.log({ error });
+      toast.push(error.message);
     }
   }
 

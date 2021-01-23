@@ -1,10 +1,11 @@
 <script lang="ts">
-  import { onMount, tick } from "svelte";
+  import { onMount } from "svelte";
   import { fade, fly } from "svelte/transition";
   import { link } from "svelte-routing";
 
   import { getDefaultPage } from "../utils";
   import { playlists } from "../stores/tracks";
+  import { menuOpen } from "stores/ui";
   import Pagelinks from "../components/pagelinks.svelte";
 
   import type { Playlist } from "@typings/spotify";
@@ -29,9 +30,11 @@
   onMount(() => {
     pageRes = loadPage(0);
   });
+
+  $: console.log({ $menuOpen });
 </script>
 
-<nav class="sidebar">
+<nav class="sidebar" class:active={$menuOpen}>
   <div class="sidebar__items">
     {#await pageRes}
       <div class="loading">loading</div>
@@ -59,11 +62,32 @@
 
 <style lang="scss">
   .sidebar {
+    --sidebar-x: -100vw;
+
     display: grid;
     grid-template-rows: 1fr auto;
     align-items: flex-start;
 
+    transition: transform 0.5s;
+
     overflow: hidden;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100%;
+    transform: translate3d(var(--sidebar-x), 0, 0);
+    background: var(--app-bg);
+
+    &.active {
+      --sidebar-x: 0;
+    }
+
+    @media (--mq-medium) {
+      --sidebar-x: 0;
+      position: static;
+      width: unset;
+    }
   }
 
   .loading {
@@ -77,7 +101,7 @@
 
     overflow-y: auto;
     max-height: 100%;
-    padding: 0.5rem;
+    padding: 1rem;
     color: #333;
   }
 

@@ -11,12 +11,12 @@
   <svg class="icon" aria-hidden="true">
     <use xlink:href="#icon-spotify" />
   </svg>
-  <p class="cta">Click to sign in to Spotify</p>
+  <p class="cta title">Click to sign in to Spotify</p>
 </a>
 
 <style lang="scss">
   .loginbtn {
-    --wh: 80px;
+    --wh: 100px;
 
     transition: opacity 0.5s;
 

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ui } from "../stores/ui";
+  import { pageTitle, contentTitle } from "../stores/ui";
   import TrackList from "../components/track-list.svelte";
 
   import type { Track } from "@typings/app";
@@ -10,9 +10,11 @@
 
   async function loadArtist(artistId: string) {
     const response = await (await fetch(`/api/artists/${artistId}`)).json();
-    ui.update((props) => ({ ...props, title: `Artist: ${response.artist.name}` }));
 
-    // TODO: display artist image
+    pageTitle.set("Artist");
+    contentTitle.set(response.artist.name);
+
+    // TODO: display artist image & other data
 
     tracks = response.topTracks;
   }

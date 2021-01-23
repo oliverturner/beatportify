@@ -28,6 +28,8 @@
   --key11: hsl(330, 25%, 50%);
 
   --border: #333;
+  --app-bg: #222;
+  --app-colour: #999;
   --item-bg: #111;
   --item-text: #aaa;
   --item-title: hsl(210, 25%, 65%);
@@ -48,8 +50,8 @@ body {
     "Helvetica Neue", sans-serif;
   font-size: small;
 
-  background: #222;
-  color: #999;
+  background: var(--app-bg);
+  color: var(--app-colour);
 }
 
 a {

@@ -36,8 +36,10 @@
   <div class="app" class:active={data.user}>
     <Nav user={data.user} />
     {#if data.user}
-      <main class="app__main">
-        <Sidebar />
+      <main class="app__main app__main--active">
+        <div class="app__main__sidebar">
+          <Sidebar />
+        </div>
 
         <Route path="/artist/:id" component={Artist} />
         <Route path="/track/:id" component={Track} />
@@ -45,7 +47,7 @@
         <Route component={Top} />
       </main>
     {:else}
-      <main class="app__login">
+      <main class="app__main app__main--login">
         <LoginBtn href={data.loginURL} />
       </main>
     {/if}
@@ -63,17 +65,8 @@
     /* iOS viewport bug fix */
     height: 100vh;
     max-height: -webkit-fill-available;
-
-    // @media(--mq-medium) {
-    //   background: orange;
-    // }
-
-    // @media(--mq-large) {
-    //   background: pink;
-    // }
   }
 
-  .app__login,
   .app__main {
     display: grid;
 
@@ -82,11 +75,20 @@
     overflow: hidden;
   }
 
-  .app__login {
+  .app__main--login {
     place-content: center;
   }
 
-  .app__main {
-    grid-template-columns: 250px 1fr;
+  .app__main--active {
+    grid-template-columns: 0 1fr;
+
+    @media (--mq-medium) {
+      grid-template-columns: 250px 1fr;
+    }
+  }
+
+  .app__main__sidebar {
+    position: relative;
+    z-index: 1;
   }
 </style>

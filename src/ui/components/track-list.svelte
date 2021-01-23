@@ -26,13 +26,11 @@
 <style lang="scss">
   .tracklist {
     display: grid;
-
     align-items: start;
     gap: 1rem;
 
     overflow: hidden;
     height: 100%;
-    padding-top: 0.5rem;
 
     &.tracklist--header {
       grid-template-rows: auto 1fr;
@@ -54,5 +52,6 @@
 
     overflow: hidden auto;
     max-height: 100%;
+    padding: 1rem 0;
   }
 </style>

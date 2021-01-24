@@ -118,6 +118,8 @@
 
   .tile {
     display: grid;
+    align-content: start;
+
     overflow: hidden;
 
     & > img {

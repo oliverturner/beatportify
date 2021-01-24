@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { onMount } from "svelte";
-  import { fade, fly } from "svelte/transition";
+  import { tick } from "svelte";
+  import { fade } from "svelte/transition";
   import { link } from "svelte-routing";
 
   import { getDefaultPage } from "../utils";
@@ -20,6 +20,9 @@
   }
 
   async function loadPage(offset: number) {
+    playlists.set([]);
+    await tick();
+
     try {
       const res = await fetch(makeLink(offset));
       page = await res.json();
@@ -33,27 +36,20 @@
 </script>
 
 <nav class="sidebar" class:active={$menuOpen}>
-  <div class="sidebar__items">
-    {#if $playlists?.length}
+  {#if $playlists?.length}
+    <div class="sidebar__items" in:fade out:fade>
       {#each $playlists as playlist, index (playlist.id)}
-        <a
-          class="sidebar__item"
-          href="/playlist/{playlist.id}"
-          use:link
-          on:click={hideMenu}
-          in:fade={{ delay: 1000 + index * 50 }}
-          out:fly={{ delay: index * 25 }}>
+        <a class="sidebar__item" href="/playlist/{playlist.id}" use:link on:click={hideMenu}>
           <span>{playlist.name}</span>
         </a>
       {/each}
-    {/if}
-  </div>
+    </div>
+  {:else}
+    <div class="sidebar__items" />
+  {/if}
 
   <div class="sidebar__controls">
-    <p class="controls__label">pages:</p>
-    <div class="controls__links">
-      <Pagelinks {page} {makeLink} {loadPage} />
-    </div>
+    <Pagelinks {page} {makeLink} {loadPage} />
   </div>
 </nav>
 
@@ -103,22 +99,7 @@
   }
 
   .sidebar__controls {
-    --wh: var(--s6);
-
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 0.5rem;
-
     padding: var(--s4);
     border-top: 1px solid var(--border);
-  }
-
-  .controls__label {
-    margin: 0;
-    line-height: var(--wh);
-  }
-
-  .controls__links {
-    flex: 1;
   }
 </style>

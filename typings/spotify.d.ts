@@ -45,7 +45,7 @@ export interface Album {
   release_date: string;
   release_date_precision: string;
   restrictions: AlbumRestriction;
-  tracks: SimplifiedTrack[];
+  tracks: PagingObject<SimplifiedTrack>;
   type: string;
   uri: string;
 }

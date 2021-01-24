@@ -36,7 +36,7 @@
     <h3 class="title">Top 20 Tracks:</h3>
     <div class="tracks">
       {#each tracks as item, index (item.id)}
-        <TrackItem {item} {index} />
+        <TrackItem {item} />
       {/each}
     </div>
   </section>
@@ -45,7 +45,7 @@
     <h3 class="title">Appears on:</h3>
     <div class="tiles">
       {#each albums as album, index (album.id)}
-        <article class="tile">
+        <a class="tile" href="/album/{album.id}">
           <img
             srcset={getSrcSet(album.images)}
             src={`default ${album.images[1]?.url}`}
@@ -54,7 +54,7 @@
             height="175px"
           />
           <span>{album.name}</span>
-        </article>
+        </a>
       {/each}
     </div>
   </section>
@@ -118,6 +118,8 @@
 
   .tile {
     display: grid;
+    align-content: start;
+
     overflow: hidden;
 
     & > img {

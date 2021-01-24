@@ -1,14 +1,13 @@
 <script lang="ts">
-  export let id: string;
-
   import { pageTitle, contentTitle } from "../stores/ui";
 
+  export let id: string;
+
+  pageTitle.set(`Track`);
+
   async function loadTrack(trackId: string) {
-    // TODO: display *album* data
-    // const response = await (await fetch(`/api/artists/${artistId}`)).json();
-    pageTitle.set(`Track`);
-    contentTitle.set(id);
-    // tracks = response.topTracks;
+    const response = await (await fetch(`/api/tracks/${trackId}`)).json();
+    contentTitle.set(response.name);
   }
 
   $: loadTrack(id);

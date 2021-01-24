@@ -15,13 +15,13 @@ export function processAlbum(itemAlbum: SpotifyApi.SimplifiedAlbum): Portify.Alb
 }
 
 export function processTrack(item: SpotifyApi.Track): Portify.Track {
-  const { album, artists, duration_ms, id, is_playable, name, uri } = item;
+  const { id, album, artists, duration_ms, is_playable, name, uri } = item;
 
   return {
+    id,
     album: processAlbum(album),
     artists,
     duration_ms,
-    id,
     is_playable,
     name,
     uri,

@@ -10,6 +10,7 @@
   import Top from "./routes/top.svelte";
   import Artist from "./routes/artist.svelte";
   import Track from "./routes/track.svelte";
+  import Album from "./routes/album.svelte";
   import Playlist from "./routes/playlist.svelte";
 
   import type { LoginData } from "@typings/app";
@@ -40,8 +41,9 @@
           <Sidebar />
         </div>
 
-        <Route path="/artist/:id" component={Artist} />
         <Route path="/track/:id" component={Track} />
+        <Route path="/album/:id" component={Album} />
+        <Route path="/artist/:id" component={Artist} />
         <Route path="/playlist/:id" component={Playlist} />
         <Route component={Top} />
       </main>

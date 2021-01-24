@@ -65,7 +65,7 @@
     </a>
     <div class="item__label">
       <h3 class="title">
-        <a href="/track/{item.id}" use:link>{item.name}</a>
+        <a href="/album/{item.album.id}" use:link>{item.name}</a>
       </h3>
       <p class="artists">
         {#each item.artists as artist}

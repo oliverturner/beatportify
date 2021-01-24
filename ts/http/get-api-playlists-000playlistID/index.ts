@@ -5,7 +5,7 @@ import { buildUrl, makeResponse } from "@architect/shared/utils";
 import { getTracksAudio } from "@architect/shared/audio";
 
 import type { ArcHeaders } from "@typings/arc";
-import type { ApiPageRequest, ApiRequest } from "@typings/index";
+import type { ApiPageRequest } from "@typings/index";
 import type * as Portify from "@typings/app";
 import type * as Spotify from "@typings/spotify";
 

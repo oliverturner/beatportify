@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { fade } from "svelte/transition";
+
   import TrackItem from "./track-item.svelte";
 
   import type { Track } from "@typings/app";
@@ -14,11 +16,15 @@
 >
   <slot name="header" />
 
-  <div class="tracklist__items">
-    {#each tracks as item, index (item.id)}
-      <TrackItem {item} {index} />
-    {/each}
-  </div>
+  {#if tracks?.length}
+    <div class="tracklist__items" in:fade out:fade>
+      {#each tracks as item (item.id)}
+        <TrackItem {item} />
+      {/each}
+    </div>
+  {:else}
+    <div class="tracklist__items" />
+  {/if}
 
   <slot name="footer" />
 </section>

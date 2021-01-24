@@ -1,5 +1,7 @@
 <script lang="ts">
-  import { pageTitle, contentTitle, menuOpen } from "../stores/ui";
+  import { tick } from "svelte";
+
+  import { pageTitle, contentTitle } from "../stores/ui";
   import { tracks, playlistMap } from "../stores/tracks";
   import { getDefaultPage } from "../utils";
   import TrackList from "../components/track-list.svelte";
@@ -21,14 +23,19 @@
   }
 
   async function loadPage(offset: number) {
+    tracks.set([]);
+    await tick();
+    
     page = await (await fetch(makeLink(offset))).json();
     tracks.set(page.items);
   }
-  
+
   async function loadTracks(playlist: Playlist) {
     if (!playlist) return;
-    
+
     tracks.set([]);
+    await tick();
+
     contentTitle.set(playlist.name);
     await loadPage(0);
   }
@@ -38,14 +45,6 @@
 
 <TrackList tracks={$tracks}>
   <div class="content__footer" slot="footer">
-    <p>pages:</p>
     <Pagelinks {page} {makeLink} {loadPage} />
   </div>
 </TrackList>
-
-<style lang="scss">
-  .content__footer > p {
-    margin: 0 4px 0 auto;
-    line-height: var(--s6);
-  }
-</style>

@@ -11,30 +11,42 @@
 </script>
 
 <div class="pagelinks">
-  {#each pageLinks as href, index}
-    <a
-      class="pagelink"
-      class:active={index === pageCurrent}
-      {href}
-      on:click|preventDefault|stopPropagation={() => loadPage(index)}>
-      <span>{index + 1}</span>
-    </a>
-  {/each}
+  <p class="pagelinks__label">pages:</p>
+  <div class="pagelinks__items">
+    {#each pageLinks as href, index}
+      <a
+        class="pagelinks__item"
+        class:active={index === pageCurrent}
+        {href}
+        on:click|preventDefault|stopPropagation={() => loadPage(index)}>
+        <span>{index + 1}</span>
+      </a>
+    {/each}
+  </div>
 </div>
 
 <style lang="scss">
   .pagelinks {
     --wh: var(--s6);
 
-    display: grid;
-    grid-template-columns: repeat(auto-fill, var(--wh));
-    grid-auto-flow: column;
-    gap: 0.5rem;
-
-    color: #333;
+    display: flex;
+    justify-content: flex-end;
   }
 
-  .pagelink {
+  .pagelinks__label {
+    padding-right: 0.5rem;
+    line-height: var(--wh);
+  }
+
+  .pagelinks__items {
+    flex: 1;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fill, var(--wh));
+    gap: 0.5rem;
+  }
+
+  .pagelinks__item {
     --bg: #444;
     --color: #ccc;
 
@@ -52,7 +64,7 @@
     &:enter,
     &.active {
       --bg: #aaa;
-      --color: inherit;
+      --color: #333;
     }
 
     &::before {

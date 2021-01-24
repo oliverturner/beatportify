@@ -9,7 +9,6 @@
   import type { Track } from "@typings/app";
 
   export let item: Track;
-  export let index: number = 0;
 
   let artists: string;
   let searchTerm: string;
@@ -51,12 +50,7 @@
 -->
 
 {#if item}
-  <article
-    class="item"
-    style={`--key: var(--key${item.audio.key});`}
-    in:fade={{ delay: index * 100 }}
-    out:fly
-  >
+  <article class="item" style={`--key: var(--key${item.audio.key});`}>
     <a
       class="item__play"
       href={`/api/play/${item.id}`}

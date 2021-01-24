@@ -129,10 +129,6 @@ h3.title {
 }
 
 .content__footer {
-  display: flex;
-  justify-content: end;
-  gap: 0.5rem;
-
   padding: var(--s4);
   border-top: 1px solid var(--border);
 }

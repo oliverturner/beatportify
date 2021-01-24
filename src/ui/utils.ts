@@ -1,4 +1,4 @@
-import type { PagingObject } from "@typings/spotify";
+import type { Image, PagingObject } from "@typings/spotify";
 
 export function getDefaultPage<T>({ limit = 0 }): PagingObject<T> {
   return {
@@ -10,4 +10,8 @@ export function getDefaultPage<T>({ limit = 0 }): PagingObject<T> {
     next: "",
     previous: "",
   };
+}
+
+export function getSrcSet(images: Image[]) {
+  return images.map(({ url, width }) => `${url} ${width}w`).join(", ");
 }

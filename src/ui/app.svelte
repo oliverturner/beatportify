@@ -23,7 +23,6 @@
   onMount(async () => {
     try {
       data = await (await fetch("/login")).json();
-      console.log({ "app.onMount": data });
     } catch (err) {
       console.log({ "app.onMount:err:": err });
     }
@@ -58,12 +57,12 @@
 <style lang="scss">
   .app {
     display: grid;
-    grid-template-rows: auto 1fr;
+    /* minmax forces calculation of "indefinite" dimensions on iOS */
+    grid-template-rows: auto minmax(0, 1fr);
 
     overflow: hidden;
-
-    /* iOS viewport bug fix */
     height: 100vh;
+    /* iOS viewport bug fix */
     max-height: -webkit-fill-available;
   }
 
@@ -73,17 +72,17 @@
     max-height: 100%;
     border-top: 1px solid var(--border);
     overflow: hidden;
-  }
 
-  .app__main--login {
-    place-content: center;
-  }
+    &.app__main--login {
+      place-content: center;
+    }
 
-  .app__main--active {
-    grid-template-columns: 0 1fr;
+    &.app__main--active {
+      grid-template-columns: 0 1fr;
 
-    @media (--mq-medium) {
-      grid-template-columns: 250px 1fr;
+      @media (--mq-medium) {
+        grid-template-columns: 250px 1fr;
+      }
     }
   }
 

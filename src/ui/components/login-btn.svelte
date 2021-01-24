@@ -1,24 +1,28 @@
 <script>
   export let href = "";
-  let clicked = false;
+  let fadeout = false;
 
   function remove(event) {
-    clicked = true;
+    fadeout = true;
   }
 </script>
 
-<a class="loginbtn" class:faded={clicked} {href} on:click={remove}>
-  <svg class="icon" aria-hidden="true">
+<a class="loginbtn" class:fadein={href.length} class:fadeout {href} on:click={remove}>
+  <svg class="icon icon--spotify" aria-hidden="true">
     <use xlink:href="#icon-spotify" />
   </svg>
-  <p class="cta title">Click to sign in to Spotify</p>
+  <svg class="icon icon--arrow" aria-hidden="true">
+    <use xlink:href="#icon-arrow-up" />
+  </svg>
+  <p class="cta title">Click to sign in</p>
 </a>
 
 <style lang="scss">
   .loginbtn {
-    --wh: 100px;
+    --wh: 140px;
 
     transition: opacity 0.5s;
+    opacity: 0;
 
     display: grid;
     justify-items: center;
@@ -26,12 +30,24 @@
 
     width: var(--wh);
 
-    &.faded {
+    &.fadein {
+      transition-delay: 1s;
+      opacity: 1;
+    }
+
+    &.fadeout {
       opacity: 0;
     }
   }
 
-  .icon {
+  .icon--spotify {
+    width: var(--wh);
+    height: var(--wh);
+  }
+
+  .icon--arrow {
+    --wh: 32px;
+
     width: var(--wh);
     height: var(--wh);
   }

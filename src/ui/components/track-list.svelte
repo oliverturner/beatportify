@@ -52,6 +52,10 @@
 
     overflow: hidden auto;
     max-height: 100%;
-    padding: 1rem 0;
+    padding: 1rem;
+
+    @media (--mq-medium) {
+      padding: 1rem 0;
+    }
   }
 </style>

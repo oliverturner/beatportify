@@ -13,47 +13,40 @@
   const limit = 50;
   const makeLink = (offset: number) => `/api/playlists?offset=${offset * limit}&limit=${limit}`;
 
-  let pageRes: Promise<void>;
   let page = getDefaultPage<Playlist>({ limit });
+
+  function hideMenu() {
+    menuOpen.set(false);
+  }
 
   async function loadPage(offset: number) {
     try {
-      return fetch(makeLink(offset)).then(async (res) => {
-        page = await res.json();
-        playlists.set(page.items);
-
-        console.log("page.items", page.items);
-      });
+      const res = await fetch(makeLink(offset));
+      page = await res.json();
+      playlists.set(page.items);
     } catch (error) {
       console.log({ error });
     }
   }
 
-  onMount(() => {
-    pageRes = loadPage(0);
-  });
-
-  $: console.log({ $playlists });
+  loadPage(0);
 </script>
 
 <nav class="sidebar" class:active={$menuOpen}>
   <div class="sidebar__items">
-    {#await pageRes}
-      <div class="loading">loading</div>
-    {:then}
-      {#if $playlists?.length}
-        {#each $playlists as playlist, index (playlist.id)}
-          <a
-            class="sidebar__item"
-            href="/playlist/{playlist.id}"
-            use:link
-            in:fade={{ delay: 1000 + index * 50 }}
-            out:fly={{ delay: index * 25 }}>
-            <span>{playlist.name}</span>
-          </a>
-        {/each}
-      {/if}
-    {/await}
+    {#if $playlists?.length}
+      {#each $playlists as playlist, index (playlist.id)}
+        <a
+          class="sidebar__item"
+          href="/playlist/{playlist.id}"
+          use:link
+          on:click={hideMenu}
+          in:fade={{ delay: 1000 + index * 50 }}
+          out:fly={{ delay: index * 25 }}>
+          <span>{playlist.name}</span>
+        </a>
+      {/each}
+    {/if}
   </div>
 
   <div class="sidebar__controls">
@@ -91,10 +84,6 @@
       position: static;
       width: unset;
     }
-  }
-
-  .loading {
-    place-self: center;
   }
 
   .sidebar__items {

@@ -3,7 +3,9 @@
   import { link } from "svelte-routing";
   import { toast } from "@zerodevx/svelte-toast";
 
-  import type * as SpotifyApi from "@typings/spotify";
+  import { getSrcSet } from "../utils";
+
+  import type * as Spotify from "@typings/spotify";
   import type { Track } from "@typings/app";
 
   export let item: Track;
@@ -13,23 +15,18 @@
   let searchTerm: string;
   let purchaseLinks: Record<string, string>;
 
-  function getArtists(artists: SpotifyApi.Artist[] = []) {
+  function getArtists(artists: Spotify.Artist[] = []) {
     return artists.map((a) => a.name);
-  }
-
-  function getSrcSet(images) {
-    return images.map(({ url, width }) => `${url} ${width}w`).join(", ");
   }
 
   async function onTrackClick(event) {
     try {
       const res = await (await fetch(event.target.href)).json();
       if (res.error) {
-        // TODO notify user that a Spotify device must be available
+        console.log("status", res.error.status);
         throw new Error(res.error.message);
       }
 
-      // TODO notify user that track is loading
       toast.push(`Playing "${item.name}" via Spotify Connect`);
     } catch (error) {
       console.log({ error });

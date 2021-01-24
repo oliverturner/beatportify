@@ -13,8 +13,11 @@
   const limit = 50;
   const makeLink = (offset: number) => `/api/playlists?offset=${offset * limit}&limit=${limit}`;
 
-  let pageRes: Promise<void>;
   let page = getDefaultPage<Playlist>({ limit });
+
+  function hideMenu() {
+    menuOpen.set(false);
+  }
 
   async function loadPage(offset: number) {
     try {
@@ -26,23 +29,24 @@
     }
   }
 
-  onMount(() => {
-    pageRes = loadPage(0);
-  });
+  loadPage(0);
 </script>
 
 <nav class="sidebar" class:active={$menuOpen}>
   <div class="sidebar__items">
-    {#each $playlists as playlist, index (playlist.id)}
-      <a
-        class="sidebar__item"
-        href="/playlist/{playlist.id}"
-        use:link
-        in:fade={{ delay: 1000 + index * 50 }}
-        out:fly={{ delay: index * 25 }}>
-        <span>{playlist.name}</span>
-      </a>
-    {/each}
+    {#if $playlists?.length}
+      {#each $playlists as playlist, index (playlist.id)}
+        <a
+          class="sidebar__item"
+          href="/playlist/{playlist.id}"
+          use:link
+          on:click={hideMenu}
+          in:fade={{ delay: 1000 + index * 50 }}
+          out:fly={{ delay: index * 25 }}>
+          <span>{playlist.name}</span>
+        </a>
+      {/each}
+    {/if}
   </div>
 
   <div class="sidebar__controls">

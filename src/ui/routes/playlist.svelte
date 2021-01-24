@@ -31,7 +31,6 @@
     tracks.set([]);
     contentTitle.set(playlist.name);
     await loadPage(0);
-    menuOpen.set(false);
   }
 
   $: loadTracks($playlistMap[id]);

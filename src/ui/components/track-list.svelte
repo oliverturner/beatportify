@@ -17,7 +17,7 @@
   <slot name="header" />
 
   {#if tracks?.length}
-    <div class="tracklist__items" in:fade out:fade>
+    <div class="tracklist__items" in:fade>
       {#each tracks as item (item.id)}
         <TrackItem {item} />
       {/each}

@@ -79,7 +79,7 @@ label {
   display: block;
 }
 
-input,
+/* input,
 button,
 select,
 textarea {
@@ -89,15 +89,18 @@ textarea {
   font-family: inherit;
   font-size: inherit;
   color: inherit;
-}
+} */
 
 button {
+  border: none;
+  font: inherit;
+  text-transform: inherit;
   cursor: pointer;
 }
 
 .title {
   text-transform: uppercase;
-  font-weight: 400;
+  font-weight: 300;
   letter-spacing: var(--spacing);
 }
 

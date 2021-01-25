@@ -26,8 +26,10 @@
 
   <div class="user">
     {#if user}
-      <button class="togglebtn" on:click={toggleMenu}>menu</button>
-      <form action="/logout" method="post"><button class="btn">log out</button></form>
+      <button class="title btn btn--menu" on:click={toggleMenu}>menu</button>
+      <form action="/logout" method="post">
+        <button class="title btn">log out</button>
+      </form>
     {/if}
   </div>
 </nav>
@@ -38,7 +40,7 @@
     grid-template-columns: auto 1fr auto;
     align-items: baseline;
 
-    padding: 0.5rem 0;
+    padding: 0.5rem;
     line-height: 1;
 
     @media (--mq-medium) {
@@ -58,6 +60,10 @@
     }
   }
 
+  .title__content {
+    color: var(--key2);
+  }
+
   .title--app {
     padding: 0 0.5rem;
   }
@@ -72,7 +78,14 @@
     }
   }
 
-  .togglebtn {
+  .btn {
+    font-size: 0.7rem;
+    border: 1px solid var(--item-text);
+    color: var(--item-bg);
+    color: var(--item-text);
+  }
+
+  .btn--menu {
     @media (--mq-medium) {
       display: none;
     }

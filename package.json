@@ -34,6 +34,7 @@
     "@rollup/plugin-typescript": "8.1.0",
     "@tsconfig/node12": "1.0.7",
     "@tsconfig/svelte": "1.0.10",
+    "@types/architect__functions": "3.13.0",
     "@types/aws-lambda": "8.10.71",
     "@types/node": "12.19.11",
     "@types/spotify-api": "0.0.6",

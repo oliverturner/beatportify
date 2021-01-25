@@ -37,7 +37,11 @@
 
 <nav class="sidebar" class:active={$menuOpen}>
   {#if $playlists?.length}
-    <div class="sidebar__items" in:fade out:fade>
+    <div
+      class="sidebar__items"
+      in:fade={{ duration: 250, delay: 500 }}
+      out:fade={{ duration: 250, delay: 0 }}
+    >
       {#each $playlists as playlist, index (playlist.id)}
         <a class="sidebar__item" href="/playlist/{playlist.id}" use:link on:click={hideMenu}>
           <span>{playlist.name}</span>

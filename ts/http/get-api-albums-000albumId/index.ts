@@ -5,7 +5,7 @@ import { buildUrl, makeResponse } from "@architect/shared/utils";
 import { getTracksAudio } from "@architect/shared/audio";
 
 import type { ApiRequest } from "@typings/index";
-import type { Album } from "@typings/spotify";
+import type { Album, Track } from "@typings/spotify";
 
 const getAlbumData: ApiRequest = async (req, headers) => {
   const albumId = req.params.albumId;
@@ -19,12 +19,34 @@ const getAlbumData: ApiRequest = async (req, headers) => {
     images,
     label,
     name,
-    tracks,
+    tracks: tracksRaw,
     external_ids: externalIds,
     release_date: releaseDate,
   } = album;
 
-  // const tracks = getTracksAudio(tracksRaw.items, headers);
+  // TODO: Relax `processTrack` requirements: Pick<{...required}>
+  // TODO: Use CSS counter to display track numbers against names
+  const albumTracks: any[] = [];
+  let trackIndex = 1;
+  for (const track of tracksRaw.items) {
+    const albumTrack = {
+      ...track,
+      album: { ...album },
+      external_ids: externalIds,
+      popularity: undefined,
+    };
+
+    albumTracks.push(albumTrack);
+  }
+
+  let tracks;
+  try {
+    tracks = await getTracksAudio(albumTracks, headers);
+  } catch (err) {
+    console.log({ err });
+  }
+
+  console.log({ tracks });
 
   return {
     id,

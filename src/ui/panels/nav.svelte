@@ -14,21 +14,23 @@
   $: console.log({ user });
 </script>
 
-<nav class="nav">
-  <a href="/" use:links>
-    <h2 class="title title--app">Portify</h2>
+<nav class="title nav">
+  <a class="nav__item nav__item--logo" href="/" use:links>
+    <h1>Portify</h1>
   </a>
 
-  <h3 class="title title--content">
-    <span class="title__page">{$pageTitle}:</span>
-    {$contentTitle}
-  </h3>
+  <h2 class="nav__item nav__item--labels">
+    {#if $pageTitle?.length}
+      <span class="label--page">{$pageTitle}:</span>
+    {/if}
+    <span class="label--content">{$contentTitle}</span>
+  </h2>
 
-  <div class="user">
+  <div class="nav__item nav__item--controls">
     {#if user}
-      <button class="title btn btn--menu" on:click={toggleMenu}>menu</button>
+      <button class="btn btn--menu" on:click={toggleMenu}>menu</button>
       <form action="/logout" method="post">
-        <button class="title btn">log out</button>
+        <button class="btn">log out</button>
       </form>
     {/if}
   </div>
@@ -38,34 +40,47 @@
   .nav {
     display: grid;
     grid-template-columns: auto 1fr auto;
-    align-items: baseline;
 
-    padding: 0.5rem;
+    font-size: 1rem;
+    line-height: 1;
+
+    & h1,
+    & h2 {
+      margin: 0;
+      font: inherit;
+      letter-spacing: 1.6px;
+    }
 
     @media (--mq-medium) {
       grid-template-columns: 250px 1fr auto;
     }
   }
 
-  .title {
-    margin: 0;
+  .nav__item {
+    display: flex;
+
+    padding: 0.5rem;
   }
 
-  .title--app,
-  .title--content {
-    line-height: 1.2rem;
+  .nav__item--logo {
+    align-items: center;
+
+    background-color: var(--item-bg);
+    color: #fff;
   }
 
-  .title--app {
-    padding: 0 0.5rem;
+  .nav__item--controls {
+    display: flex;
+    padding: 0;
+
+    & form {
+      display: contents;
+    }
   }
 
-  .title--content {
-    color: var(--key2);
-  }
-
-  .title__page {
+  .label--page {
     display: none;
+    padding-right: 4px;
 
     @media (--mq-medium) {
       display: unset;
@@ -74,31 +89,19 @@
     }
   }
 
-  .user {
-    display: flex;
-    margin-left: auto;
-    color: #333;
+  .label--content {    
+    max-height: 2rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
 
-    & > * + * {
-      margin-left: 0.25rem;
-    }
+    color: var(--key2);
   }
 
   .btn {
-    --bg: var(--app-bg);
-    --text: var(--app-colour);
-
-    transition: background-color 0.25s, border-color 0.25s;
-
-    font-size: 0.7rem;
-    border: 1px solid var(--border);
-    background-color: var(--bg);
-    color: var(--text);
-
-    &:enter {
-      --border: var(--item-bg);
-      --bg: var(--item-bg);
-    }
+    font-size: 0.8rem;
+    border-left: 1px solid var(--border);
+    background: var(--app-bg);
+    color: var(--app-colour);
   }
 
   .btn--menu {

@@ -9,7 +9,8 @@
   export const location: Location = null;
   let tracks: Track[] = [];
 
-  pageTitle.set("Top tracks");
+  pageTitle.set("");
+  contentTitle.set("Top tracks");
 
   onMount(async () => {
     try {

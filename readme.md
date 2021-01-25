@@ -34,12 +34,13 @@ Navigate to [localhost:3333](http://localhost:3333)
 - [ ] Truncate long titles in mobile headers
 - [ ] Offer compact views of items
 - [ ] Make page limits configurable
+- [ ] Make tracks sortable via derived store
 - [ ] Scroll-to-load on paged content
+- [ ] Album: Use CSS counter to display track numbers against names
 
 ### Tech debt
 - [ ] Remove `/track/:id` endpoint
 - [ ] Relax `processTrack` requirements: Pick<{...required}>
-- [ ] Album: Use CSS counter to display track numbers against names
 
 ### DX        
 - [ ] Switch to Snowpack

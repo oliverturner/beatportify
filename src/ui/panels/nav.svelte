@@ -15,13 +15,13 @@
 </script>
 
 <nav class="nav">
-  <div class="logo">
-    <a href="/" use:links><h2 class="title title--app">Portify</h2></a>
-  </div>
+  <a href="/" use:links>
+    <h2 class="title title--app">Portify</h2>
+  </a>
 
-  <h3 class="title">
+  <h3 class="title title--content">
     <span class="title__page">{$pageTitle}:</span>
-    <span class="title__content">{$contentTitle}</span>
+    {$contentTitle}
   </h3>
 
   <div class="user">
@@ -41,7 +41,6 @@
     align-items: baseline;
 
     padding: 0.5rem;
-    line-height: 1;
 
     @media (--mq-medium) {
       grid-template-columns: 250px 1fr auto;
@@ -52,20 +51,27 @@
     margin: 0;
   }
 
+  .title--app,
+  .title--content {
+    line-height: 1.2rem;
+  }
+
+  .title--app {
+    padding: 0 0.5rem;
+  }
+
+  .title--content {
+    color: var(--key2);
+  }
+
   .title__page {
     display: none;
 
     @media (--mq-medium) {
       display: unset;
+      background: var(--app-bg);
+      color: var(--app-colour);
     }
-  }
-
-  .title__content {
-    color: var(--key2);
-  }
-
-  .title--app {
-    padding: 0 0.5rem;
   }
 
   .user {
@@ -79,10 +85,20 @@
   }
 
   .btn {
+    --bg: var(--app-bg);
+    --text: var(--app-colour);
+
+    transition: background-color 0.25s, border-color 0.25s;
+
     font-size: 0.7rem;
-    border: 1px solid var(--item-text);
-    color: var(--item-bg);
-    color: var(--item-text);
+    border: 1px solid var(--border);
+    background-color: var(--bg);
+    color: var(--text);
+
+    &:enter {
+      --border: var(--item-bg);
+      --bg: var(--item-bg);
+    }
   }
 
   .btn--menu {

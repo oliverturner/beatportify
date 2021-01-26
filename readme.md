@@ -11,7 +11,7 @@ Like music? Like supporting the artists who make it? If you said "hell yeah", th
 - 🔍  Surfaces related tracks and artists 
 
 ### How it works
-Portify uses the amazing [Architect](https://arc.codes) framework to easily shape data from Spotify's API and [Svelte](https://svelte.dev/) to surface it in an intuitive and polished UI.
+Portify uses the amazing [Architect](https://arc.codes) framework to easily shape data from Spotify's API and [Svelte](https://svelte.dev/) to surface it.
 
 I built it as a learning exercise and because it was a product that I needed. Mad respect to [Henry Desroches](https://twitter.com/xdesro) and [Tom Duncalf](https://twitter.com/tomduncalf) for their prior art and inspiration:
 - https://henry.codes/writing/spotify-now-playing

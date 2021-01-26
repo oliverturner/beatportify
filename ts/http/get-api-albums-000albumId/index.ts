@@ -24,6 +24,9 @@ const getAlbumData: ApiRequest = async (req, headers) => {
     release_date: releaseDate,
   } = album;
 
+  console.log(JSON.stringify(album, null, 2));
+  
+
   // TODO: Relax `processTrack` requirements: Pick<{...required}>
   // TODO: Use CSS counter to display track numbers against names
   const albumTracks: any[] = [];
@@ -45,8 +48,6 @@ const getAlbumData: ApiRequest = async (req, headers) => {
   } catch (err) {
     console.log({ err });
   }
-
-  console.log({ tracks });
 
   return {
     id,

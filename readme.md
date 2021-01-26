@@ -50,6 +50,7 @@ Navigate to [localhost:3333](http://localhost:3333)
 - [ ] Paging: Scroll-to-load on paged content
 - [ ] Album: Use CSS counter to display track numbers against names AND/OR create `albumIndex`?
 - [ ] Album: Don't repeat cover image per track
+- [ ] Album: Assume an album if all tracks within a playlist share the same album id
 
 #### Stretch
 - [ ] Use Spotify Connect to highlight playing track

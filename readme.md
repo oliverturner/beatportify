@@ -42,6 +42,7 @@ Navigate to [localhost:3333](http://localhost:3333)
 - [x] Link to album page from tracks
 - [x] Load tracks + audio for albums
 - [x] Fix missing playlists at boot
+- [ ] Preload top 100 playlists
 - [ ] Underline artist links
 - [x] Truncate long titles in mobile headers
 - [ ] TrackList: Offer compact views of items
@@ -50,6 +51,7 @@ Navigate to [localhost:3333](http://localhost:3333)
 - [ ] Paging: Scroll-to-load on paged content
 - [ ] Album: Use CSS counter to display track numbers against names AND/OR create `albumIndex`?
 - [ ] Album: Don't repeat cover image per track
+- [ ] Page transitions
 
 #### Stretch
 - [ ] Use Spotify Connect to highlight playing track

@@ -31,10 +31,10 @@ Navigate to [localhost:3333](http://localhost:3333)
 
 ### UX
 - [x] Link to album page from tracks
-- [ ] Load tracks + audio for albums
-- [ ] Fix missing playlists at boot
+- [x] Load tracks + audio for albums
+- [x] Fix missing playlists at boot
 - [ ] Underline artist links
-- [ ] Truncate long titles in mobile headers
+- [x] Truncate long titles in mobile headers
 - [ ] TrackList: Offer compact views of items
 - [ ] TrackList: Make sortable via derived store
 - [ ] Paging: Make page limits configurable
@@ -54,7 +54,7 @@ Navigate to [localhost:3333](http://localhost:3333)
 - [ ] Switch to Snowpack
 - [ ] Use query params to drive paging
 
-### Perfomance:
+### Perf:
 - [ ] Create a `use:onload` action for fading in lazy-loaded images
 - [ ] Investigate `content-visibility`
         - https://infrequently.org/2020/12/resize-resilient-deferred-rendering/

@@ -5,10 +5,13 @@
 
 Like music? Like supporting the artists who make it? If you said "hell yeah", then this app is for you! 
 
-**Portify** 
+### What it does
+- 🥰  Links the music you like on Spotify to buy on Beatport and Bandcamp
+- 🎧  Shows you each track's musical key so you can see how DJ mixes are structured
+- 🔍  Surfaces related tracks and artists 
 
-- 🥰 Helps the music you discover on Spotify become yours to keep by providing you with links to buy it on Beatport and Bandcamp
-- 🎧 Shows you a track's musical key so you can see how DJ mixes are structured
+### How it works
+Portify uses the amazing [Arc framework](https://arc.codes) to easily shape data from Spotify's API and [Svelte](https://svelte.dev/) to surface it in an intuitive and polished UI.
 
 [![Begin build status](https://buildstatus.begin.app/pie-lb1/status.svg)](https://begin.com)
 

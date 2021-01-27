@@ -25,7 +25,7 @@ const getAlbumData: ApiRequest = async (req, headers) => {
   } = album;
 
   // TODO: Relax `processTrack` requirements: Pick<{...required}>
-  // TODO: Use CSS counter to display track numbers against names
+  // TODO: Use CSS counter to display track numbers against names?
   const albumTracks: any[] = [];
   let trackIndex = 1;
   for (const track of tracksRaw.items) {
@@ -39,14 +39,7 @@ const getAlbumData: ApiRequest = async (req, headers) => {
     albumTracks.push(albumTrack);
   }
 
-  let tracks;
-  try {
-    tracks = await getTracksAudio(albumTracks, headers);
-  } catch (err) {
-    console.log({ err });
-  }
-
-  console.log({ tracks });
+  let tracks = await getTracksAudio(albumTracks, headers);
 
   return {
     id,

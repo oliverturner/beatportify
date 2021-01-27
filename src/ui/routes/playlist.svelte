@@ -3,7 +3,7 @@
 
   import { pageTitle, contentTitle } from "../stores/ui";
   import { tracks, playlistMap } from "../stores/tracks";
-  import { getDefaultPage } from "../utils";
+  import { getPlaylistPage } from "../utils";
   import TrackList from "../components/track-list.svelte";
   import Pagelinks from "../components/pagelinks.svelte";
 
@@ -16,7 +16,7 @@
   const TRACK_LIMIT = 24;
   pageTitle.set("Playlist");
 
-  let page = getDefaultPage<Track>({ limit: TRACK_LIMIT });
+  let page = getPlaylistPage({ limit: TRACK_LIMIT });
 
   function makeLink(offset: number) {
     return `/api/playlists/${id}?offset=${offset * TRACK_LIMIT}&limit=${TRACK_LIMIT}`;
@@ -43,7 +43,7 @@
   $: loadTracks($playlistMap[id]);
 </script>
 
-<TrackList tracks={$tracks}>
+<TrackList tracks={$tracks} compact={page.isCollection}>
   <div class="content__footer" slot="footer">
     <Pagelinks {page} {makeLink} {loadPage} />
   </div>

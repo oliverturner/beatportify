@@ -9,6 +9,8 @@
   import type { Track } from "@typings/app";
 
   export let item: Track;
+  export let index: number;
+  export let compact: boolean = false;
 
   let artists: string;
   let searchTerm: string;
@@ -18,11 +20,18 @@
     return artists.map((a) => a.name);
   }
 
-  async function onTrackClick(event) {
+  async function onTrackClick(event: Event) {
+    event.stopPropagation();
+    event.preventDefault();
+
     try {
       const res = await (await fetch(event.target.href)).json();
+
       if (res.error) {
-        console.log("status", res.error.status);
+        if (String(res.error.status) === "404") {
+          throw new Error("Spotify needs to be playing to load tracks via Connects");
+        }
+
         throw new Error(res.error.message);
       }
 
@@ -31,6 +40,10 @@
       console.log({ error });
       toast.push(error.message);
     }
+  }
+
+  function onImageLoad(event: Event) {
+    (event.target as HTMLImageElement).classList.add("loaded");
   }
 
   if (item) {
@@ -50,19 +63,26 @@
 -->
 
 {#if item}
-  <article class="item" style={`--key: var(--key${item.audio.key});`}>
-    <a
-      class="item__play"
-      href={`/api/play/${item.id}`}
-      on:click|stopPropagation|preventDefault={onTrackClick}>
-      <img
-        srcset={getSrcSet(item.album.images)}
-        src={`default ${item.album.images[1]?.url}`}
-        alt={`Cover art for ${item.album.name}`}
-        width="300"
-        height="300"
-      />
-    </a>
+  <article class="item" class:compact style={`--key: var(--key${item.audio.key});`}>
+    {#if compact}
+      <!-- show play btn -->
+      <!-- show track number - oswald font? -->
+      <div class="item__index">{index + 1}</div>
+    {:else}
+      <a class="item__play" href={`/api/play/${item.id}`} on:click={onTrackClick}>
+        <img
+          class="item__thumbnail"
+          class:loaded={false}
+          data-srcset={getSrcSet(item.album.images)}
+          data-src={`default ${item.album.images[1]?.url}`}
+          src={item.album.images[2]?.url}
+          alt={`Cover art for ${item.album.name}`}
+          width="300"
+          height="300"
+          on:load|once={onImageLoad}
+        />
+      </a>
+    {/if}
     <div class="item__label">
       <h3 class="title">
         <a href="/album/{item.album.id}" use:link>{item.name}</a>
@@ -76,6 +96,7 @@
     <div class="item__audio">
       <p class="item__audio__pitch">Key: {item.audio.pitch}</p>
       <p class="item__audio__bpm">BPM: {item.audio.bpm}</p>
+      <!-- display in info popover? -->
       <!-- <p><a href={item.audio.analysisUrl}>Analysis</a></p> -->
     </div>
     <aside class="item__purchases">
@@ -90,7 +111,7 @@
 
       <a class="purchaselink" href={purchaseLinks.bandcamp} aria-label="Find on Bandcamp">
         <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-bandcamp" />
+          <use xlink:href="#icon-bandcamp" />sa
         </svg>
       </a>
     </aside>
@@ -107,21 +128,22 @@
     grid-template-areas:
       "a b b"
       "a c d";
-    gap: 0.5rem 1rem;
 
     position: relative;
     background: var(--item-bg);
     color: var(--item-text);
 
-    & img {
-      display: block;
-      max-width: 100%;
-      height: 100%;
-      min-width: 150px;
-      min-height: 150px;
-      object-fit: cover;
-      pointer-events: none;
+    &.compact {
+      grid-template-columns: 2rem 1fr auto;
     }
+  }
+
+  .item__index {
+    grid-area: a;
+
+    display: grid;
+    place-content: center;
+    background: #000;
   }
 
   .item__play {
@@ -131,9 +153,28 @@
     background: #333;
   }
 
+  .item__thumbnail {
+    --wh: 150px;
+
+    transition: opacity 0.5s;
+
+    display: block;
+    max-width: 100%;
+    height: 100%;
+    min-width: var(--wh);
+    min-height: var(--wh);
+    object-fit: cover;
+    pointer-events: none;
+    opacity: 0;
+
+    &.loaded {
+      opacity: 1;
+    }
+  }
+
   .item__label,
   .item__audio {
-    padding: 0.5rem 0;
+    padding: 0.5rem;
   }
 
   .item__label {

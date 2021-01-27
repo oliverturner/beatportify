@@ -27,13 +27,15 @@ const getPlaylist: ApiPageRequest<Portify.Track> = async (req, headers) => {
     market: req.session.user.country,
   };
 
+  // TODO: optimise with fewer iterations & more composition
   const page = (await getTracks(playlistId, params, headers)).body;
   const tracks = page.items
     .filter(({ is_local }) => !is_local)
     .map(({ track }) => track as Spotify.Track);
   const items = await getTracksAudio(tracks, headers);
+  const isCollection = new Set(items.map((item) => item.album?.id)).size === 1;
 
-  return { ...page, items };
+  return { ...page, isCollection, items };
 };
 
 export const handler = http.async(makeResponse(getPlaylist));

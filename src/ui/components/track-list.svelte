@@ -1,11 +1,13 @@
 <script lang="ts">
   import { fade } from "svelte/transition";
 
+  import { intersectionObserver } from "../actions/intersection-observer";
   import TrackItem from "./track-item.svelte";
 
   import type { Track } from "@typings/app";
 
   export let tracks: Track[] = [];
+  export let compact: boolean = false;
 </script>
 
 <section
@@ -17,9 +19,14 @@
   <slot name="header" />
 
   {#if tracks?.length}
-    <div class="tracklist__items" in:fade>
-      {#each tracks as item (item.id)}
-        <TrackItem {item} />
+    <div
+      class="tracklist__items"
+      class:compact={compact}
+      in:fade
+      use:intersectionObserver
+    >
+      {#each tracks as item, index (item.id)}
+        <TrackItem {item} {index} compact={compact} />
       {/each}
     </div>
   {:else}
@@ -62,6 +69,10 @@
 
     @media (--mq-medium) {
       padding: 1rem 0;
+    }
+
+    &.compact {
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     }
   }
 </style>

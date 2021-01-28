@@ -40,8 +40,6 @@
   }
 
   function onImageLoad(event: Event) {
-    console.log({ onLoad: event });
-
     (event.target as HTMLImageElement).classList.add("loaded");
   }
 

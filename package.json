@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "@architect/functions": "3.13.9",
+    "@architect/hydrate": "^1.9.5",
     "@architect/sandbox": "3.3.5",
     "@begin/data": "1.2.3",
     "@zerodevx/svelte-toast": "0.1.4",
@@ -51,6 +52,7 @@
   "scripts": {
     "build:tsc": "tsc",
     "build:rollup": "rollup -c",
+    "build:hydrate": "arc-hydrate autoinstall",
     "build": "run-s build:*",
     "dev": "tsc -w & rollup -c -w",
     "lint": "eslint src --fix",

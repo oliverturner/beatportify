@@ -34,4 +34,8 @@ export type TrackAudioFetch = (
   trackIds: string[]
 ) => Promise<{ body: { audio_features: AudioFeatures[] } }>;
 
+export interface PlaylistPage extends Spotify.PagingObject<Track> {
+  isCollection: boolean;
+}
+
 export type AudioRequestFactory = (headers: ArcHeaders) => TrackAudioFetch;

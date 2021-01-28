@@ -7,7 +7,7 @@
   }
 </script>
 
-<a class="loginbtn" class:fadein={href.length} class:fadeout {href} on:click={remove}>
+<a class="loginbtn" class:fadein={href?.length} class:fadeout {href} on:click={remove}>
   <svg class="icon icon--spotify" aria-hidden="true">
     <use xlink:href="#icon-spotify" />
   </svg>

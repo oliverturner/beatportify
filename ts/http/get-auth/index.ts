@@ -2,7 +2,7 @@ import { http } from "@architect/functions";
 
 import { init, refresh } from "./session";
 
-import type { ArcRequest, SpotifySession } from "@typings/arc";
+import type { SpotifySession } from "@typings/arc";
 import type { ApiRequest } from "@typings/index";
 
 const auth: ApiRequest = async (req) => {

@@ -18,4 +18,4 @@
   $: loadAlbum(id);
 </script>
 
-<TrackList {tracks} />
+<TrackList {tracks} compact={true} />

@@ -25,11 +25,12 @@
     event.preventDefault();
 
     try {
-      const res = await (await fetch(event.target.href)).json();
+      const url = (event.target as HTMLAnchorElement).href;
+      const res = await (await fetch(url)).json();
 
       if (res.error) {
         if (String(res.error.status) === "404") {
-          throw new Error("Spotify needs to be playing to load tracks via Connects");
+          throw new Error("Spotify needs to be playing to load tracks via Connect");
         }
 
         throw new Error(res.error.message);
@@ -66,8 +67,10 @@
   <article class="item" class:compact style={`--key: var(--key${item.audio.key});`}>
     {#if compact}
       <!-- show play btn -->
-      <!-- show track number - oswald font? -->
-      <div class="item__index">{index + 1}</div>
+      <!-- use oswald font? -->
+      <a class="item__index" href={`/api/play/${item.id}`} on:click={onTrackClick}>
+        {index + 1}
+      </a>
     {:else}
       <a class="item__play" href={`/api/play/${item.id}`} on:click={onTrackClick}>
         <img

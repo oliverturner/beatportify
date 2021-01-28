@@ -25,6 +25,7 @@
     try {
       data = await (await fetch("/login")).json();
     } catch (err) {
+      // TODO: display message as toast
       console.log({ "app.onMount:err:": err });
     }
   });

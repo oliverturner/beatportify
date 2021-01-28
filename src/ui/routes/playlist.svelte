@@ -43,6 +43,7 @@
   $: loadTracks($playlistMap[id]);
 </script>
 
+<!-- TODO: add header slot for album image, release data, etc -->
 <TrackList tracks={$tracks} compact={page.isCollection}>
   <div class="content__footer" slot="footer">
     <Pagelinks {page} {makeLink} {loadPage} />

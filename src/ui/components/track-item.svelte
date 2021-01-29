@@ -145,8 +145,11 @@
     grid-area: a;
 
     display: grid;
-    place-content: center;
-    background: #000;
+    place-content: end center;
+
+    padding: 0.5rem 0;
+    background: #0006;
+    color: #555;
   }
 
   .item__play {

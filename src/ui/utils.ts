@@ -14,10 +14,6 @@ export function getDefaultPage<T>({ limit = 0 }): PagingObject<T> {
   return { ...pageDefaults, limit };
 }
 
-export function getPlaylistPage({ limit = 0 }): PlaylistPage {
-  return { ...pageDefaults, limit, isCollection: false };
-}
-
 export function getSrcSet(images: Image[]) {
   return images.map(({ url, width }) => `${url} ${width}w`).join(", ");
 }

@@ -33,7 +33,7 @@ const getPlaylist: ApiPageRequest<Portify.Track> = async (req, headers) => {
     .filter(({ is_local }) => !is_local)
     .map(({ track }) => track as Spotify.Track);
   const items = await getTracksAudio(tracks, headers);
-  const isCollection = new Set(items.map((item) => item.album?.id)).size === 1;
+  const isCollection = items.length > 1 && new Set(items.map((item) => item.album?.id)).size === 1;
 
   return { ...page, isCollection, items };
 };

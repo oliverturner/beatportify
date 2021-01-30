@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { fade, fly } from "svelte/transition";
   import { link } from "svelte-routing";
   import { toast } from "@zerodevx/svelte-toast";
 
@@ -66,8 +65,8 @@
 {#if item}
   <article class="item" class:compact style={`--key: var(--key${item.audio.key});`}>
     {#if compact}
-      <!-- show play btn -->
-      <!-- use oswald font? -->
+      <!-- TODO show play btn -->
+      <!-- TODO use oswald font? -->
       <a class="item__index" href={`/api/play/${item.id}`} on:click={onTrackClick}>
         {index + 1}
       </a>

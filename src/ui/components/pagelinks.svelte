@@ -32,10 +32,6 @@
 
     display: flex;
     justify-content: flex-end;
-
-    &.hidden {
-      display: none;
-    }
   }
 
   .pagelinks__label {

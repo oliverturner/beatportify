@@ -8,6 +8,8 @@
   export let id: string;
 
   pageTitle.set(`Album`);
+
+  // TODO: fix `Album` type
   let album;
   let tracks: Track[];
 

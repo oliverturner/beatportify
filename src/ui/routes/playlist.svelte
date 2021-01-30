@@ -58,5 +58,7 @@
     </div>
   </TrackList>
 {:else}
-  <Loader />
+  <div class="grid">
+    <Loader />
+  </div>
 {/if}

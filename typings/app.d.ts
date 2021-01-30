@@ -9,7 +9,7 @@ export interface LoginData {
 export type Album = Pick<
   Spotify.SimplifiedAlbum,
   "id" | "album_type" | "artists" | "images" | "name" | "uri"
->;
+>
 
 export type Artist = Pick<Spotify.Artist, "name" | "id">;
 

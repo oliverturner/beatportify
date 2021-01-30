@@ -3,12 +3,12 @@
 
   import { pageTitle, contentTitle } from "../stores/ui";
   import { tracks, playlistMap } from "../stores/tracks";
-  import { getPlaylistPage } from "../utils";
   import TrackList from "../components/track-list.svelte";
   import Pagelinks from "../components/pagelinks.svelte";
+  import Loader from "../components/loader.svelte";
 
-  import type { Track } from "@typings/app";
   import type { Playlist } from "@typings/spotify";
+  import type { PlaylistPage, Album } from "@typings/app";
 
   export let id: string;
   export const location: Location = null;
@@ -16,7 +16,9 @@
   const TRACK_LIMIT = 24;
   pageTitle.set("Playlist");
 
-  let page = getPlaylistPage({ limit: TRACK_LIMIT });
+  let page: PlaylistPage;
+  let compact = false;
+  let album: Album;
 
   function makeLink(offset: number) {
     return `/api/playlists/${id}?offset=${offset * TRACK_LIMIT}&limit=${TRACK_LIMIT}`;
@@ -24,9 +26,15 @@
 
   async function loadPage(offset: number) {
     tracks.set([]);
+    compact = false;
+    album = undefined;
     await tick();
-    
+
     page = await (await fetch(makeLink(offset))).json();
+    if (page.isCollection) {
+      compact = true;
+      album = page.items[0].album;
+    }
     tracks.set(page.items);
   }
 
@@ -43,9 +51,14 @@
   $: loadTracks($playlistMap[id]);
 </script>
 
-<!-- TODO: add header slot for album image, release data, etc -->
-<TrackList tracks={$tracks} compact={page.isCollection}>
-  <div class="content__footer" slot="footer">
-    <Pagelinks {page} {makeLink} {loadPage} />
+{#if page}
+  <TrackList tracks={$tracks} {compact} {album}>
+    <div class="content__footer" slot="footer">
+      <Pagelinks {page} {makeLink} {loadPage} />
+    </div>
+  </TrackList>
+{:else}
+  <div class="grid">
+    <Loader />
   </div>
-</TrackList>
+{/if}

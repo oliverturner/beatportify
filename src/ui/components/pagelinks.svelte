@@ -18,7 +18,8 @@
         class="pagelinks__item"
         class:active={index === pageCurrent}
         {href}
-        on:click|preventDefault|stopPropagation={() => loadPage(index)}>
+        on:click|preventDefault|stopPropagation={() => loadPage(index)}
+      >
         <span>{index + 1}</span>
       </a>
     {/each}

@@ -6,6 +6,7 @@
   import { getSrcSet } from "../utils";
   import { intersectionObserver } from "../actions/intersection-observer";
   import TrackItem from "../components/track-item.svelte";
+  import Loader from "../components/loader.svelte";
 
   import type { Album, Track, Artist } from "@typings/spotify";
 
@@ -48,18 +49,18 @@
 
 {#if response}
   <div class="artist" use:intersectionObserver in:fade out:fade>
-    <section>
-      <h3 class="title">Top 20 Tracks:</h3>
-      <div class="tracks">
+    <section class="section">
+      <h3 class="title section__title">Top 20 Tracks:</h3>
+      <div class="section__content section__content--tracks">
         {#each tracks as item, index (item.id)}
           <TrackItem {item} />
         {/each}
       </div>
     </section>
 
-    <section>
-      <h3 class="title">Appears on:</h3>
-      <div class="tiles">
+    <section class="section">
+      <h3 class="title section__title">Appears on:</h3>
+      <div class="section__content section__content--tiles">
         {#each albums as album, index (album.id)}
           <a class="tile" href="/album/{album.id}">
             <img
@@ -79,10 +80,10 @@
       </div>
     </section>
 
-    <section>
-      <h3 class="title">Related artists:</h3>
-      <div class="items">
-        {#each related as artist, index (artist.id)}
+    <section class="section">
+      <h3 class="title section__title">Related artists:</h3>
+      <div class="section__content section__content--items">
+        {#each related as artist (artist.id)}
           <a class="item" href={`/artist/${artist.id}`}>
             <img
               class="thumbnail item__thumbnail"
@@ -102,7 +103,7 @@
     </section>
   </div>
 {:else}
-  <div class="title loading">Loading</div>
+  <Loader />
 {/if}
 
 <style lang="scss">
@@ -119,36 +120,35 @@
     }
   }
 
-  .loading {
-    display: grid;
-    place-content: center;
-  }
-
   .artist {
+    display: grid;
+    gap: 1rem;
+
     overflow: hidden auto;
     padding: 1rem;
+  }
 
-    @media (--mq-medium) {
-      padding: 0;
+  .section {
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .section__content {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(var(--item-w), 1fr));
+
+    &.section__content--tracks {
+      --item-w: 350px;
     }
-  }
 
-  .tracks {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    gap: 1rem;
-  }
+    &.section__content--tiles {
+      --item-w: 175px;
+    }
 
-  .tiles {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
-    gap: 1rem;
-  }
-
-  .items {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 1rem;
+    &.section__content--items {
+      --item-w: 250px;
+    }
   }
 
   .tile,

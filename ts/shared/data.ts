@@ -19,7 +19,8 @@ export function processTrack(item: SpotifyApi.Track): Portify.Track {
 
   return {
     id,
-    album: processAlbum(album),
+    // album: processAlbum(album),
+    album,
     artists,
     duration_ms,
     is_playable,

@@ -3,11 +3,12 @@
 
   import { contentTitle, pageTitle } from "../stores/ui";
   import TrackList from "../components/track-list.svelte";
+  import Loader from "../components/loader.svelte";
 
   import type { Track } from "@typings/app";
 
   export const location: Location = null;
-  let tracks: Track[] = [];
+  let tracks: Track[];
 
   pageTitle.set("");
   contentTitle.set("Top tracks");
@@ -24,26 +25,10 @@
   });
 </script>
 
-<TrackList {tracks}>
-  <!-- 
-  <div class="content__header" slot="header">
-    <div class="controls">
-      <p>time</p>
-      <p>limit</p>
-    </div>
+{#if tracks}
+  <TrackList {tracks} />
+{:else}
+  <div class="grid">
+    <Loader />
   </div>
-   -->
-</TrackList>
-
-<style lang="scss">
-  // .controls {
-  //   display: flex;
-  //   justify-content: flex-end;
-  //   gap: 1rem;
-  //   bottom: pink;
-
-  //   & > p {
-  //     margin: 0;
-  //   }
-  // }
-</style>
+{/if}

@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { fade, fly } from "svelte/transition";
   import { link } from "svelte-routing";
   import { toast } from "@zerodevx/svelte-toast";
 
@@ -66,10 +65,9 @@
 {#if item}
   <article class="item" class:compact style={`--key: var(--key${item.audio.key});`}>
     {#if compact}
-      <!-- show play btn -->
-      <!-- use oswald font? -->
       <a class="item__index" href={`/api/play/${item.id}`} on:click={onTrackClick}>
-        {index + 1}
+        <svg class="icon" aria-hidden="true"><use xlink:href="#icon-play" /></svg>
+        <span>{index + 1}</span>
       </a>
     {:else}
       <a class="item__play" href={`/api/play/${item.id}`} on:click={onTrackClick}>
@@ -106,7 +104,8 @@
       <a
         class="purchaselink purchaselink--beatport"
         href={purchaseLinks.beatport}
-        aria-label="Find on Beatport">
+        aria-label="Find on Beatport"
+      >
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-beatport" />
         </svg>
@@ -114,7 +113,7 @@
 
       <a class="purchaselink" href={purchaseLinks.bandcamp} aria-label="Find on Bandcamp">
         <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-bandcamp" />sa
+          <use xlink:href="#icon-bandcamp" />
         </svg>
       </a>
     </aside>
@@ -144,9 +143,20 @@
   .item__index {
     grid-area: a;
 
-    display: grid;
-    place-content: center;
-    background: #000;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 0.5rem 0;
+    background: #0006;
+    color: #555;
+
+    & .icon {
+      // flex: 0 0 var(--icon-wh);
+      width: 1rem;
+      height: 1rem;
+    }
   }
 
   .item__play {

@@ -5,6 +5,7 @@
   import { tracks, playlistMap } from "../stores/tracks";
   import TrackList from "../components/track-list.svelte";
   import Pagelinks from "../components/pagelinks.svelte";
+  import Loader from "../components/loader.svelte";
 
   import type { Playlist } from "@typings/spotify";
   import type { PlaylistPage, Album } from "@typings/app";
@@ -50,14 +51,12 @@
   $: loadTracks($playlistMap[id]);
 </script>
 
-<!-- TODO: add header slot for album image, release data, etc -->
 {#if page}
-  <!-- content here -->
   <TrackList tracks={$tracks} {compact} {album}>
     <div class="content__footer" slot="footer">
       <Pagelinks {page} {makeLink} {loadPage} />
     </div>
   </TrackList>
 {:else}
-  <p>loading</p>
+  <Loader />
 {/if}

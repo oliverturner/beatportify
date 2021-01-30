@@ -3,6 +3,7 @@
 
   import { intersectionObserver } from "../actions/intersection-observer";
   import TrackItem from "./track-item.svelte";
+  import Loader from "./loader.svelte";
 
   import type { Track } from "@typings/app";
 
@@ -11,8 +12,6 @@
   export let album;
 
   function getDate(d: string) {
-    console.log({ d });
-
     const options = {
       year: "numeric",
       month: "long",
@@ -25,18 +24,18 @@
 
 <section class="tracklist" class:tracklist--footer={$$slots.footer}>
   {#if tracks?.length}
-    <div class="tracklist__items" class:compact in:fade use:intersectionObserver>
+    <div
+      class="tracklist__items"
+      class:compact
+      use:intersectionObserver
+      in:fade={{ duration: 500 }}
+    >
       {#if album}
-        {@debug album}
         <header class="album">
           <img class="album__artwork" src={album.images[1].url} alt={`${album.name} cover image`} />
           <div class="album__info">
-            <dl class="album__info__data">
-              <dt>Track count:</dt>
-              <dd>{album.total_tracks}</dd>
-              <dt>Release date:</dt>
-              <dd>{getDate(album.release_date)}</dd>
-            </dl>
+            <p>Track count: <span class="value">{album.total_tracks || tracks.length}</span></p>
+            <p>Release date: <span class="value">{getDate(album.release_date)}</span></p>
           </div>
         </header>
       {/if}
@@ -46,7 +45,7 @@
       {/each}
     </div>
   {:else}
-    <div class="tracklist__items" />
+    <Loader />
   {/if}
 
   <slot name="footer" />
@@ -56,7 +55,6 @@
   .tracklist {
     display: grid;
     align-items: start;
-    gap: 1rem;
 
     overflow: hidden;
     height: 100%;
@@ -75,22 +73,31 @@
     max-height: 100%;
     padding: 1rem;
 
-    @media (--mq-medium) {
-      padding: 1rem 0;
-    }
-
     &.compact {
       grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     }
   }
 
   .album {
-    grid-column: 1 / 3;
+    grid-column: 1 / -1;
 
     display: flex;
 
-    background: var(--item-bg);
+    margin: -1rem;
+    margin-bottom: 0;
+    background-color: var(--item-bg);
+    background-image: repeating-linear-gradient(
+      315deg,
+      transparent 0,
+      transparent 10px,
+      #000a 0,
+      #000a 20px
+    );
     color: var(--item-colour);
+
+    @media (--mq-medium) {
+      margin: 0;
+    }
   }
 
   .album__artwork {
@@ -101,21 +108,23 @@
   }
 
   .album__info {
-    display: grid;
-    align-items: end;
-
+    margin-top: auto;
     padding: 1rem;
-  }
 
-  .album__info__data {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 0.5rem;
-
-    margin: 0;
-
-    & dd {
+    & p {
+      float: left;
+      clear: both;
       margin: 0;
+      padding: 0.5rem;
+      font-size: 1rem;
+
+      background: #000;
+      color: #666;
+    }
+
+    & .value {
+      white-space: nowrap;
+      color: var(--item-text);
     }
   }
 </style>

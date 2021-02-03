@@ -7,7 +7,6 @@
   import Pagelinks from "../components/pagelinks.svelte";
   import Loader from "../components/loader.svelte";
 
-  import type { Playlist } from "@typings/spotify";
   import type { PlaylistPage, Album } from "@typings/app";
 
   export let id: string;
@@ -20,15 +19,19 @@
   let compact = false;
   let album: Album;
 
+  function reset() {
+    tracks.set([]);
+    compact = false;
+    album = undefined;
+    return tick();
+  }
+
   function makeLink(offset: number) {
     return `/api/playlists/${id}?offset=${offset * TRACK_LIMIT}&limit=${TRACK_LIMIT}`;
   }
 
   async function loadPage(offset: number) {
-    tracks.set([]);
-    compact = false;
-    album = undefined;
-    await tick();
+    await reset();
 
     page = await (await fetch(makeLink(offset))).json();
     if (page.isCollection) {
@@ -38,20 +41,23 @@
     tracks.set(page.items);
   }
 
-  async function loadTracks(playlist: Playlist) {
-    if (!playlist) return;
+  async function loadTracks(playlistId: string) {
+    if (!playlistId) return;
 
-    tracks.set([]);
-    await tick();
+    await reset();
 
-    contentTitle.set(playlist.name);
-    await loadPage(0);
+    const playlist = $playlistMap[playlistId];
+    if (playlist) {
+      contentTitle.set(playlist.name);
+    }
+
+    loadPage(0);
   }
 
-  $: loadTracks($playlistMap[id]);
+  $: loadTracks(id);
 </script>
 
-{#if page}
+{#if $tracks?.length}
   <TrackList tracks={$tracks} {compact} {album}>
     <div class="content__footer" slot="footer">
       <Pagelinks {page} {makeLink} {loadPage} />

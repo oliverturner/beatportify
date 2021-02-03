@@ -24,7 +24,8 @@
     event.preventDefault();
 
     try {
-      const url = (event.target as HTMLAnchorElement).href;
+      const anchor = (event.target as Element).closest("a");
+      const url = (anchor as HTMLAnchorElement).href;
       const res = await (await fetch(url)).json();
 
       if (res.error) {
@@ -82,6 +83,7 @@
           height="300"
           on:load|once={onImageLoad}
         />
+        <svg class="icon" aria-hidden="true"><use xlink:href="#icon-play" /></svg>
       </a>
     {/if}
     <div class="item__label">
@@ -160,10 +162,39 @@
   }
 
   .item__play {
+    --opacity: 0;
+
     grid-area: a;
+
+    position: relative;
 
     overflow: hidden;
     background: #333;
+    color: #999;
+
+    &::before,
+    & .icon {
+      position: absolute;
+      transition: opacity 0.5s;
+      opacity: var(--opacity);
+    }
+
+    &::before {
+      content: "";
+      inset: 0;
+      background-color: #000a;
+    }
+
+    & .icon {
+      inset: 50%;
+      width: 50%;
+      height: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    &:hover {
+      --opacity: 1;
+    }
   }
 
   .item__thumbnail {

@@ -120,6 +120,10 @@
 
       background: #000;
       color: #666;
+
+      & + p {
+        margin-top: -0.5rem;
+      }
     }
 
     & .value {

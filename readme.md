@@ -39,6 +39,7 @@ Navigate to [localhost:3333](http://localhost:3333)
 ## TO DO:
 
 ### UX
+- [ ] User preferences: allow toggling musical notation
 - [x] Link to album page from tracks
 - [x] Load tracks + audio for albums
 - [x] Fix missing playlists at boot
@@ -49,8 +50,8 @@ Navigate to [localhost:3333](http://localhost:3333)
 - [ ] TrackList: Make sortable via derived store
 - [ ] Paging: Make page limits configurable
 - [ ] Paging: Scroll-to-load on paged content
-- [ ] Album: Use CSS counter to display track numbers against names AND/OR create `albumIndex`?
-- [ ] Album: Don't repeat cover image per track
+- [x] Album: Use CSS counter to display track numbers against names AND/OR create `albumIndex`?
+- [x] Album: Don't repeat cover image per track
 - [ ] Page transitions
 
 #### Stretch
@@ -61,12 +62,12 @@ Navigate to [localhost:3333](http://localhost:3333)
 - [ ] Relax `processTrack` requirements: Pick<{...required}>
 
 ### DX        
-- [ ] Work out how to attach a debugger
+- [ ] Work out how to attach a debug session to Arc endpoints
 - [ ] Switch to Snowpack
-- [ ] Use query params to drive paging
+- [ ] Use query params to drive paging?
 
 ### Perf:
-- [ ] Create a `use:onload` action for fading in lazy-loaded images
+- [x] Create a `use:onload` action for fading in lazy-loaded images
 - [ ] Investigate `content-visibility`
         - https://infrequently.org/2020/12/resize-resilient-deferred-rendering/
         - https://web.dev/content-visibility/

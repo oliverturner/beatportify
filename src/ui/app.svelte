@@ -5,6 +5,7 @@
 
   import Nav from "./panels/nav.svelte";
   import Sidebar from "./panels/sidebar.svelte";
+  import Prefs from "./panels/preferences.svelte";
   import LoginBtn from "./components/login-btn.svelte";
 
   import Top from "./routes/top.svelte";
@@ -47,6 +48,10 @@
         <Route path="/artist/:id" component={Artist} />
         <Route path="/playlist/:id" component={Playlist} />
         <Route component={Top} />
+
+        <div class="app__main__sidebar">
+          <Prefs user={data.user} />
+        </div>
       </main>
     {:else}
       <main class="app__main app__main--login">
@@ -81,10 +86,14 @@
     }
 
     &.app__main--active {
-      grid-template-columns: 0 1fr;
+      grid-template-columns: 0 1fr 0;
 
       @media (--mq-medium) {
-        grid-template-columns: 250px 1fr;
+        grid-template-columns: 250px 1fr 0;
+      }
+
+      @media (--mq-xlarge) {
+        grid-template-columns: 250px 1fr 150px;
       }
     }
   }

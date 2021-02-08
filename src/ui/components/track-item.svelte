@@ -151,11 +151,10 @@
     align-items: center;
 
     padding: 0.5rem 0;
-    background: #0006;
+    background: #000a;
     color: #555;
 
     & .icon {
-      // flex: 0 0 var(--icon-wh);
       width: 1rem;
       height: 1rem;
     }

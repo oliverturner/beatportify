@@ -1,11 +1,12 @@
 <script lang="ts">
   import { links } from "svelte-routing";
+  import Popover from "svelte-popover";
 
   import { pageTitle, contentTitle, menuOpen } from "../stores/ui";
 
-  export let user;
+  import type { PrivateUser } from "@typings/spotify";
 
-  const routes = [];
+  export let user: PrivateUser;
 
   function toggleMenu() {
     menuOpen.set(!$menuOpen);
@@ -29,9 +30,10 @@
   <div class="nav__item nav__item--controls">
     {#if user}
       <button class="btn btn--menu" on:click={toggleMenu}>menu</button>
-      <form action="/logout" method="post">
-        <button class="btn">log out</button>
-      </form>
+
+      <button class="prefsbtn" aria-label="preferences">
+        <img src={user.images[0].url} alt="Your avatar" />
+      </button>
     {/if}
   </div>
 </nav>
@@ -89,7 +91,7 @@
     }
   }
 
-  .label--content {    
+  .label--content {
     max-height: 2rem;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -107,6 +109,31 @@
   .btn--menu {
     @media (--mq-medium) {
       display: none;
+    }
+  }
+
+  .prefsbtn {
+    all: unset;
+
+    --wh: var(--s8);
+
+    width: var(--wh);
+    height: var(--wh);
+    margin: 0.5rem;
+    border: none;
+    border-radius: var(--wh);
+    overflow: hidden;
+
+    background-color: hotpink;
+
+    & > img {
+      width: var(--wh);
+      height: var(--wh);
+      object-fit: cover;
+    }
+
+    @media (--mq-xxlarge) {
+      overflow: hidden;
     }
   }
 </style>

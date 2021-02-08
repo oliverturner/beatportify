@@ -1,8 +1,9 @@
-const breakpoints = {
+export const breakpoints = {
   small: 414,
   medium: 768,
   large: 960,
   xlarge: 1200,
+  xxlarge: 1400,
 };
 
 /**
@@ -15,7 +16,7 @@ const breakpoints = {
  *   xlarge: (min-width: 1200px)
  * }
  */
-const mediaQueries = Object.entries(breakpoints).reduce((acc, [k, v]) => {
+export const mediaQueries = Object.entries(breakpoints).reduce((acc, [k, v]) => {
   return { ...acc, [k]: `(min-width: ${v}px)` };
 }, {});
 
@@ -36,13 +37,7 @@ const mediaQueries = Object.entries(breakpoints).reduce((acc, [k, v]) => {
  * }
  */
 
-const customMedia = {};
+export const customMedia = {};
 for (const [k, v] of Object.entries(mediaQueries)) {
   customMedia[`--mq-${k}`] = v;
 }
-
-module.exports = {
-  breakpoints,
-  mediaQueries,
-  customMedia,
-};

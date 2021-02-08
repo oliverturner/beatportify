@@ -7,23 +7,31 @@
 
   $: pageNum = Math.ceil(page.total / page.limit);
   $: pageCurrent = Math.floor(page.offset / page.limit);
-  $: pageLinks = Array.from({ length: pageNum }, (_, index) => index).map(makeLink);
+  $: pageLinks = Array.from({ length: pageNum }, (_, index) => index).map(
+    makeLink
+  );
 </script>
 
 <div class="pagelinks">
-  <p class="pagelinks__label">pages:</p>
-  <div class="pagelinks__items">
-    {#each pageLinks as href, index}
-      <a
-        class="pagelinks__item"
-        class:active={index === pageCurrent}
-        {href}
-        on:click|preventDefault|stopPropagation={() => loadPage(index)}
-      >
-        <span>{index + 1}</span>
-      </a>
-    {/each}
-  </div>
+  {#if pageLinks.length > 1}
+    <!-- content here -->
+
+    <p class="pagelinks__label">pages:</p>
+    <div class="pagelinks__items">
+      {#each pageLinks as href, index}
+        <a
+          class="pagelinks__item"
+          class:active={index === pageCurrent}
+          {href}
+          on:click|preventDefault|stopPropagation={() => loadPage(index)}
+        >
+          <span>{index + 1}</span>
+        </a>
+      {/each}
+    </div>
+  {:else}
+    <p class="pagelinks__label">&nbsp;</p>
+  {/if}
 </div>
 
 <style lang="scss">

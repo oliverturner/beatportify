@@ -1,11 +1,11 @@
-import { http } from "@architect/functions";
-import { get } from "tiny-json-http";
-
-import { buildUrl, makeResponse } from "@architect/shared/utils";
-
 /**
  * @typedef {import("@typings/index").ApiRequest} ApiRequest
  */
+
+const { http } = require("@architect/functions");
+const { get } = require("tiny-json-http");
+
+const { buildUrl, makeResponse } = require("@architect/shared/utils");
 
 /** @type {ApiRequest} */
 const getTrack = async (req, headers) => {
@@ -19,4 +19,6 @@ const getTrack = async (req, headers) => {
   return result.body;
 };
 
-export const handler = http.async(makeResponse(getTrack));
+module.exports = {
+  handler: http.async(makeResponse(getTrack)),
+};

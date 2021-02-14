@@ -1,12 +1,12 @@
-import { http } from "@architect/functions";
-import { get } from "tiny-json-http";
-
-import { buildUrl, makeResponse } from "@architect/shared/utils";
-import { getTracksAudio } from "@architect/shared/audio";
-
 /**
  * @typedef {import("@typings/index").ApiRequest} ApiRequest
  */
+
+const { http } = require("@architect/functions");
+const { get } = require("tiny-json-http");
+
+const { buildUrl, makeResponse } = require("@architect/shared/utils");
+const { getTracksAudio } = require("@architect/shared/audio");
 
 /** @type {ApiRequest} */
 const getAlbumData = async (req, headers) => {
@@ -45,4 +45,6 @@ const getAlbumData = async (req, headers) => {
   };
 };
 
-export const handler = http.async(makeResponse(getAlbumData));
+module.exports = {
+  handler: http.async(makeResponse(getAlbumData)),
+};

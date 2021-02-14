@@ -1,9 +1,9 @@
-import { http } from "@architect/functions";
-import { buildUrl } from "@architect/shared/utils";
-
 /**
  * @typedef {import("@typings/index").ApiRequest} ApiRequest
  */
+
+const { http } = require("@architect/functions");
+const { buildUrl } = require("@architect/shared/utils");
 
 const scopes = [
   "playlist-read-private",
@@ -38,4 +38,6 @@ const login = async (req) => {
   };
 };
 
-export const handler = http.async(login);
+module.exports = {
+  handler: http.async(login),
+};

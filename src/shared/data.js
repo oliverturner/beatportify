@@ -2,7 +2,7 @@
  * @param {import("@typings/spotify").SimplifiedAlbum} itemAlbum
  * @returns {import("@typings/app").Album}
  */
-export function processAlbum(itemAlbum) {
+function processAlbum(itemAlbum) {
   const { album_type, artists, id, images, name, uri } = itemAlbum;
 
   return {
@@ -19,7 +19,7 @@ export function processAlbum(itemAlbum) {
  * @param {import("@typings/spotify").Track} item
  * @returns {import("@typings/app").Track}
  */
-export function processTrack(item) {
+function processTrack(item) {
   const { id, album, artists, duration_ms, is_playable, name, uri } = item;
 
   return {
@@ -33,3 +33,8 @@ export function processTrack(item) {
     uri,
   };
 }
+
+module.exports = {
+  processAlbum,
+  processTrack,
+};

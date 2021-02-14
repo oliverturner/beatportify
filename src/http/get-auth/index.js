@@ -1,11 +1,11 @@
-import { http } from "@architect/functions";
-
-import { init, refresh } from "./session";
-
 /**
  * @typedef {import("@typings/index").ApiRequest} ApiRequest
  * @typedef {import("@typings/arc").SpotifySession} SpotifySession
  */
+
+const { http } = require("@architect/functions");
+
+const { init, refresh } = require("./session");
 
 /** @type {ApiRequest} */
 const auth = async (req) => {
@@ -52,4 +52,6 @@ const auth = async (req) => {
   };
 };
 
-export const handler = http.async(auth);
+module.exports = {
+  handler: http.async(auth),
+};

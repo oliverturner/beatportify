@@ -1,4 +1,4 @@
-import { http } from "@architect/functions";
+const { http } = require("@architect/functions");
 
 async function logout() {
   return {
@@ -7,4 +7,6 @@ async function logout() {
   };
 }
 
-export const handler = http.async(logout);
+module.exports = {
+  handler: http.async(logout),
+};

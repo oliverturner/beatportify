@@ -1,4 +1,4 @@
-export const API_URL = "https://api.spotify.com/v1";
+const API_URL = "https://api.spotify.com/v1";
 
 /**
  * @param {{
@@ -7,7 +7,7 @@ export const API_URL = "https://api.spotify.com/v1";
  *   params: Record<string, string>;
  * }} params
  */
-export function buildUrl({ rootUrl = API_URL, endpoint, params }) {
+function buildUrl({ rootUrl = API_URL, endpoint, params }) {
   const builtURL = new URL(`${rootUrl}${endpoint}`);
   for (const [key, val] of Object.entries(params)) {
     builtURL.searchParams.set(key, val);
@@ -31,7 +31,7 @@ function makePayload(statusCode, body) {
 /**
  * @type { import("@typings/index").MakeResponse }
  */
-export const makeResponse = (apiRequest) => async (req) => {
+const makeResponse = (apiRequest) => async (req) => {
   const { accessToken } = req.session;
   if (!accessToken) return { location: "/" };
 
@@ -58,4 +58,10 @@ export const makeResponse = (apiRequest) => async (req) => {
 
     return makePayload(error.statusCode, { message: error.message });
   }
+};
+
+module.exports = {
+  API_URL,
+  buildUrl,
+  makeResponse,
 };

@@ -50,11 +50,9 @@
     "typescript": "4.1.5"
   },
   "scripts": {
-    "build:tsc": "tsc",
     "build:rollup": "rollup -c",
-    "build:hydrate": "arc-hydrate autoinstall",
     "build": "run-s build:*",
-    "dev": "tsc -w & rollup -c -w",
+    "dev": "rollup -c -w",
     "lint": "eslint src --fix",
     "start": "cross-env NODE_ENV=testing ARC_LOCAL=1 npx sandbox",
     "test:arc": "cross-env NODE_ENV=testing PORT=6666 tape test/*-test.js ./test/**/*-test.js | tap-spec",

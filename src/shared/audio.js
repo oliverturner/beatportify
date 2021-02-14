@@ -1,7 +1,7 @@
-import { get } from "tiny-json-http";
+const { get } = require("tiny-json-http");
 
-import { processTrack } from "./data";
-import { buildUrl } from "./utils";
+const { processTrack } = require("./data");
+const { buildUrl } = require("./utils");
 
 // Camelot keys indexed by mode -> pitch class
 // https://maustsontoast.com/2020/pitch-class-tonal-counterparts-and-camelot-key-equivalents
@@ -35,7 +35,7 @@ const TONES = [
  * @param {import("@typings/spotify").AudioFeatures} audioFeatures
  * @returns
  */
-export function processAudio(audioFeatures) {
+function processAudio(audioFeatures) {
   const { key, mode, tempo, analysis_url: analysisUrl } = audioFeatures;
   const pitch = PITCHES[mode][key];
   const tone = TONES[mode][key];
@@ -48,7 +48,7 @@ export function processAudio(audioFeatures) {
  * Return a method for fetching an array of AudioFeature instances
  * @type {import("@typings/app").AudioRequestFactory}
  */
-export const makeAudioRequest = (headers) => (trackIds) => {
+const makeAudioRequest = (headers) => (trackIds) => {
   const url = buildUrl({ endpoint: `/audio-features`, params: { ids: trackIds.join(",") } });
 
   return get({ url, headers });
@@ -59,7 +59,7 @@ export const makeAudioRequest = (headers) => (trackIds) => {
  * @param {import("@typings/arc").ArcHeaders} headers
  * @returns {Promise<Record<string, Portify.Track>>}
  */
-export async function getTracksAudio(tracks, headers) {
+async function getTracksAudio(tracks, headers) {
   const getAudioFeatures = makeAudioRequest(headers);
   const tracksMap = {};
   for (const track of tracks) {
@@ -79,4 +79,10 @@ export async function getTracksAudio(tracks, headers) {
   }
 
   return Object.values(tracksMap);
+}
+
+module.exports = {
+  processAudio,
+  makeAudioRequest,
+  getTracksAudio
 }

@@ -1,9 +1,3 @@
-import arc from "@architect/functions";
-import { get } from "tiny-json-http";
-
-import { API_URL, buildUrl, makeResponse } from "@architect/shared/utils";
-import { getTracksAudio } from "@architect/shared/audio";
-
 /**
  * @typedef {import("@typings/index").ApiRequest} ApiRequest
  * @typedef {import("@typings/arc").ArcHeaders} ArcHeaders
@@ -12,6 +6,12 @@ import { getTracksAudio } from "@architect/shared/audio";
  * @typedef {import("@typings/app").Track} Track
  * @typedef {import("@typings/spotify").PagingKeysAlbum} PagingKeysAlbum
  */
+
+const arc = require("@architect/functions");
+const { get } = require("tiny-json-http");
+
+const { API_URL, buildUrl, makeResponse } = require("@architect/shared/utils");
+const { getTracksAudio } = require("@architect/shared/audio");
 
 /**
  * @param {string} artistId
@@ -103,4 +103,6 @@ const getArtistData = async (req, headers) => {
   return data;
 };
 
-export const handler = arc.http.async(makeResponse(getArtistData));
+module.exports = {
+  handler: arc.http.async(makeResponse(getArtistData)),
+};

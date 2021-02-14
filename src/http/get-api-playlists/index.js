@@ -1,14 +1,14 @@
-import { http } from "@architect/functions";
-import { get } from "tiny-json-http";
-
-import { makeResponse } from "@architect/shared/utils";
-
-const legalParams = ["limit", "offset"];
-
 /**
  * @typedef {import("@typings/index").ApiPageRequest} ApiPageRequest
  * @typedef {import("@typings/spotify").Playlist} Playlist
  */
+
+const { http } = require("@architect/functions");
+const { get } = require("tiny-json-http");
+
+const { makeResponse } = require("@architect/shared/utils");
+
+const legalParams = ["limit", "offset"];
 
 /** @type {ApiPageRequest<Playlist>} */
 const getPlaylists = async (req, headers) => {
@@ -28,4 +28,6 @@ const getPlaylists = async (req, headers) => {
   }
 };
 
-export const handler = http.async(makeResponse(getPlaylists));
+module.exports = {
+  handler: http.async(makeResponse(getPlaylists)),
+};

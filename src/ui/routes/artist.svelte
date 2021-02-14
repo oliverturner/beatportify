@@ -1,4 +1,4 @@
-<script lang="ts">
+<script>
   import { tick } from "svelte";
   import { fade } from "svelte/transition";
 
@@ -8,23 +8,28 @@
   import TrackItem from "../components/track-item.svelte";
   import Loader from "../components/loader.svelte";
 
-  import type { Album, Track, Artist } from "@typings/spotify";
+  /** @type {string} */
+  export let id;
 
-  export let id: string;
+  /** @type {import("@typings/spotify").Artist} */
+  let artist;
 
-  let artist: Artist;
-  let tracks: Track[] = [];
-  let albums: Album[] = [];
-  let related: Artist[] = [];
+  /** @type {import("@typings/spotify").Track[]} */
+  let tracks = [];
 
-  let response: {
-    artist: Artist;
-    topTracks: Track[];
-    albums: { items: Album[] };
-    relatedArtists: { artists: Artist[] };
-  };
+  /** @type {import("@typings/spotify").Album[]} */
+  let albums = [];
 
-  async function loadArtist(artistId: string) {
+  /** @type {import("@typings/spotify").Artist[]} */
+  let related = [];
+
+  /** @type {import("@typings/app").APIResponseArtists} */
+  let response;
+
+  /**
+   * @param {string} artistId
+   */
+  async function loadArtist(artistId) {
     pageTitle.set("Artist");
     contentTitle.set("loading...");
     response = undefined;
@@ -40,8 +45,13 @@
     contentTitle.set(artist.name);
   }
 
-  function onImageLoad(event: Event) {
-    (event.target as HTMLImageElement).classList.add("loaded");
+  /**
+   * @param {Event} event
+   */
+  function onImageLoad(event) {
+    /** @type {HTMLImageElement} */
+    const el = event.target;
+    el.classList.add("loaded");
   }
 
   $: loadArtist(id);

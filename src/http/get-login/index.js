@@ -1,7 +1,9 @@
 import { http } from "@architect/functions";
 import { buildUrl } from "@architect/shared/utils";
 
-import type { ApiRequest } from "@typings/index";
+/**
+ * @typedef {import("@typings/index").ApiRequest} ApiRequest
+ */
 
 const scopes = [
   "playlist-read-private",
@@ -22,7 +24,8 @@ const loginURL = buildUrl({
   },
 });
 
-const login: ApiRequest = async (req) => {
+/** @type {ApiRequest} */
+const login = async (req) => {
   const { user } = req.session;
 
   return {

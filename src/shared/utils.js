@@ -1,39 +1,42 @@
-import type { ApiPageRequest, ApiRequest, ApiRequestHeaders } from "@typings/index";
-import type { ArcRequest } from "@typings/arc";
-
 export const API_URL = "https://api.spotify.com/v1";
 
-interface BuildUrlProps {
-  rootUrl?: string;
-  endpoint: string;
-  params: Record<string, unknown>;
-}
-export function buildUrl({ rootUrl = API_URL, endpoint, params }: BuildUrlProps) {
+/**
+ * @param {{
+ *   rootUrl?: string;
+ *   endpoint: string;
+ *   params: Record<string, string>;
+ * }} params
+ */
+export function buildUrl({ rootUrl = API_URL, endpoint, params }) {
   const builtURL = new URL(`${rootUrl}${endpoint}`);
   for (const [key, val] of Object.entries(params)) {
-    builtURL.searchParams.set(key, val as string);
+    builtURL.searchParams.set(key, val);
   }
 
   return builtURL;
 }
 
-function makePayload(statusCode: number, body: unknown) {
+/**
+ * @param {number} statusCode
+ * @param {unknown} body
+ */
+function makePayload(statusCode, body) {
   return {
-    headers: {
-      "content-type": "application/json; charset=utf-8",
-    },
+    headers: { "content-type": "application/json; charset=utf-8" },
     statusCode,
     body: JSON.stringify(body),
   };
 }
 
-export const makeResponse = (apiRequest: ApiRequest | ApiPageRequest<unknown>) => async (
-  req: ArcRequest
-) => {
+/**
+ * @type { import("@typings/index").MakeResponse }
+ */
+export const makeResponse = (apiRequest) => async (req) => {
   const { accessToken } = req.session;
   if (!accessToken) return { location: "/" };
 
-  const headers: ApiRequestHeaders = {
+  /** @type {ApiRequestHeaders} */
+  const headers = {
     "Content-Type": "application/json",
     Authorization: `Bearer ${accessToken}`,
   };

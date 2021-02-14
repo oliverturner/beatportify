@@ -9,7 +9,7 @@ export interface LoginData {
 export type Album = Pick<
   Spotify.SimplifiedAlbum,
   "id" | "album_type" | "artists" | "images" | "name" | "uri"
->
+>;
 
 export type Artist = Pick<Spotify.Artist, "name" | "id">;
 
@@ -39,3 +39,10 @@ export interface PlaylistPage extends Spotify.PagingObject<Track> {
 }
 
 export type AudioRequestFactory = (headers: ArcHeaders) => TrackAudioFetch;
+
+export type APIResponseArtists = {
+  artist: Artist;
+  topTracks: Track[];
+  albums: { items: Album[] };
+  relatedArtists: { artists: Artist[] };
+};

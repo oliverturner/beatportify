@@ -1,6 +1,8 @@
 import { get, post } from "tiny-json-http";
 
-import type { SpotifySession } from "@typings/arc";
+/**
+ * @typedef {import("@typings/arc").SpotifySession} SpotifySession
+ */
 
 const { SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, SPOTIFY_REDIRECT } = process.env;
 const clientTokenRaw = `${SPOTIFY_CLIENT_ID}:${SPOTIFY_CLIENT_SECRET}`;
@@ -11,7 +13,11 @@ const headers = {
   Authorization: `Basic ${clientToken}`,
 };
 
-export async function init(code: string): Promise<SpotifySession | { error: string }> {
+/**
+ * @param {string} code
+ * @returns {Promise<SpotifySession | { error: string }>}
+ */
+export async function init(code) {
   try {
     const tokenResult = await post({
       url,
@@ -47,7 +53,11 @@ export async function init(code: string): Promise<SpotifySession | { error: stri
   }
 }
 
-export async function refresh(refresh_token: string): Promise<string | { error: string }> {
+/**
+ * @param {string} refresh_token
+ * @returns {Promise<string | { error: string }>}
+ */
+export async function refresh(refresh_token) {
   try {
     const tokenResult = await post({
       url,

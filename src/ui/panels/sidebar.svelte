@@ -1,4 +1,4 @@
-<script lang="ts">
+<script>
   import { tick } from "svelte";
   import { fade } from "svelte/transition";
   import { link } from "svelte-routing";
@@ -8,18 +8,24 @@
   import { menuOpen } from "stores/ui";
   import Pagelinks from "../components/pagelinks.svelte";
 
-  import type { Playlist } from "@typings/spotify";
-
   const limit = 50;
-  const makeLink = (offset: number) => `/api/playlists?offset=${offset * limit}&limit=${limit}`;
 
-  let page = getDefaultPage<Playlist>({ limit });
+  /**
+   * @param {number} offset
+   */
+  const makeLink = (offset) => `/api/playlists?offset=${offset * limit}&limit=${limit}`;
+
+  /** @type {import("@typings/spotify").Playlist } */
+  let page = getDefaultPage({ limit });
 
   function hideMenu() {
     menuOpen.set(false);
   }
 
-  async function loadPage(offset: number) {
+  /**
+   * @param {number} offset
+   */
+  async function loadPage(offset) {
     playlists.set([]);
     await tick();
 

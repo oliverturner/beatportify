@@ -3,11 +3,6 @@ import { get } from "tiny-json-http";
 import { processTrack } from "./data";
 import { buildUrl } from "./utils";
 
-import type { ArcHeaders } from "@typings/arc";
-import type * as Portify from "@typings/app";
-import type * as Spotify from "@typings/spotify";
-import type { AudioRequestFactory } from "@typings/app";
-
 // Camelot keys indexed by mode -> pitch class
 // https://maustsontoast.com/2020/pitch-class-tonal-counterparts-and-camelot-key-equivalents
 const PITCHES = [
@@ -36,8 +31,11 @@ const TONES = [
  * liveness: 0.0744
  * loudness: -7.095
  * speechiness: 0.0638
+ *
+ * @param {import("@typings/spotify").AudioFeatures} audioFeatures
+ * @returns
  */
-export function processAudio(audioFeatures: Spotify.AudioFeatures) {
+export function processAudio(audioFeatures) {
   const { key, mode, tempo, analysis_url: analysisUrl } = audioFeatures;
   const pitch = PITCHES[mode][key];
   const tone = TONES[mode][key];
@@ -48,16 +46,22 @@ export function processAudio(audioFeatures: Spotify.AudioFeatures) {
 
 /**
  * Return a method for fetching an array of AudioFeature instances
+ * @type {import("@typings/app").AudioRequestFactory}
  */
-export const makeAudioRequest: AudioRequestFactory = (headers) => (trackIds) => {
+export const makeAudioRequest = (headers) => (trackIds) => {
   const url = buildUrl({ endpoint: `/audio-features`, params: { ids: trackIds.join(",") } });
 
   return get({ url, headers });
 };
 
-export async function getTracksAudio(tracks: Spotify.Track[], headers: ArcHeaders) {
+/**
+ * @param {import("../typings/spotify").Track[]} tracks
+ * @param {import("@typings/arc").ArcHeaders} headers
+ * @returns {Promise<Record<string, Portify.Track>>}
+ */
+export async function getTracksAudio(tracks, headers) {
   const getAudioFeatures = makeAudioRequest(headers);
-  const tracksMap: Record<string, Portify.Track> = {};
+  const tracksMap = {};
   for (const track of tracks) {
     if (track.is_playable === false) continue;
     tracksMap[track.id] = processTrack(track);

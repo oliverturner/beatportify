@@ -4,38 +4,33 @@ import { get } from "tiny-json-http";
 import { API_URL, buildUrl, makeResponse } from "@architect/shared/utils";
 import { getTracksAudio } from "@architect/shared/audio";
 
-import type { ApiRequest } from "@typings/index";
-import type { ArcHeaders } from "@typings/arc";
-import type { PagingObject, Artist, Album, Track } from "@typings/spotify";
+/**
+ * @typedef {import("@typings/index").ApiRequest} ApiRequest
+ * @typedef {import("@typings/arc").ArcHeaders} ArcHeaders
+ * @typedef {import("@typings/app").Album} Album
+ * @typedef {import("@typings/app").Artist} Artist
+ * @typedef {import("@typings/app").Track} Track
+ * @typedef {import("@typings/spotify").PagingKeysAlbum} PagingKeysAlbum
+ */
 
-interface PagingKeys {
-  limit: string | number;
-  offset: string | number;
-}
-
-interface PagingKeysAlbum extends PagingKeys {
-  // include_groups: "album" | "single" | "appears_on" | "compilation"
-  include_groups: string;
-  market: string;
-}
-
-interface Res<T> {
-  body: T;
-}
-
-type ArtistRes = Res<Artist>;
-type AlbumRes = Res<PagingObject<Album>>;
-type TopTracksRes = Res<{ tracks: Track[] }>;
-type RelatedArtistRes = Res<{ artists: Artist[] }>;
-
-function getArtist(artistId: string, headers: ArcHeaders): Promise<ArtistRes> {
+/**
+ * @param {string} artistId
+ * @param {ArcHeaders} headers
+ * @returns {Promise<{body:Artist}>}
+ */
+function getArtist(artistId, headers) {
   return get({
     url: `${API_URL}/artists/${artistId}`,
     headers,
   });
 }
 
-function getTopTracks(artistId: string, headers: ArcHeaders): Promise<TopTracksRes> {
+/**
+ * @param {string} artistId
+ * @param {ArcHeaders} headers
+ * @returns {Promise<{body:Track[]}>}
+ */
+function getTopTracks(artistId, headers) {
   const url = buildUrl({
     endpoint: `/artists/${artistId}/top-tracks`,
     params: { market: "from_token" },
@@ -44,11 +39,13 @@ function getTopTracks(artistId: string, headers: ArcHeaders): Promise<TopTracksR
   return get({ url, headers });
 }
 
-function getAlbums(
-  artistId: string,
-  headers: ArcHeaders,
-  params: Partial<PagingKeysAlbum> = {}
-): Promise<AlbumRes> {
+/**
+ * @param {string} artistId
+ * @param {ArcHeaders} headers
+ * @param {PagingKeysAlbum} params
+ * @returns {Promise<{body:Album[]}>}
+ */
+function getAlbums(artistId, headers, params = {}) {
   const url = buildUrl({
     endpoint: `/artists/${artistId}/albums`,
     params: { ...params, market: "from_token" },
@@ -57,14 +54,20 @@ function getAlbums(
   return get({ url, headers });
 }
 
-function getRelatedArtists(artistId: string, headers: ArcHeaders): Promise<RelatedArtistRes> {
+/**
+ * @param {string} artistId
+ * @param {ArcHeaders} headers
+ * @returns {Promise<{body:Artist[]}>}
+ */
+function getRelatedArtists(artistId, headers) {
   return get({
     url: `${API_URL}/artists/${artistId}/related-artists`,
     headers,
   });
 }
 
-const getArtistData: ApiRequest = async (req, headers) => {
+/** @type {ApiRequest} */
+const getArtistData = async (req, headers) => {
   const artistId = req.params.artistId;
 
   const requestMap = {
@@ -78,7 +81,7 @@ const getArtistData: ApiRequest = async (req, headers) => {
     Object.values(requestMap).map((fn) => fn(artistId, headers))
   );
 
-  const data: Record<string, unknown> = {};
+  const data = {};
   let index = 0;
   for (const key of Object.keys(requestMap)) {
     const res = responses[index++];
@@ -89,7 +92,7 @@ const getArtistData: ApiRequest = async (req, headers) => {
     }
 
     if (key === "topTracks") {
-      const { tracks: topTracks } = (res.value as TopTracksRes).body;
+      const { tracks: topTracks } = res.value.body;
       data[key] = await getTracksAudio(topTracks, headers);
       continue;
     }

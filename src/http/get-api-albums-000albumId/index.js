@@ -4,29 +4,22 @@ import { get } from "tiny-json-http";
 import { buildUrl, makeResponse } from "@architect/shared/utils";
 import { getTracksAudio } from "@architect/shared/audio";
 
-import type { ApiRequest } from "@typings/index";
-import type { Album, Track } from "@typings/spotify";
+/**
+ * @typedef {import("@typings/index").ApiRequest} ApiRequest
+ */
 
-const getAlbumData: ApiRequest = async (req, headers) => {
+/** @type {ApiRequest} */
+const getAlbumData = async (req, headers) => {
   const albumId = req.params.albumId;
   const market = req.session.user.country;
 
   const url = buildUrl({ endpoint: `/albums/${albumId}`, params: { market } });
-  const album: Album = (await get({ url, headers })).body;
-  const {
-    id,
-    artists,
-    images,
-    label,
-    name,
-    tracks: tracksRaw,
-    external_ids,
-    release_date,
-  } = album;
+  const album = (await get({ url, headers })).body;
+  const { id, artists, images, label, name, tracks: tracksRaw, external_ids, release_date } = album;
 
   // TODO: Relax `processTrack` requirements: Pick<{...required}>
   // TODO: Use CSS counter to display track numbers against names?
-  const albumTracks: any[] = [];
+  const albumTracks = [];
   for (const track of tracksRaw.items) {
     const albumTrack = {
       ...track,

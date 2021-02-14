@@ -12,3 +12,13 @@ export type ApiPageRequest<T> = (
   req: ArcRequest,
   headers: ArcHeaders
 ) => Promise<PagingObject<T> | { debug: res }>;
+
+export type MakeResponse = (
+  apiRequest: ApiRequest | ApiPageRequest<T>
+) => (
+  req: ArcRequest
+) => Promise<{
+  headers: { "content-type": string };
+  statusCode: number;
+  body: string;
+}>;

@@ -376,6 +376,14 @@ export interface PagingObject<T> {
   total: number;
 }
 
+type PagingKeys = Pick<PagingObject<T>, "limit" | "offset">;
+
+export type PagingKeysAlbum = Partial<PagingKeys & {
+  // include_groups: "album" | "single" | "appears_on" | "compilation"
+  include_groups: string;
+  market: string;
+}>
+
 export type TopTimeRange = "long_term" | "medium_term" | "short_term";
 
 export type getDefaultPage<T> = ({ limit = 0 }) => PagingObject<T>;

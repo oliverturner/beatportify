@@ -3,9 +3,12 @@ import { get } from "tiny-json-http";
 
 import { buildUrl, makeResponse } from "@architect/shared/utils";
 
-import type { ApiRequest } from "@typings/index";
+/**
+ * @typedef {import("@typings/index").ApiRequest} ApiRequest
+ */
 
-const getTrack: ApiRequest = async (req, headers) => {
+/** @type {ApiRequest} */
+const getTrack = async (req, headers) => {
   const trackId = req.params.trackId;
   const market = req.session.user.country;
 

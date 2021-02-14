@@ -1,9 +1,3 @@
-interface Props {
-  options?: Partial<typeof defaultOpts>;
-  targets?: HTMLElement[] | NodeListOf<HTMLImageElement>;
-  onIntersect?: (el: Element) => void;
-}
-
 const defaultOpts = {
   once: true,
   margin: {
@@ -14,21 +8,37 @@ const defaultOpts = {
   },
 };
 
-function onDefaultIntersect(el: Element) {
-  const { srcset, src } = (el as HTMLImageElement).dataset;
+/**
+ * @param {Element} el
+ */
+function onDefaultIntersect(el) {
+  const { srcset, src } = /** @type {HTMLImageElement} */ (el).dataset;
 
-  if (srcset) {
+  if (srcset && src) {
     el.setAttribute("srcset", srcset);
     el.setAttribute("src", src);
   }
 }
 
-export function intersectionObserver(
-  root: HTMLElement,
-  { options, targets, onIntersect }: Props = {}
-) {
-  let observer: IntersectionObserver;
-  let rootMargin: string;
+/**
+ *
+ * @param {HTMLElement} root
+ * @param {{
+ *  options?: Partial<typeof defaultOpts>;
+ *  targets?: HTMLElement[] | NodeListOf<HTMLImageElement>;
+ *  onIntersect?: (el: Element) => void;
+ * }} param1
+ * @returns
+ */
+export function intersectionObserver(root, { options, targets, onIntersect } = {}) {
+  /** @type {IntersectionObserver|undefined} */
+  let observer;
+
+  /** @type {string} */
+  let rootMargin;
+
+  /** @type {(el: Element) => void} */
+  let onIntersectCb = onIntersect || onDefaultIntersect;
 
   // IntersectionObserver is supported
   if (typeof IntersectionObserver !== "undefined") {
@@ -36,16 +46,15 @@ export function intersectionObserver(
 
     rootMargin = `${margin.top}px ${margin.right}px ${margin.bottom}px ${margin.left}px`;
     targets = targets || root.querySelectorAll("img");
-    onIntersect = onIntersect || onDefaultIntersect;
 
     observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
           if (entry.isIntersecting) {
-            onIntersect(entry.target);
+            onIntersectCb(entry.target);
 
             if (once) {
-              observer.unobserve(entry.target);
+              observer && observer.unobserve(entry.target);
             }
           }
         }

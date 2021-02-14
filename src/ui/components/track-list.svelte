@@ -1,17 +1,21 @@
-<script lang="ts">
+<script>
   import { fade } from "svelte/transition";
 
   import { intersectionObserver } from "../actions/intersection-observer";
   import TrackItem from "./track-item.svelte";
   import Loader from "./loader.svelte";
 
-  import type { Track } from "@typings/app";
+  /** @typedef {import("@typings/app").Track} Track */
 
-  export let tracks: Track[] = [];
-  export let compact: boolean = false;
+  /** @type {Track[]} */
+  export let tracks = [];
+  export let compact = false;
   export let album;
 
-  function getDate(d: string) {
+  /**
+   * @param {string} d
+   */
+  function getDate(d) {
     const options = {
       year: "numeric",
       month: "long",

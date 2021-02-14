@@ -1,15 +1,17 @@
-<script lang="ts">
+<script>
   import { onMount } from "svelte";
 
   import { contentTitle, pageTitle } from "../stores/ui";
   import TrackList from "../components/track-list.svelte";
   import Loader from "../components/loader.svelte";
 
-  import type { Track } from "@typings/app";
+  /** @type {Location} */
+  export const location = null;
 
-  export const location: Location = null;
-  let tracks: Track[];
+  /** @type {import("@typings/app").Track[]} */
+  let tracks;
 
+  // TODO: set pageTitle / contentTitle at App level
   pageTitle.set("");
   contentTitle.set("Top tracks");
 

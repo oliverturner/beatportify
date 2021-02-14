@@ -2,12 +2,16 @@ import { http } from "@architect/functions";
 
 import { init, refresh } from "./session";
 
-import type { SpotifySession } from "@typings/arc";
-import type { ApiRequest } from "@typings/index";
+/**
+ * @typedef {import("@typings/index").ApiRequest} ApiRequest
+ * @typedef {import("@typings/arc").SpotifySession} SpotifySession
+ */
 
-const auth: ApiRequest = async (req) => {
+/** @type {ApiRequest} */
+const auth = async (req) => {
   if (req.query.code) {
-    let account: SpotifySession | { error: string };
+    /** @type {SpotifySession | { error: string }} */
+    let account;
 
     try {
       account = await init(req.query.code);
@@ -25,7 +29,8 @@ const auth: ApiRequest = async (req) => {
   }
 
   if (req.query.refreshUrl) {
-    let accessToken: string | { error: string };
+    /** @type {string | { error: string }} */
+    let accessToken;
 
     try {
       accessToken = await refresh(req.session.refreshToken);

@@ -3,12 +3,15 @@ import { get } from "tiny-json-http";
 
 import { makeResponse } from "@architect/shared/utils";
 
-import type { ApiPageRequest } from "@typings/index";
-import type { Playlist } from "@typings/spotify";
-
 const legalParams = ["limit", "offset"];
 
-const getPlaylists: ApiPageRequest<Playlist> = async (req, headers) => {
+/**
+ * @typedef {import("@typings/index").ApiPageRequest} ApiPageRequest
+ * @typedef {import("@typings/spotify").Playlist} Playlist
+ */
+
+/** @type {ApiPageRequest<Playlist>} */
+const getPlaylists = async (req, headers) => {
   try {
     const url = new URL("https://api.spotify.com/v1/me/playlists");
     for (const [k, v] of Object.entries(req.query)) {

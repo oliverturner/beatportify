@@ -1,11 +1,6 @@
 const defaultOpts = {
   once: true,
-  margin: {
-    top: 0,
-    right: 0,
-    bottom: 0,
-    left: 0,
-  },
+  margin: { top: 0, right: 0, bottom: 0, left: 0 },
 };
 
 /**
@@ -27,8 +22,9 @@ function onDefaultIntersect(el) {
  *  options?: Partial<typeof defaultOpts>;
  *  targets?: HTMLElement[] | NodeListOf<HTMLImageElement>;
  *  onIntersect?: (el: Element) => void;
- * }} param1
- * @returns
+ * }} config
+ * 
+ * @returns {{destroy: () => void}}
  */
 export function intersectionObserver(root, { options, targets, onIntersect } = {}) {
   /** @type {IntersectionObserver|undefined} */
@@ -38,7 +34,7 @@ export function intersectionObserver(root, { options, targets, onIntersect } = {
   let rootMargin;
 
   /** @type {(el: Element) => void} */
-  let onIntersectCb = onIntersect || onDefaultIntersect;
+  let intersectionCallback = onIntersect || onDefaultIntersect;
 
   // IntersectionObserver is supported
   if (typeof IntersectionObserver !== "undefined") {
@@ -51,7 +47,7 @@ export function intersectionObserver(root, { options, targets, onIntersect } = {
       (entries) => {
         for (const entry of entries) {
           if (entry.isIntersecting) {
-            onIntersectCb(entry.target);
+            intersectionCallback(entry.target);
 
             if (once) {
               observer && observer.unobserve(entry.target);

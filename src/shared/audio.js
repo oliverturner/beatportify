@@ -1,3 +1,11 @@
+/**
+ * @typedef {import("@typings/spotify").Track} Track
+ * @typedef {import("@typings/spotify").AudioFeatures} AudioFeatures
+ * @typedef {import("@typings/app").AudioRequestFactory} AudioRequestFactory
+ * @typedef {import("@typings/app").Track} PortifyTrack
+ * @typedef {import("@typings/arc").ArcHeaders} ArcHeaders
+ */
+
 const { get } = require("tiny-json-http");
 
 const { processTrack } = require("./data");
@@ -12,6 +20,7 @@ const PITCHES = [
   ["8B", "3B", "10B", "5B", "12B", "7B", "2B", "9B", "4B", "11B", "6B", "1B"],
 ];
 
+// TODO: enhance notation from MixedInKey
 // Musical tones indexed by mode -> pitch class
 const TONES = [
   // minor
@@ -22,18 +31,17 @@ const TONES = [
 
 /**
  * ADDITIONAL PROPERTIES:
- * energy: 0.894
- * danceability: 0.779
- * valence: 0.234
- * time_signature: 4
- * acousticness: 0.000802
- * instrumentalness: 0.923
- * liveness: 0.0744
- * loudness: -7.095
- * speechiness: 0.0638
+ * - energy: 0.894
+ * - danceability: 0.779
+ * - valence: 0.234
+ * - time_signature: 4
+ * - acousticness: 0.000802
+ * - instrumentalness: 0.923
+ * - liveness: 0.0744
+ * - loudness: -7.095
+ * - speechiness: 0.0638
  *
- * @param {import("@typings/spotify").AudioFeatures} audioFeatures
- * @returns
+ * @param {AudioFeatures} audioFeatures
  */
 function processAudio(audioFeatures) {
   const { key, mode, tempo, analysis_url: analysisUrl } = audioFeatures;
@@ -46,7 +54,7 @@ function processAudio(audioFeatures) {
 
 /**
  * Return a method for fetching an array of AudioFeature instances
- * @type {import("@typings/app").AudioRequestFactory}
+ * @type {AudioRequestFactory}
  */
 const makeAudioRequest = (headers) => (trackIds) => {
   const url = buildUrl({ endpoint: `/audio-features`, params: { ids: trackIds.join(",") } });
@@ -55,9 +63,7 @@ const makeAudioRequest = (headers) => (trackIds) => {
 };
 
 /**
- * @param {import("../typings/spotify").Track[]} tracks
- * @param {import("@typings/arc").ArcHeaders} headers
- * @returns {Promise<Record<string, Portify.Track>>}
+ * @type {(tracks: Track[], headers: ArcHeaders) => Promise<Record<string, PortifyTrack>>}
  */
 async function getTracksAudio(tracks, headers) {
   const getAudioFeatures = makeAudioRequest(headers);
@@ -84,5 +90,5 @@ async function getTracksAudio(tracks, headers) {
 module.exports = {
   processAudio,
   makeAudioRequest,
-  getTracksAudio
-}
+  getTracksAudio,
+};

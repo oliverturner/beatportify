@@ -22,3 +22,9 @@ export type MakeResponse = (
   statusCode: number;
   body: string;
 }>;
+
+export type ArtistRequest<T> = (
+  artistId: string,
+  headers: ArcHeaders,
+  params?: Record<string, unknown>
+) => Promise<{ body: T[] }>;

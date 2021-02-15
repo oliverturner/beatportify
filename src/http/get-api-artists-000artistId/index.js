@@ -14,9 +14,7 @@ const { API_URL, buildUrl, makeResponse } = require("@architect/shared/utils");
 const { getTracksAudio } = require("@architect/shared/audio");
 
 /**
- * @param {string} artistId
- * @param {ArcHeaders} headers
- * @returns {Promise<{body:Artist}>}
+ * @type {import("@typings/index").ArtistRequest<Artist>}
  */
 function getArtist(artistId, headers) {
   return get({
@@ -26,9 +24,7 @@ function getArtist(artistId, headers) {
 }
 
 /**
- * @param {string} artistId
- * @param {ArcHeaders} headers
- * @returns {Promise<{body:Track[]}>}
+ * @type {import("@typings/index").ArtistRequest<Track>}
  */
 function getTopTracks(artistId, headers) {
   const url = buildUrl({
@@ -40,10 +36,17 @@ function getTopTracks(artistId, headers) {
 }
 
 /**
- * @param {string} artistId
- * @param {ArcHeaders} headers
- * @param {PagingKeysAlbum} params
- * @returns {Promise<{body:Album[]}>}
+ * @type {import("@typings/index").ArtistRequest<Artist>}
+ */
+function getRelatedArtists(artistId, headers) {
+  return get({
+    url: `${API_URL}/artists/${artistId}/related-artists`,
+    headers,
+  });
+}
+
+/**
+ * @type {import("@typings/index").ArtistRequest<Album>}
  */
 function getAlbums(artistId, headers, params = {}) {
   const url = buildUrl({
@@ -52,18 +55,6 @@ function getAlbums(artistId, headers, params = {}) {
   });
 
   return get({ url, headers });
-}
-
-/**
- * @param {string} artistId
- * @param {ArcHeaders} headers
- * @returns {Promise<{body:Artist[]}>}
- */
-function getRelatedArtists(artistId, headers) {
-  return get({
-    url: `${API_URL}/artists/${artistId}/related-artists`,
-    headers,
-  });
 }
 
 /** @type {ApiRequest} */
@@ -81,6 +72,7 @@ const getArtistData = async (req, headers) => {
     Object.values(requestMap).map((fn) => fn(artistId, headers))
   );
 
+  /** @type {Record<keyof requestMap, unknown>} */
   const data = {};
   let index = 0;
   for (const key of Object.keys(requestMap)) {

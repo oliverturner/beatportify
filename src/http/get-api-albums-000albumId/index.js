@@ -1,4 +1,5 @@
 /**
+ * @typedef {import("@typings/spotify").Album} Album
  * @typedef {import("@typings/index").ApiRequest} ApiRequest
  */
 
@@ -14,11 +15,12 @@ const getAlbumData = async (req, headers) => {
   const market = req.session.user.country;
 
   const url = buildUrl({ endpoint: `/albums/${albumId}`, params: { market } });
+
+  /** @type {Album} */
   const album = (await get({ url, headers })).body;
   const { id, artists, images, label, name, tracks: tracksRaw, external_ids, release_date } = album;
 
   // TODO: Relax `processTrack` requirements: Pick<{...required}>
-  // TODO: Use CSS counter to display track numbers against names?
   const albumTracks = [];
   for (const track of tracksRaw.items) {
     const albumTrack = {

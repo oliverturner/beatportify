@@ -1,12 +1,15 @@
-import { get } from "tiny-json-http";
+/**
+ * @typedef {import("@typings/spotify").Track} Track
+ * @typedef {import("@typings/spotify").AudioFeatures} AudioFeatures
+ * @typedef {import("@typings/app").AudioRequestFactory} AudioRequestFactory
+ * @typedef {import("@typings/app").Track} PortifyTrack
+ * @typedef {import("@typings/arc").ArcHeaders} ArcHeaders
+ */
 
-import { processTrack } from "./data";
-import { buildUrl } from "./utils";
+const { get } = require("tiny-json-http");
 
-import type { ArcHeaders } from "@typings/arc";
-import type * as Portify from "@typings/app";
-import type * as Spotify from "@typings/spotify";
-import type { AudioRequestFactory } from "@typings/app";
+const { processTrack } = require("./data");
+const { buildUrl } = require("./utils");
 
 // Camelot keys indexed by mode -> pitch class
 // https://maustsontoast.com/2020/pitch-class-tonal-counterparts-and-camelot-key-equivalents
@@ -17,6 +20,7 @@ const PITCHES = [
   ["8B", "3B", "10B", "5B", "12B", "7B", "2B", "9B", "4B", "11B", "6B", "1B"],
 ];
 
+// TODO: enhance notation from MixedInKey
 // Musical tones indexed by mode -> pitch class
 const TONES = [
   // minor
@@ -27,17 +31,19 @@ const TONES = [
 
 /**
  * ADDITIONAL PROPERTIES:
- * energy: 0.894
- * danceability: 0.779
- * valence: 0.234
- * time_signature: 4
- * acousticness: 0.000802
- * instrumentalness: 0.923
- * liveness: 0.0744
- * loudness: -7.095
- * speechiness: 0.0638
+ * - energy: 0.894
+ * - danceability: 0.779
+ * - valence: 0.234
+ * - time_signature: 4
+ * - acousticness: 0.000802
+ * - instrumentalness: 0.923
+ * - liveness: 0.0744
+ * - loudness: -7.095
+ * - speechiness: 0.0638
+ *
+ * @param {AudioFeatures} audioFeatures
  */
-export function processAudio(audioFeatures: Spotify.AudioFeatures) {
+function processAudio(audioFeatures) {
   const { key, mode, tempo, analysis_url: analysisUrl } = audioFeatures;
   const pitch = PITCHES[mode][key];
   const tone = TONES[mode][key];
@@ -48,16 +54,20 @@ export function processAudio(audioFeatures: Spotify.AudioFeatures) {
 
 /**
  * Return a method for fetching an array of AudioFeature instances
+ * @type {AudioRequestFactory}
  */
-export const makeAudioRequest: AudioRequestFactory = (headers) => (trackIds) => {
+const makeAudioRequest = (headers) => (trackIds) => {
   const url = buildUrl({ endpoint: `/audio-features`, params: { ids: trackIds.join(",") } });
 
   return get({ url, headers });
 };
 
-export async function getTracksAudio(tracks: Spotify.Track[], headers: ArcHeaders) {
+/**
+ * @type {(tracks: Track[], headers: ArcHeaders) => Promise<Record<string, PortifyTrack>>}
+ */
+async function getTracksAudio(tracks, headers) {
   const getAudioFeatures = makeAudioRequest(headers);
-  const tracksMap: Record<string, Portify.Track> = {};
+  const tracksMap = {};
   for (const track of tracks) {
     if (track.is_playable === false) continue;
     tracksMap[track.id] = processTrack(track);
@@ -76,3 +86,9 @@ export async function getTracksAudio(tracks: Spotify.Track[], headers: ArcHeader
 
   return Object.values(tracksMap);
 }
+
+module.exports = {
+  processAudio,
+  makeAudioRequest,
+  getTracksAudio,
+};

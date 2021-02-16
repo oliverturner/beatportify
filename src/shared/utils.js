@@ -1,39 +1,41 @@
-import type { ApiPageRequest, ApiRequest, ApiRequestHeaders } from "@typings/index";
-import type { ArcRequest } from "@typings/arc";
+const API_URL = "https://api.spotify.com/v1";
 
-export const API_URL = "https://api.spotify.com/v1";
-
-interface BuildUrlProps {
-  rootUrl?: string;
-  endpoint: string;
-  params: Record<string, unknown>;
-}
-export function buildUrl({ rootUrl = API_URL, endpoint, params }: BuildUrlProps) {
+/**
+ * @param {{
+ *   rootUrl?: string;
+ *   endpoint: string;
+ *   params: Record<string, string>;
+ * }} params
+ */
+function buildUrl({ rootUrl = API_URL, endpoint, params }) {
   const builtURL = new URL(`${rootUrl}${endpoint}`);
   for (const [key, val] of Object.entries(params)) {
-    builtURL.searchParams.set(key, val as string);
+    builtURL.searchParams.set(key, val);
   }
 
   return builtURL;
 }
 
-function makePayload(statusCode: number, body: unknown) {
+/**
+ * @param {number} statusCode
+ * @param {unknown} body
+ */
+function makePayload(statusCode, body) {
   return {
-    headers: {
-      "content-type": "application/json; charset=utf-8",
-    },
+    headers: { "content-type": "application/json; charset=utf-8" },
     statusCode,
     body: JSON.stringify(body),
   };
 }
 
-export const makeResponse = (apiRequest: ApiRequest | ApiPageRequest<unknown>) => async (
-  req: ArcRequest
-) => {
+/**
+ * @type { import("@typings/index").MakeResponse }
+ */
+const makeResponse = (apiRequest) => async (req) => {
   const { accessToken } = req.session;
   if (!accessToken) return { location: "/" };
 
-  const headers: ApiRequestHeaders = {
+  const headers = {
     "Content-Type": "application/json",
     Authorization: `Bearer ${accessToken}`,
   };
@@ -42,12 +44,12 @@ export const makeResponse = (apiRequest: ApiRequest | ApiPageRequest<unknown>) =
     const result = await apiRequest(req, headers);
     return makePayload(200, result);
   } catch (error) {
-    console.log("makeResponse", error);
-
     // accessToken expired: use refreshToken to generate a new one
     // TODO await a request to `req.requestContext.http.path`, store session object, redirect to refreshUrl?
     if (error.statusCode === 401) {
       const refreshUrl = req.requestContext.http.path;
+      console.log("unauthorised: refresh", { refreshUrl });
+
       return {
         location: `/auth?refreshUrl=${refreshUrl}`,
       };
@@ -55,4 +57,10 @@ export const makeResponse = (apiRequest: ApiRequest | ApiPageRequest<unknown>) =
 
     return makePayload(error.statusCode, { message: error.message });
   }
+};
+
+module.exports = {
+  API_URL,
+  buildUrl,
+  makeResponse,
 };

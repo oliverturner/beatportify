@@ -1,31 +1,46 @@
-<script lang="ts">
+<script>
   import { link } from "svelte-routing";
   import { toast } from "@zerodevx/svelte-toast";
 
   import { getSrcSet } from "../utils";
 
-  import type * as Spotify from "@typings/spotify";
-  import type { Track } from "@typings/app";
+  /**
+   * @typedef {import("@typings/app").Track} Track
+   * @typedef {import("@typings/spotify").Artist} Artist
+   */
 
-  export let item: Track;
-  export let index: number;
-  export let compact: boolean = false;
+  export let item;
 
-  let artists: string;
-  let searchTerm: string;
-  let purchaseLinks: Record<string, string>;
+  /** @type {number} */
+  export let index;
+  export let compact = false;
 
-  function getArtists(artists: Spotify.Artist[] = []) {
+  /** @type {string} */
+  let artists;
+  /** @type {string} */
+  let searchTerm;
+  /** @type {Record<string, string>} */
+  let purchaseLinks;
+
+  /**
+   * @param {Artist[]} artists
+   */
+  function getArtists(artists = []) {
     return artists.map((a) => a.name);
   }
 
-  async function onTrackClick(event: Event) {
+  /**
+   * @param {Event} event
+   */
+  async function onTrackClick(event) {
     event.stopPropagation();
     event.preventDefault();
 
     try {
-      const anchor = (event.target as Element).closest("a");
-      const url = (anchor as HTMLAnchorElement).href;
+      /** @type {Element} */
+      const target = event.target;
+      const anchor = target.closest("a");
+      const url = anchor.href;
       const res = await (await fetch(url)).json();
 
       if (res.error) {
@@ -43,8 +58,13 @@
     }
   }
 
-  function onImageLoad(event: Event) {
-    (event.target as HTMLImageElement).classList.add("loaded");
+  /**
+   * @param {Event} event
+   */
+  function onImageLoad(event) {
+    /** @type {Element} */
+    const target = event.target;
+    target.classList.add("loaded");
   }
 
   if (item) {
@@ -99,8 +119,7 @@
     <div class="item__audio">
       <p class="item__audio__pitch">Key: {item.audio.pitch}</p>
       <p class="item__audio__bpm">BPM: {item.audio.bpm}</p>
-      <!-- display in info popover? -->
-      <!-- <p><a href={item.audio.analysisUrl}>Analysis</a></p> -->
+
     </div>
     <aside class="item__purchases">
       <a
@@ -122,6 +141,11 @@
   </article>
 {/if}
 
+<!-- 
+// TODO: create use:containerQuery action: 
+// https://philipwalton.com/articles/responsive-components-a-solution-to-the-container-queries-problem/
+// https://css-tricks.com/the-raven-technique-one-step-closer-to-container-queries/
+-->
 <style lang="scss">
   .item {
     --icon-wh: 32px;

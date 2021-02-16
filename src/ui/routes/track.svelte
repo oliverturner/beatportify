@@ -1,11 +1,16 @@
-<script lang="ts">
+<script>
   import { pageTitle, contentTitle } from "../stores/ui";
 
-  export let id: string;
+  /** @type {string} */
+  export let id;
 
+  // TODO: set pageTitle / contentTitle at App level
   pageTitle.set(`Track`);
 
-  async function loadTrack(trackId: string) {
+  /**
+   * @param {string} trackId
+   */
+  async function loadTrack(trackId) {
     const response = await (await fetch(`/api/tracks/${trackId}`)).json();
     contentTitle.set(response.name);
   }

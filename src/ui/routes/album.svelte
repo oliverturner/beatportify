@@ -1,19 +1,26 @@
-<script lang="ts">
+<script>
   import { pageTitle, contentTitle } from "../stores/ui";
   import TrackList from "../components/track-list.svelte";
   import Loader from "../components/loader.svelte";
 
-  import type { Track, Album } from "@typings/app";
+  /** @typedef {import("@typings/app").Track} Track */
 
-  export let id: string;
+  /** @type {string} */
+  export let id;
 
+  // TODO: set pageTitle at App level
   pageTitle.set(`Album`);
 
-  // TODO: fix `Album` type
+  // TODO: make `Album` type more consistent with Spotify type
   let album;
-  let tracks: Track[];
 
-  async function loadAlbum(albumId: string) {
+  /** @type {Track[]} */
+  let tracks;
+
+  /**
+   * @param {string} albumId
+   */
+  async function loadAlbum(albumId) {
     album = await (await fetch(`/api/albums/${albumId}`)).json();
     contentTitle.set(album.name);
     tracks = album.tracks;

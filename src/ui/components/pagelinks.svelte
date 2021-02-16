@@ -1,9 +1,12 @@
-<script lang="ts">
-  import type { PagingObject } from "@typings/spotify";
+<script>
+  /** @type {(_offset: number) => string} */
+  export let makeLink = (_offset) => "";
 
-  export let makeLink = (_offset: number) => "";
-  export let loadPage = (_offset: number) => {};
-  export let page: PagingObject<unknown>;
+  /** @type {(_offset: number) => Record<string, unknown>} */
+  export let loadPage = (_offset) => {};
+
+  /** @type {import("@typings/spotify").PagingObject<unknown>} */
+  export let page;
 
   $: pageNum = Math.ceil(page.total / page.limit);
   $: pageCurrent = Math.floor(page.offset / page.limit);

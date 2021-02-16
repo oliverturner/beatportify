@@ -1,6 +1,6 @@
-<script lang="ts">
+<script>
   import { onMount } from "svelte";
-  import { Router, Link, Route } from "svelte-routing";
+  import { Router, Route } from "svelte-routing";
   import { SvelteToast } from "@zerodevx/svelte-toast";
 
   import Nav from "./panels/nav.svelte";
@@ -13,9 +13,12 @@
   import Album from "./routes/album.svelte";
   import Playlist from "./routes/playlist.svelte";
 
-  import type { LoginData } from "@typings/app";
+  /**
+   * @typedef {import("@typings/app").LoginData} LoginData
+   */
 
-  export let data: LoginData = {};
+  /** @type {LoginData} */
+  export let data = {};
 
   let toastOpts = {
     intro: { y: 50 },

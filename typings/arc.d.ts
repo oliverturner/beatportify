@@ -1,9 +1,12 @@
-interface ArcHeaders {}
-
 export interface SpotifySession {
   accessToken: string;
   refreshToken: string;
   user: SpotifyApi.UserObjectPrivate;
+}
+
+interface ArcHeaders {
+  "Content-Type": "application/json";
+  Authorization: string;
 }
 
 export interface ArcRequest extends APIGatewayProxyEventV2 {

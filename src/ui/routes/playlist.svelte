@@ -1,4 +1,4 @@
-<script lang="ts">
+<script>
   import { tick } from "svelte";
 
   import { pageTitle, contentTitle } from "../stores/ui";
@@ -7,41 +7,62 @@
   import Pagelinks from "../components/pagelinks.svelte";
   import Loader from "../components/loader.svelte";
 
-  import type { PlaylistPage, Album } from "@typings/app";
-
-  export let id: string;
-  export const location: Location = null;
+  /** @type {string} */
+  export let id;
+  /** @type {Location} */
+  export const location = null;
 
   const TRACK_LIMIT = 24;
+
+  // TODO: set pageTitle at App level
   pageTitle.set("Playlist");
 
-  let page: PlaylistPage;
+  /** @type {import("@typings/app").PlaylistPage} */
+  let page;
+  /** @type {import("@typings/app").Album} */
+  let album;
   let compact = false;
-  let album: Album;
 
   function reset() {
     tracks.set([]);
     compact = false;
     album = undefined;
+
     return tick();
   }
 
-  function makeLink(offset: number) {
+  /**
+   * @param {number} offset
+   */
+  function makeLink(offset) {
     return `/api/playlists/${id}?offset=${offset * TRACK_LIMIT}&limit=${TRACK_LIMIT}`;
   }
 
-  async function loadPage(offset: number) {
+  /**
+   * @param {number} offset
+   */
+  async function loadPage(offset) {
     await reset();
 
-    page = await (await fetch(makeLink(offset))).json();
-    if (page.isCollection) {
-      compact = true;
-      album = page.items[0].album;
+    try {
+      const link = makeLink(offset);
+      const res = await fetch(link);
+      console.log({ link });
+      page = await res.json();
+      if (page.isCollection) {
+        compact = true;
+        album = page.items[0].album;
+      }
+      tracks.set(page.items);
+    } catch (error) {
+      console.log({ error });
     }
-    tracks.set(page.items);
   }
 
-  async function loadTracks(playlistId: string) {
+  /**
+   * @param {string} playlistId
+   */
+  async function loadTracks(playlistId) {
     if (!playlistId) return;
 
     await reset();

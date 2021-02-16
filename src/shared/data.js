@@ -1,7 +1,8 @@
-import type * as Portify from "@typings/app";
-import type * as SpotifyApi from "@typings/spotify";
-
-export function processAlbum(itemAlbum: SpotifyApi.SimplifiedAlbum): Portify.Album {
+/**
+ * @param {import("@typings/spotify").SimplifiedAlbum} itemAlbum
+ * @returns {import("@typings/app").Album}
+ */
+function processAlbum(itemAlbum) {
   const { album_type, artists, id, images, name, uri } = itemAlbum;
 
   return {
@@ -14,7 +15,11 @@ export function processAlbum(itemAlbum: SpotifyApi.SimplifiedAlbum): Portify.Alb
   };
 }
 
-export function processTrack(item: SpotifyApi.Track): Portify.Track {
+/**
+ * @param {import("@typings/spotify").Track} item
+ * @returns {import("@typings/app").Track}
+ */
+function processTrack(item) {
   const { id, album, artists, duration_ms, is_playable, name, uri } = item;
 
   return {
@@ -28,3 +33,8 @@ export function processTrack(item: SpotifyApi.Track): Portify.Track {
     uri,
   };
 }
+
+module.exports = {
+  processAlbum,
+  processTrack,
+};

@@ -1,11 +1,11 @@
-<script lang="ts">
+<script>
   import { links } from "svelte-routing";
 
   import { pageTitle, contentTitle, menuOpen } from "../stores/ui";
 
   export let user;
 
-  const routes = [];
+  // const routes = [];
 
   function toggleMenu() {
     menuOpen.set(!$menuOpen);

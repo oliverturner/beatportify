@@ -1,9 +1,6 @@
 @app
 portify
 
-@create
-autocreate true
-
 @static
 
 @http

@@ -56,7 +56,6 @@
     "lint": "eslint src --fix",
     "start": "cross-env NODE_ENV=testing ARC_LOCAL=1 npx sandbox",
     "test:arc": "cross-env NODE_ENV=testing PORT=6666 tape test/*-test.js ./test/**/*-test.js | tap-spec",
-    "test:types": "tsc --noEmit",
     "test": "run-s test:*",
     "deploy:build": "npm run build",
     "deploy:arc": "npx arc deploy",

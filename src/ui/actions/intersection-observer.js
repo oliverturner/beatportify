@@ -1,10 +1,13 @@
+const defaultMargin = { top: 0, right: 0, bottom: 0, left: 0 };
+
 const defaultOpts = {
   once: true,
-  margin: { top: 0, right: 0, bottom: 0, left: 0 },
+  margin: defaultMargin,
 };
 
 /**
- * @param {Element} el
+ * Provide a default callback: lazy load images
+ * @type {(el: Element) => void}
  */
 function onDefaultIntersect(el) {
   const { srcset, src } = /** @type {HTMLImageElement} */ (el).dataset;
@@ -15,60 +18,55 @@ function onDefaultIntersect(el) {
   }
 }
 
+/** @type {(typeof defaultMargin) => string} */
+function calcMargin({ top, right, bottom, left }) {
+  return `${top}px ${right}px ${bottom}px ${left}px`;
+}
+
 /**
- *
  * @param {HTMLElement} root
  * @param {{
  *  options?: Partial<typeof defaultOpts>;
  *  targets?: HTMLElement[] | NodeListOf<HTMLImageElement>;
  *  onIntersect?: (el: Element) => void;
  * }} config
- * 
+ *
  * @returns {{destroy: () => void}}
  */
 export function intersectionObserver(root, { options, targets, onIntersect } = {}) {
-  /** @type {IntersectionObserver|undefined} */
-  let observer;
+  let { once, margin } = { ...defaultOpts, ...options };
+  let rootMargin = calcMargin(margin);
 
-  /** @type {string} */
-  let rootMargin;
+  if (!targets) {
+    targets = root.querySelectorAll("img");
+    onIntersect = onDefaultIntersect;
+  }
 
-  /** @type {(el: Element) => void} */
-  let intersectionCallback = onIntersect || onDefaultIntersect;
+  let observer = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          onIntersect(entry.target);
 
-  // IntersectionObserver is supported
-  if (typeof IntersectionObserver !== "undefined") {
-    let { once, margin } = { ...defaultOpts, ...options };
-
-    rootMargin = `${margin.top}px ${margin.right}px ${margin.bottom}px ${margin.left}px`;
-    targets = targets || root.querySelectorAll("img");
-
-    observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            intersectionCallback(entry.target);
-
-            if (once) {
-              observer && observer.unobserve(entry.target);
-            }
+          if (once) {
+            observer.unobserve(entry.target);
           }
         }
-      },
-      {
-        root,
-        rootMargin,
       }
-    );
-
-    for (const target of targets) {
-      observer.observe(target);
+    },
+    {
+      root,
+      rootMargin,
     }
+  );
+
+  for (const target of targets) {
+    observer.observe(target);
   }
 
   return {
     destroy: () => {
-      observer = undefined;
+      observer && observer.disconnect();
     },
   };
 }

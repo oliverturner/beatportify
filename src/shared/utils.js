@@ -35,7 +35,6 @@ const makeResponse = (apiRequest) => async (req) => {
   const { accessToken } = req.session;
   if (!accessToken) return { location: "/" };
 
-  /** @type {ApiRequestHeaders} */
   const headers = {
     "Content-Type": "application/json",
     Authorization: `Bearer ${accessToken}`,
@@ -45,12 +44,12 @@ const makeResponse = (apiRequest) => async (req) => {
     const result = await apiRequest(req, headers);
     return makePayload(200, result);
   } catch (error) {
-    console.log("makeResponse", error);
-
     // accessToken expired: use refreshToken to generate a new one
     // TODO await a request to `req.requestContext.http.path`, store session object, redirect to refreshUrl?
     if (error.statusCode === 401) {
       const refreshUrl = req.requestContext.http.path;
+      console.log("unauthorised: refresh", { refreshUrl });
+
       return {
         location: `/auth?refreshUrl=${refreshUrl}`,
       };

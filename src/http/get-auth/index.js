@@ -34,17 +34,16 @@ const auth = async (req) => {
 
     try {
       accessToken = await refresh(req.session.refreshToken);
+      return {
+        session: { ...req.session, accessToken },
+        location: req.query.refreshUrl,
+      };
     } catch (err) {
       return {
         statusCode: err.code,
         body: err.message,
       };
     }
-
-    return {
-      session: { ...req.session, accessToken },
-      location: req.query.refreshUrl,
-    };
   }
 
   return {

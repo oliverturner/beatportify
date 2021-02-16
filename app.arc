@@ -1,9 +1,6 @@
 @app
 portify
 
-@create
-autocreate true
-
 @static
 
 @http
@@ -13,6 +10,7 @@ post /logout
 
 get /api/top
 get /api/playlists
+get /api/playlists/:playlistId
 get /api/tracks/:trackId
 get /api/albums/:albumId
 get /api/play/:trackId

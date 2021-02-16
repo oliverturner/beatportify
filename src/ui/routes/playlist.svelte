@@ -44,12 +44,19 @@
   async function loadPage(offset) {
     await reset();
 
-    page = await (await fetch(makeLink(offset))).json();
-    if (page.isCollection) {
-      compact = true;
-      album = page.items[0].album;
+    try {
+      const link = makeLink(offset);
+      const res = await fetch(link);
+      console.log({ link });
+      page = await res.json();
+      if (page.isCollection) {
+        compact = true;
+        album = page.items[0].album;
+      }
+      tracks.set(page.items);
+    } catch (error) {
+      console.log({ error });
     }
-    tracks.set(page.items);
   }
 
   /**

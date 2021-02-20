@@ -1,10 +1,10 @@
 {
   "extends": "@tsconfig/node12/tsconfig.json",
   "compilerOptions": {
-    "noImplicitAny": true,
+    "noImplicitAny": false,
     "moduleResolution": "node",
-    "lib": ["DOM", "es2019", "es2020.promise", "es2020.bigint", "es2020.string"],
-    "noEmit": true,
+    "lib": ["DOM", "DOM.Iterable", "es2019", "es2020.promise", "es2020.bigint", "es2020.string"],
+    "checkJs": true,
     "baseUrl": ".",
     "paths": {
       "@typings/*": ["typings/*"],
@@ -12,5 +12,5 @@
     }
   },
   "include": ["./typings", "./src"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "./src/main.js"]
 }

@@ -1,5 +1,5 @@
 /**
- * @typedef {import("@typings/index").ApiRequest} ApiPageRequest
+ * @typedef {import("@typings/index").ApiRequest} ApiRequest
  * @typedef {import("@typings/spotify").TopTimeRange} TopTimeRange
  */
 
@@ -16,9 +16,7 @@ const ROOT_URL = "https://api.spotify.com/v1/me/top/";
 /** @type {ApiRequest} */
 const getTop = async (req, headers) => {
   const limit = req.query.limit || LIMIT;
-
-  /** @type {TopTimeRange} */
-  const timeRange = req.query.timeRange || TIME_RANGE;
+  const timeRange = /** @type {TopTimeRange} */ (req.query.timeRange || TIME_RANGE);
 
   const url = `${ROOT_URL}tracks?time_range=${timeRange}&limit=${limit}`;
   const page = (await get({ url, headers })).body;

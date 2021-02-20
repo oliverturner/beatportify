@@ -1,3 +1,4 @@
+// @ts-nocheck
 const API_URL = "https://api.spotify.com/v1";
 
 /**
@@ -5,15 +6,22 @@ const API_URL = "https://api.spotify.com/v1";
  *   rootUrl?: string;
  *   endpoint: string;
  *   params: Record<string, string>;
+ *   asUrl?: boolean
  * }} params
+ *
+ * @returns {string | URL}
  */
-function buildUrl({ rootUrl = API_URL, endpoint, params }) {
+function buildUrl({ rootUrl = API_URL, endpoint, params, asUrl }) {
   const builtURL = new URL(`${rootUrl}${endpoint}`);
   for (const [key, val] of Object.entries(params)) {
     builtURL.searchParams.set(key, val);
   }
 
-  return builtURL;
+  if (asUrl) {
+    return builtURL;
+  }
+
+  return builtURL.toString();
 }
 
 /**

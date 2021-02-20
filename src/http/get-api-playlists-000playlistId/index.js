@@ -43,6 +43,7 @@ const getPlaylist = async (req, headers) => {
   // TODO: optimise with fewer iterations & more composition
   const page = (await getTracks({ playlistId, params, headers })).body;
   const tracks = page.items.filter(({ is_local }) => !is_local).map(({ track }) => track);
+  // @ts-ignore
   const items = await getTracksAudio(tracks, headers);
   const isCollection = testCollection(items);
 

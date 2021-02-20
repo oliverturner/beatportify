@@ -6,7 +6,7 @@ import { terser } from "rollup-plugin-terser";
 import commonjs from "@rollup/plugin-commonjs";
 import css from "rollup-plugin-css-only";
 import resolve from "@rollup/plugin-node-resolve";
-import typescript from "@rollup/plugin-typescript";
+// import typescript from "@rollup/plugin-typescript";
 import sveltePreprocess from "svelte-preprocess";
 
 const production = !process.env.ROLLUP_WATCH;
@@ -45,7 +45,7 @@ export default {
     file: "public/build/bundle.js",
   },
   plugins: [
-    typescript({ tsconfig: "src/ui/tsconfig.json" }),
+    // typescript({ tsconfig: "src/ui/tsconfig.json" }),
     svelte({
       preprocess,
       compilerOptions: {

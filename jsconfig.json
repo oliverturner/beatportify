@@ -1,7 +1,6 @@
 {
   "extends": "@tsconfig/node12/tsconfig.json",
   "compilerOptions": {
-    "noImplicitAny": false,
     "moduleResolution": "node",
     "lib": ["DOM", "DOM.Iterable", "es2019", "es2020.promise", "es2020.bigint", "es2020.string"],
     "checkJs": true,

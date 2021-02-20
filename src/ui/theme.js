@@ -20,7 +20,7 @@ const breakpoints = {
  *   xlarge: (min-width: 1200px)
  * }
  * 
- * @type {Partial<Record<BreakpointId, string>>}
+ * @type {Record<string, string>}
  */
 const mediaQueries = {};
 for (const [k, v] of Object.entries(breakpoints)) {
@@ -43,7 +43,7 @@ for (const [k, v] of Object.entries(breakpoints)) {
  *   @media (--mq-xlarge) { ... }
  * }
  * 
- * @type {Partial<Record<`--mq-${BreakpointId}`, string>>}
+ * @type {Record<string, string>}
  */
 const customMedia = {};
 for (const [k, v] of Object.entries(mediaQueries)) {

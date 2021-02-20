@@ -20,7 +20,7 @@ const playTrack = async (req, headers) => {
       },
     });
 
-    return result;
+    return { ...result };
   } catch (error) {
     // no device available for playback
     if (error.statusCode === 404) {

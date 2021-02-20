@@ -63,12 +63,15 @@ const makeAudioRequest = (headers) => (trackIds) => {
 };
 
 /**
- * @type {(tracks: Track[], headers: ArcHeaders) => Promise<Record<string, PortifyTrack>>}
+ * @type {(tracks: Track[], headers: ArcHeaders) => Promise<PortifyTrack[]>}
  */
 async function getTracksAudio(tracks, headers) {
   const getAudioFeatures = makeAudioRequest(headers);
+
+  /** @type {Record<string, PortifyTrack> } */
   const tracksMap = {};
   for (const track of tracks) {
+    // TODO: filter unplayable tracks externally
     if (track.is_playable === false) continue;
     tracksMap[track.id] = processTrack(track);
   }

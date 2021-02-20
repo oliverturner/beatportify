@@ -1,3 +1,8 @@
+/**
+ * @typedef {keyof typeof breakpoints} BreakpointId
+ * @typedef {{[k in BreakpointId]?: string}} MediaQueries
+ */
+
 const breakpoints = {
   small: 414,
   medium: 768,
@@ -14,10 +19,13 @@ const breakpoints = {
  *   large:  (min-width: 960px),
  *   xlarge: (min-width: 1200px)
  * }
+ * 
+ * @type {Partial<Record<BreakpointId, string>>}
  */
-const mediaQueries = Object.entries(breakpoints).reduce((acc, [k, v]) => {
-  return { ...acc, [k]: `(min-width: ${v}px)` };
-}, {});
+const mediaQueries = {};
+for (const [k, v] of Object.entries(breakpoints)) {
+  mediaQueries[k] = `(min-width: ${v}px)`;
+}
 
 /**
  * Produces a series of @custom-media props for use in CSS
@@ -34,8 +42,9 @@ const mediaQueries = Object.entries(breakpoints).reduce((acc, [k, v]) => {
  *   @media (--mq-large)  { ... }
  *   @media (--mq-xlarge) { ... }
  * }
+ * 
+ * @type {Partial<Record<`--mq-${BreakpointId}`, string>>}
  */
-
 const customMedia = {};
 for (const [k, v] of Object.entries(mediaQueries)) {
   customMedia[`--mq-${k}`] = v;

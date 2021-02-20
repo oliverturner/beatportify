@@ -8,8 +8,8 @@ const pageDefaults = {
 };
 
 /**
- * @param {{ limit: number }} param0
- * @returns {import("@typings/spotify").PagingObject}
+ * @param {{ limit: number }} params
+ * @returns {import("@typings/spotify").PagingObject<unknown>}
  */
 export function getDefaultPage({ limit = 0 }) {
   return { ...pageDefaults, limit };

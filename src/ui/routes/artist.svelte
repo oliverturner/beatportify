@@ -70,7 +70,7 @@
 
     <section class="section">
       <h3 class="title section__title">Appears on:</h3>
-      <div class="section__content section__content--tiles">
+      <div class="carousel">
         {#each albums as album, index (album.id)}
           <a class="tile" href="/album/{album.id}">
             <img
@@ -159,6 +159,10 @@
     &.section__content--items {
       --item-w: 250px;
     }
+  }
+
+  .carousel {
+    --carousel-item-w: 175px;
   }
 
   .tile,

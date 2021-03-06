@@ -125,7 +125,7 @@
     display: grid;
     place-content: center;
 
-    max-width: 420px;
+    max-width: 52ch;
     margin: auto;
     padding: 1.2rem;
     font-size: 1.2rem;

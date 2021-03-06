@@ -59,7 +59,7 @@
           </p>
           <LoginBtn href={data.loginURL} />
           <p>
-            Logging in shows lets the app show you the tracks in your playlists with added links to
+            Logging in lets the app show you the tracks in your playlists with added links to
             Beatport and Bandcamp.
           </p>
           <p>Your details are never recorded.</p>

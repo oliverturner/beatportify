@@ -55,7 +55,8 @@
       <main class="app__main app__main--login">
         <div class="intro" class:intro--active={data.loginURL}>
           <p>
-            <span class="title">Portify</span> makes it easy to support the artists you follow on Spotify.
+            <span class="title">Portify</span> makes it easy to buy music from the artists you follow
+            on Spotify.
           </p>
           <LoginBtn href={data.loginURL} />
           <p>
@@ -125,7 +126,7 @@
     display: grid;
     place-content: center;
 
-    max-width: 52ch;
+    max-width: 44ch;
     margin: auto;
     padding: 1.2rem;
     font-size: 1.2rem;

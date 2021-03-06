@@ -55,8 +55,7 @@
       <main class="app__main app__main--login">
         <div class="intro" class:intro--active={data.loginURL}>
           <p>
-            <span class="title">Portify</span> makes it easy to buy music from the artists you follow
-            on Spotify.
+            <span class="title">Portify</span> makes it easy to support the artists you follow on Spotify.
           </p>
           <LoginBtn href={data.loginURL} />
           <p>
@@ -68,7 +67,8 @@
           <p>
             <span class="title">Portify</span> was made by
             <a href="https://twitter.com/oliverturner">Oliver Turner</a> because I wanted to make it
-            easier to buy the music I love and support the artists I admire. As a fully
+            easier to buy the music I love and give a little back to the artists I admire. As a
+            fully
             <a href="https://github.com/oliverturner/beatportify">open source project</a> your feedback,
             suggestions, and contributions are welcome.
           </p>

@@ -7,37 +7,26 @@
   }
 </script>
 
-<a class="loginbtn" class:fadein={href.length} class:fadeout {href} on:click={remove}>
+<a class="loginbtn" {href} on:click={remove}>
   <svg class="icon icon--spotify" aria-hidden="true">
     <use xlink:href="#icon-spotify" />
   </svg>
   <svg class="icon icon--arrow" aria-hidden="true">
     <use xlink:href="#icon-arrow-up" />
   </svg>
-  <p class="cta title">Click to sign in</p>
+  <p class="cta title">click!</p>
 </a>
 
 <style lang="scss">
   .loginbtn {
-    --wh: 140px;
-
-    transition: opacity 0.5s;
-    opacity: 0;
+    --wh: 120px;
 
     display: grid;
     justify-items: center;
-    gap: 1rem;
+    gap: 0.5rem;
 
     width: var(--wh);
-
-    &.fadein {
-      transition-delay: 1s;
-      opacity: 1;
-    }
-
-    &.fadeout {
-      opacity: 0;
-    }
+    margin: 1rem auto;
   }
 
   .icon--spotify {
@@ -54,5 +43,6 @@
 
   .cta {
     text-align: center;
+    letter-spacing: 2px;
   }
 </style>

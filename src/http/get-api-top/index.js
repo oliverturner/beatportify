@@ -11,7 +11,7 @@ const { getTracksAudio } = require("@architect/shared/audio");
 
 const LIMIT = 48;
 const TIME_RANGE = "short_term";
-const ROOT_URL = "https://api.spotify.com/v1/me/top/";
+const ROOT_URL = "https://api.spotify.com/v1/me/top";
 
 /** @type {ApiRequest} */
 const getTop = async (req, headers) => {
@@ -20,7 +20,7 @@ const getTop = async (req, headers) => {
   /** @type {TopTimeRange} */
   const timeRange = req.query.timeRange || TIME_RANGE;
 
-  const url = `${ROOT_URL}tracks?time_range=${timeRange}&limit=${limit}`;
+  const url = `${ROOT_URL}/tracks?time_range=${timeRange}&limit=${limit}`;
   const page = (await get({ url, headers })).body;
   const tracks = await getTracksAudio(page.items, headers);
 

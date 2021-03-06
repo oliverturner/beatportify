@@ -53,7 +53,25 @@
       </main>
     {:else}
       <main class="app__main app__main--login">
-        <LoginBtn href={data.loginURL} />
+        <div class="intro" class:intro--active={data.loginURL}>
+          <p>
+            <span class="title">Portify</span> makes it easy to support the artists you follow on Spotify.
+          </p>
+          <LoginBtn href={data.loginURL} />
+          <p>
+            Logging in shows lets the app show you the tracks in your playlists with added links to
+            Beatport and Bandcamp.
+          </p>
+          <p>Your details are never recorded.</p>
+          <hr />
+          <p>
+            <span class="title">Portify</span> was made by
+            <a href="https://twitter.com/oliverturner">Oliver Turner</a> because I wanted to make it
+            easier to buy the music I love and support the artists I admire. As a fully
+            <a href="https://github.com/oliverturner/beatportify">open source project</a> your feedback,
+            suggestions, and contributions are welcome.
+          </p>
+        </div>
       </main>
     {/if}
   </div>
@@ -79,16 +97,16 @@
     border-top: 1px solid var(--border);
     overflow: hidden;
 
-    &.app__main--login {
-      place-content: center;
-    }
-
     &.app__main--active {
       grid-template-columns: 0 1fr;
 
       @media (--mq-medium) {
         grid-template-columns: 250px 1fr;
       }
+    }
+
+    &.app__main--login {
+      overflow-y: auto;
     }
   }
 
@@ -98,6 +116,38 @@
 
     @media (--mq-medium) {
       overflow: hidden;
+    }
+  }
+
+  .intro {
+    transition: 1s opacity 1s;
+
+    display: grid;
+    place-content: center;
+
+    max-width: 420px;
+    margin: auto;
+    padding: 1.2rem;
+    font-size: 1.2rem;
+    line-height: 1.8rem;
+    opacity: 0;
+
+    &.intro--active {
+      opacity: 1;
+    }
+
+    & p + p {
+      margin-top: 1.2rem;
+    }
+
+    & a {
+      text-decoration: underline;
+    }
+
+    & hr {
+      width: 50%;
+      margin: 1.2rem auto;
+      opacity: 0.25;
     }
   }
 </style>

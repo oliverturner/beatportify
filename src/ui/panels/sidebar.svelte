@@ -5,7 +5,7 @@
 
   import { getDefaultPage } from "../utils";
   import { playlists } from "../stores/tracks";
-  import { menuOpen } from "stores/ui";
+  import { menuOpen } from "../stores/ui";
   import Pagelinks from "../components/pagelinks.svelte";
 
   const limit = 50;

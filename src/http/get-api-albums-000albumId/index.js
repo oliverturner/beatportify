@@ -1,5 +1,7 @@
 /**
  * @typedef {import("@typings/spotify").Album} Album
+ * @typedef {import("@typings/spotify").Track} Track
+ * @typedef {import("@typings/spotify").ExternalId} ExternalId
  * @typedef {import("@typings/index").ApiRequest} ApiRequest
  */
 
@@ -21,6 +23,7 @@ const getAlbumData = async (req, headers) => {
   const { id, artists, images, label, name, tracks: tracksRaw, external_ids, release_date } = album;
 
   // TODO: Relax `processTrack` requirements: Pick<{...required}>
+  /** @type {any[]} */
   const albumTracks = [];
   for (const track of tracksRaw.items) {
     const albumTrack = {

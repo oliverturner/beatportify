@@ -18,7 +18,7 @@ function onDefaultIntersect(el) {
   }
 }
 
-/** @type {(typeof defaultMargin) => string} */
+/** @type {(props: typeof defaultMargin) => string} */
 function calcMargin({ top, right, bottom, left }) {
   return `${top}px ${right}px ${bottom}px ${left}px`;
 }
@@ -33,13 +33,15 @@ function calcMargin({ top, right, bottom, left }) {
  *
  * @returns {{destroy: () => void}}
  */
-export function intersectionObserver(root, { options, targets, onIntersect } = {}) {
+export function intersectionObserver(
+  root,
+  { options, targets, onIntersect = onDefaultIntersect } = {}
+) {
   let { once, margin } = { ...defaultOpts, ...options };
   let rootMargin = calcMargin(margin);
 
   if (!targets) {
     targets = root.querySelectorAll("img");
-    onIntersect = onDefaultIntersect;
   }
 
   let observer = new IntersectionObserver(

@@ -72,9 +72,10 @@ const getArtistData = async (req, headers) => {
     Object.values(requestMap).map((fn) => fn(artistId, headers))
   );
 
-  /** @type {Record<keyof requestMap, unknown>} */
+  /** @type {Record<string, unknown>} */
   const data = {};
   let index = 0;
+
   for (const key of Object.keys(requestMap)) {
     const res = responses[index++];
 
@@ -84,6 +85,7 @@ const getArtistData = async (req, headers) => {
     }
 
     if (key === "topTracks") {
+      // @ts-ignore
       const { tracks: topTracks } = res.value.body;
       data[key] = await getTracksAudio(topTracks, headers);
       continue;

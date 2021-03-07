@@ -152,10 +152,6 @@
       --item-w: 350px;
     }
 
-    &.section__content--tiles {
-      --item-w: 175px;
-    }
-
     &.section__content--items {
       --item-w: 250px;
     }

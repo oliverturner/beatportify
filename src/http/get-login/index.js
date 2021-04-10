@@ -18,7 +18,7 @@ const loginURL = buildUrl({
   endpoint: "/authorize",
   params: {
     client_id: process.env.SPOTIFY_CLIENT_ID || "",
-    redirect_uri: process.env.SPOTIFY_REDIRECT || "",
+    redirect_uri: process.env.SPOTIFY_LOGIN_REDIRECT || "",
     response_type: "code",
     scope: scopes.join(" "),
   },

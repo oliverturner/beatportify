@@ -4,7 +4,12 @@
 
 const { get, post } = require("tiny-json-http");
 
-const { SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, SPOTIFY_REDIRECT } = process.env;
+const {
+  SPOTIFY_CLIENT_ID,
+  SPOTIFY_CLIENT_SECRET,
+  SPOTIFY_LOGIN_REDIRECT,
+} = process.env;
+
 const clientTokenRaw = `${SPOTIFY_CLIENT_ID}:${SPOTIFY_CLIENT_SECRET}`;
 const clientToken = Buffer.from(clientTokenRaw).toString("base64");
 const url = "https://accounts.spotify.com/api/token";
@@ -24,7 +29,7 @@ async function init(code) {
       headers,
       data: {
         code,
-        redirect_uri: SPOTIFY_REDIRECT,
+        redirect_uri: SPOTIFY_LOGIN_REDIRECT,
         grant_type: "authorization_code",
       },
     });
@@ -64,7 +69,7 @@ async function refresh(refresh_token) {
       headers,
       data: {
         refresh_token,
-        redirect_uri: SPOTIFY_REDIRECT,
+        redirect_uri: SPOTIFY_LOGIN_REDIRECT,
         grant_type: "refresh_token",
       },
     });

@@ -84,7 +84,7 @@
 -->
 
 {#if item}
-  <article class="item" class:compact style={`--key: var(--key${item.audio.key});`}>
+  <article class="item" class:compact style={`--key: var(--key${item.audio && item.audio.key});`}>
     {#if compact}
       <a class="item__index" href={`/api/play/${item.id}`} on:click={onTrackClick}>
         <svg class="icon" aria-hidden="true"><use xlink:href="#icon-play" /></svg>
@@ -106,6 +106,7 @@
         <svg class="icon" aria-hidden="true"><use xlink:href="#icon-play" /></svg>
       </a>
     {/if}
+
     <div class="item__label">
       <h3 class="title">
         <a href="/album/{item.album.id}" use:link>{item.name}</a>
@@ -116,11 +117,14 @@
         {/each}
       </p>
     </div>
-    <div class="item__audio">
-      <p class="item__audio__pitch">Key: {item.audio.pitch}</p>
-      <p class="item__audio__bpm">BPM: {item.audio.bpm}</p>
 
+    <div class="item__audio">
+      {#if item.audio}
+        <p class="item__audio__pitch">Key: {item.audio.pitch}</p>
+        <p class="item__audio__bpm">BPM: {item.audio.bpm}</p>
+      {/if}
     </div>
+
     <aside class="item__purchases">
       <a
         class="purchaselink purchaselink--beatport"
